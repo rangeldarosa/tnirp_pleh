@@ -15,6 +15,7 @@ class Pastas extends Controller
      */
     public function index()
     {
+        session_start();
         // load views
         require APP . 'view/_templates/header.php';
         require APP . 'view/pastas/index.php';
