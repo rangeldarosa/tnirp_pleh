@@ -53,8 +53,8 @@ define('URL', URL_PROTOCOL . URL_DOMAIN . URL_SUB_FOLDER);
  * This is the place where you define your database credentials, database type etc.
  */
 define('DB_TYPE', 'mysql');
-define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'hdprint');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_HOST', 'bdhost0087.servidorwebfacil.com');
+define('DB_NAME', 'grupocas_hd_print');
+define('DB_USER', 'grupocas_user');
+define('DB_PASS', '2525977123');
 define('DB_CHARSET', 'utf8');
