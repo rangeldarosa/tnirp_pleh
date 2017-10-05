@@ -1,17 +1,9 @@
 <?php
 
-/**
- *
- * Please note:
- * Don't use the same name for class and method, as this might trigger an (unintended) __construct of the class.
- * This is really weird behaviour, but documented here: http://php.net/manual/en/language.oop5.decon.php
- *
- */
-class Professor extends Controller
-{
+class Professor extends Controller {
 
     function __construct()  {
-        
+
         parent::__construct();
         require APP . 'model/ProfessorModel.php';
         require APP . 'util/Util.php';
@@ -22,8 +14,7 @@ class Professor extends Controller
      * PAGE: index
      * This method handles what happens when you move to http://yourproject/home/index (which is the default page btw)
      */
-    public function index()
-    {
+    public function index() {
         // load views
         require APP . 'view/_templates/header.php';
         require APP . 'view/professor/index.php';
@@ -34,10 +25,9 @@ class Professor extends Controller
 
         $professor = array();
 
-        $professor["nome"] = $_POST["nome"];
-        $professor["email"] = $_POST["email"];
-        $professor["acessoPublico"] = $_POST["acessoPublico"];
-
+        $professor["nome"] = $_POST["cadProfessoresNome"];
+        $professor["email"] = $_POST["cadProfessoresStatus"];
+        $professor["acessoPublico"] = $_POST["cadProfessoresPrivado"];
         // realizar validações de entrada dos dados, como campos obrigatórios
 
         $this->model->salvarProfessor($professor);
@@ -57,5 +47,5 @@ class Professor extends Controller
         require APP . 'view/_templates/footer.php';
 
     }
-    
+
 }
