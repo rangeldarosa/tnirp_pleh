@@ -35,12 +35,15 @@ class Login extends Controller
         echo "Verificando acessos de ". $login;
         echo "<br>";
 
-        $usuario = $this->model->validarLogin($login, $senha);
+        // $usuario = $this->model->validarLogin($login, $senha);
+        $usuario = array();
+        $usuario["nome"] = "Leonardo";
 
         if($usuario) {
             echo "Usuário ". $usuario->nome . ". Login efetuado com sucesso";
             session_start();
             $_SESSION["usuario"] = $usuario;
+            $_SESSION["loginEfetuado"] = true;
             header('location: ' . URL . 'pastas/');
         } else {
             echo "Login ou senha incorretos";
