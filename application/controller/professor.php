@@ -31,9 +31,9 @@ class Professor extends Controller
 
         $professor = array();
 
-        $professor["nome"] = $_POST["nome"];
-        $professor["email"] = $_POST["email"];
-        $professor["acessoPublico"] = $_POST["acessoPublico"];
+        $professor["nome"] = $_POST["cadProfessoresNome"];
+        $professor["email"] = $_POST["cadProfessoresStatus"];
+        $professor["acessoPublico"] = $_POST["cadProfessoresPrivado"];
 
         // realizar validações de entrada dos dados, como campos obrigatórios
 
