@@ -24,6 +24,10 @@ class Professor extends Controller
      */
     public function index()
     {
+        validarLogin();
+        
+        $professores = $this->model->buscarTodosProfessores();
+        //log($professores);
         // load views
         require APP . 'view/_templates/header.php';
         require APP . 'view/professor/index.php';

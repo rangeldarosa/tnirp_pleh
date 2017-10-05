@@ -2,7 +2,7 @@
 
 <?php 
 foreach($professores as $professor) {
-    echo $professor . "<br />";
+    echo $professor->NOME . "<br />";
 }
 
 ?>

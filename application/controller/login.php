@@ -14,6 +14,7 @@ class Login extends Controller
 
         parent::__construct();
         require APP . 'model/loginModel.php';
+        require APP . 'util/Util.php';
         // create new "model" (and pass the database connection)
         $this->model = new LoginModel($this->db);
     }
@@ -37,12 +38,11 @@ class Login extends Controller
         echo "Verificando acessos de ". $login;
         echo "<br>";
 
-        // $usuario = $this->model->validarLogin($login, $senha);
-        $usuario = array();
-        $usuario["nome"] = "Leonardo";
+        $usuario = $this->model->validarLogin($login, $senha);
+        dump($usuario);
 
-        if($usuario) {
-            echo "Usuário ". $usuario->nome . ". Login efetuado com sucesso";
+        if($usuario->login == $login  && $usuario->senha == $senha) {
+            echo "Usuário ". $usuario->login . ". Login efetuado com sucesso";
             session_start();
             $_SESSION["usuario"] = $usuario;
             $_SESSION["loginEfetuado"] = true;

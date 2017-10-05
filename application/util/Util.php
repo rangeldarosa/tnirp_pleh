@@ -14,4 +14,8 @@ function validarLogin() {
 
 }
 
+function dump($param){
+    var_dump($param);
+}
+
 ?>

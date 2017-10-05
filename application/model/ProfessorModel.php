@@ -16,11 +16,11 @@ class ProfessorModel
 
     public function buscarTodosProfessores()
     {
-        $sql = "SELECT nome FROM professor";
+        $sql = "SELECT * FROM professor";
         $query = $this->db->prepare($sql);
         $query->execute();
 
-        return $query->fetch();
+        return $query->fetchAll();
     }
 
 }
