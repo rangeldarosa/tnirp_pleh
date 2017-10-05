@@ -1,17 +1,10 @@
 <?php
 
-/**
- *
- * Please note:
- * Don't use the same name for class and method, as this might trigger an (unintended) __construct of the class.
- * This is really weird behaviour, but documented here: http://php.net/manual/en/language.oop5.decon.php
- *
- */
 class Professor extends Controller
 {
 
     function __construct()  {
-        
+
         parent::__construct();
         require APP . 'model/ProfessorModel.php';
         require APP . 'util/Util.php';
@@ -25,7 +18,7 @@ class Professor extends Controller
     public function index()
     {
         validarLogin();
-        
+
         $professores = $this->model->buscarTodosProfessores();
         //log($professores);
         // load views
@@ -61,5 +54,5 @@ class Professor extends Controller
         require APP . 'view/_templates/footer.php';
 
     }
-    
+
 }
