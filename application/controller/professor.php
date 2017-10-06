@@ -17,7 +17,14 @@ class Professor extends Controller
      */
     public function index()
     {
-        validarLogin();
+
+        Util::validarLogin();
+        
+        if(isset($_GET["id"])){
+            $id = $_GET["id"];
+            $professor = $this->model->buscarProfessorPorCd($id);
+            Util::dump($professor);
+        }
 
         $professores = $this->model->buscarTodosProfessores();
         //log($professores);
@@ -25,25 +32,34 @@ class Professor extends Controller
         require APP . 'view/_templates/header.php';
         require APP . 'view/professor/index.php';
         require APP . 'view/_templates/footer.php';
+
+
+        
     }
 
     public function salvarProfessor() {
 
         $professor = array();
-
+        //$professor["cd_professor"] = $_POST["cadCdProfessor"] // CD PARA CASO DE ALTERAÇÃO DE UM PROFESSOR JA CADASTRADO.
         $professor["nome"] = $_POST["cadProfessoresNome"];
         $professor["estado"] = $_POST["cadProfessoresStatus"];
-        $professor["privado"] = $_POST["cadProfessoresPrivado"];
+        $professor["privado"] = $_POST["cadProfessoresPrivado"];  
 
+        if($professor["cd_professor"]){
+
+        }else{
+            $this->model->salvarProfessor($professor);
+        }
+        
         // realizar validações de entrada dos dados, como campos obrigatórios
 
-        $this->model->salvarProfessor($professor);
+        
 
     }
 
     public function listarProfessores() {
 
-        validarLogin();
+        Util::validarLogin();
 
         $professores = $this->model->buscarTodosProfessores();
 
@@ -52,7 +68,8 @@ class Professor extends Controller
         require APP . 'view/_templates/header.php';
         require APP . 'view/professor/index.php';
         require APP . 'view/_templates/footer.php';
-
     }
+
+
 
 }
