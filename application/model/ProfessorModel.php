@@ -28,7 +28,10 @@ class ProfessorModel
         $sql = "INSERT INTO professor (NOME, ESTADO, PRIVADO) values (:nome, :estado, :privado)";
         $query = $this->db->prepare($sql);
         $parameters = array(':nome' => $professor["nome"], ':estado' => intval($professor["estado"]), ':privado' =>  intval($professor["privado"]));
-        $query->execute($parameters);
+        $retorno = $query->execute($parameters);
+        if($retorno){
+            header('location: ' . URL . 'professor/');
+        }
     }
 
 }
