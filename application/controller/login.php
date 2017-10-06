@@ -32,14 +32,13 @@ class Login extends Controller
 
     public function validarLogin() {
 
-        
+
         $login = $_POST["login"];
         $senha = $_POST["senha"];
         echo "Verificando acessos de ". $login;
         echo "<br>";
 
         $usuario = $this->model->validarLogin($login, $senha);
-        dump($usuario);
 
         if($usuario->login == $login  && $usuario->senha == $senha) {
             echo "Usuário ". $usuario->login . ". Login efetuado com sucesso";
@@ -53,6 +52,6 @@ class Login extends Controller
 
     }
 
-    
-    
+
+
 }
