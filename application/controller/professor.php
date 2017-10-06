@@ -70,6 +70,27 @@ class Professor extends Controller
         require APP . 'view/_templates/footer.php';
     }
 
+    public function bloquearProfessor(){
+        Util::validarLogin();
+
+        $parametros = array_values(array_filter(explode('/', $_GET['url'])));
+
+        if(isset($parametros[2])){
+            $this->model->bloquearProfessor($parametros[2]);
+        }
+    }
+
+    public function verificaBloquearOuDesbloquear($cdProfessor){
+        Util::validarLogin();
+
+        $parametros = array_values(array_filter(explode('/', $_GET['url'])));
+        $professor = $this->model->buscarProfessorPorCd($cdProfessor);
+        if($professor->ESTADO === '0' ){
+            $this->model->desbloquearProfessor($cdProfessor);
+        }else{
+            $this->model->bloquearProfessor($cdProfessor);
+        }
+    }
 
 
 }

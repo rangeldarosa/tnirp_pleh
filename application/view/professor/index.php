@@ -1,6 +1,3 @@
-<?php 
-Util::dump($_SESSION);
-?>
 <div class="container">
   <h2 class="text-center">Listagem de professores</h2><br>
   <div class="panel panel-default">
