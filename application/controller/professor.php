@@ -70,20 +70,9 @@ class Professor extends Controller
         require APP . 'view/_templates/footer.php';
     }
 
-    public function bloquearProfessor(){
-        Util::validarLogin();
-
-        $parametros = array_values(array_filter(explode('/', $_GET['url'])));
-
-        if(isset($parametros[2])){
-            $this->model->bloquearProfessor($parametros[2]);
-        }
-    }
-
     public function verificaBloquearOuDesbloquear($cdProfessor){
         Util::validarLogin();
 
-        $parametros = array_values(array_filter(explode('/', $_GET['url'])));
         $professor = $this->model->buscarProfessorPorCd($cdProfessor);
         if($professor->ESTADO === '0' ){
             $this->model->desbloquearProfessor($cdProfessor);
@@ -91,6 +80,18 @@ class Professor extends Controller
             $this->model->bloquearProfessor($cdProfessor);
         }
     }
+
+    public function editarProfessor($cdProfessor){ // TRAZENDO O PROFESSOR PELO ID PASSADO POR PARAMETRO, VERIFICAR COMO IRÃO TRATAR AS INFORMAÇÕES.
+        Util::validarLogin();
+
+        $professor = $this->model->buscarProfessorPorCd($cdProfessor);
+
+        var_dump($professor);
+
+
+    }
+
+    
 
 
 }
