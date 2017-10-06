@@ -1,4 +1,4 @@
-<div class="cadFilialArea">
+<div class="cadProfessoresArea">
   <form action="<?php echo URL; ?>professor/salvarProfessor" method="post">
     <div class="form-group">
       <label for="cadProfessoresNome">Nome da Professor</label>

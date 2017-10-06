@@ -1,12 +1,4 @@
-<?php
-  if(isset($_POST['enviarDados']) && $_POST['enviarDados'] == 'Atualizar') {
-    // CHAMADA METODO ATUALIZAR
-  }
-  if(isset($_POST['enviarDados']) && $_POST['enviarDados'] == 'Cadastrar') {
-    // CHAMADA METODO CADASTRAR
-  }
- ?>
- <div class="cadFilialArea">
+<div class="cadFilialArea">
   <form class="" action="" method="post">
     <div class="form-group">
       <label for="cadFilialNome">Nome da Filial</label>
@@ -30,7 +22,14 @@
         <option value="12">TUBARÃO</option>
       </select>
     </div>
-    <input type="submit" class="btn btn-default btn-default-app" name="enviarDados" value="<?php echo $_GET['action'] == 'update' ? 'Atualizar' : 'Cadastrar';?>">
+    <div class="form-group">
+      <label for="cadProfessoresStatus">Status</label>
+      <select class="form-control select-controll-app" name="cadProfessoresStatus" id="cadProfessoresStatus" required>
+        <option value="1">Ativo</option>
+        <option value="0">Inativo</option>
+      </select>
+    </div>
+    <input type="submit" class="btn btn-default btn-default-app" name="enviarDados" value="Enviar Dados">
     <input type="reset" class="btn btn-default btn-default-app" name="resetarDados" value="Resetar Dados">
   </form>
-<div>
+</div>
