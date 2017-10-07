@@ -1,5 +1,8 @@
 <div class="container">
   <h2 class="text-center">Listagem de professores</h2><br>
+  <?php
+  include APP . 'view/_templates/alerts/alerts.tpl.php';
+  ?>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Cadastro de Professores</h3>

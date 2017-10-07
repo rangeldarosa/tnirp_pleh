@@ -1,7 +1,6 @@
 <?php
-
-class Application
-{
+ob_start();
+class Application {
     /** @var null The controller */
     private $url_controller = null;
 
