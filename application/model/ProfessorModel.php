@@ -53,16 +53,28 @@ class ProfessorModel
     }
 
     public function bloquearProfessor($cdProfessor){
-        $sql = "UPDATE professor SET ESTADO = IF(ESTADO = 1, 0, 1) WHERE CD_PROFESSOR = :cd";
+        $sql = "UPDATE professor SET ESTADO = 0 WHERE CD_PROFESSOR = :cd";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd' => intval($cdProfessor));
         $retorno = $query->execute($parameters);
         if($retorno){
-            return true;
+            Util::retornarMensagemSucesso("Professor, bloqueado com sucesso");
         }else{
-            return false;
+            Util::retornarMensagemErro("Erro ao bloquear professor");
         }
-
+        header('location: ' . URL . 'professor/');
+    }
+    public function desbloquearProfessor($cdProfessor){
+        $sql = "UPDATE professor SET ESTADO = 1 WHERE CD_PROFESSOR = :cd";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':cd' => intval($cdProfessor));
+        $retorno = $query->execute($parameters);
+        if($retorno){
+            Util::retornarMensagemSucesso("Professor, desbloqueado com sucesso");
+        }else{
+            Util::retornarMensagemErro("Erro ao desbloqueado professor");
+        }
+        header('location: ' . URL . 'professor/');
     }
 
 }

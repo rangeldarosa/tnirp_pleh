@@ -38,8 +38,6 @@ class Professor extends Controller {
     }
 
     public function listarProfessores() {
-        Util::validarLogin();
-
         $professores = $this->model->buscarTodosProfessores();
 
         require APP . 'view/_templates/header.php';
@@ -47,19 +45,18 @@ class Professor extends Controller {
         require APP . 'view/_templates/footer.php';
     }
 
-    public function bloquearProfessor($cdProfessor){
-        Util::validarLogin();
-        if($this->model->bloquearProfessor($cdProfessor)) {
-          Util::retornarMensagemSucesso("Professor, bloqueado com sucesso");
-          header('location: ' . URL . 'professor/');
-        } else {
-          Util::retornarMensagemErro("Erro ao bloquear professor");
-          header("refresh:0");
-        }
-    }
+    public function verificaBloquearOuDesbloquear($cdProfessor){
+      $professor = $this->model->buscarProfessorPorCd($cdProfessor);
+      if($professor->ESTADO === '0' ){
+          $this->model->desbloquearProfessor($cdProfessor);
+      }else{
+          $this->model->bloquearProfessor($cdProfessor);
+      }
+  }
+
+
 
     public function editarProfessor($cdProfessor){
-      Util::validarLogin();
       $professores = $this->model->buscarTodosProfessores();
       $professor = $this->model->buscarProfessorPorCd($cdProfessor);
 
