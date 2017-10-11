@@ -8,7 +8,8 @@ class Professor extends Controller {
         require APP . 'util/Util.php';
         $this->model = new ProfessorModel($this->db);
     }
-    public function index() {
+    public function index() 
+    {
         Util::validarLogin();
 
         if(isset($_GET["id"])){
@@ -23,7 +24,8 @@ class Professor extends Controller {
         require APP . 'view/_templates/footer.php';
     }
 
-    public function salvarProfessor() {
+    public function salvarProfessor() 
+    {
 
         $professor = array();
         if(isset($_POST["cadProfessoresNome"]) && isset($_POST["cadProfessoresStatus"]) && isset($_POST["cadProfessoresPrivado"])) {
@@ -37,7 +39,8 @@ class Professor extends Controller {
         }
     }
 
-    public function listarProfessores() {
+    public function listarProfessores() 
+    {
         $professores = $this->model->buscarTodosProfessores();
 
         require APP . 'view/_templates/header.php';
@@ -45,7 +48,8 @@ class Professor extends Controller {
         require APP . 'view/_templates/footer.php';
     }
 
-    public function verificaBloquearOuDesbloquear($cdProfessor){
+    public function verificaBloquearOuDesbloquear($cdProfessor)
+    {
       $professor = $this->model->buscarProfessorPorCd($cdProfessor);
       if($professor->ESTADO === '0' ){
           $this->model->desbloquearProfessor($cdProfessor);
@@ -56,7 +60,8 @@ class Professor extends Controller {
 
 
 
-    public function editarProfessor($cdProfessor){
+    public function editarProfessor($cdProfessor)
+    {
       $professores = $this->model->buscarTodosProfessores();
       $professor = $this->model->buscarProfessorPorCd($cdProfessor);
 
@@ -64,7 +69,8 @@ class Professor extends Controller {
       require APP . 'view/professor/index.php';
       require APP . 'view/_templates/footer.php';
 
-      if($cdProfessor && isset($_POST)) {
+      if($cdProfessor && isset($_POST))
+      {
         $professorEdit = array();
         if(isset($_POST["cadProfessoresNome"]) && isset($_POST["cadProfessoresStatus"]) && isset( $_POST["cadProfessoresPrivado"])) {
           $professorEdit["nome"] = $_POST["cadProfessoresNome"];

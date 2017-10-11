@@ -32,10 +32,11 @@ class ProfessorModel
         $retorno = $query->execute($parameters);
         return true;
     }
-    public function editarProfessor($professor, $cod){
+    
+    public function editarProfessor($professor, $cdProfessor){
         $sql = "UPDATE PROFESSOR SET NOME=:nome, ESTADO=:estado, PRIVADO=:privado WHERE cd_professor=:cd";
         $query = $this->db->prepare($sql);
-        $parameters = array(':nome' => $professor["nome"], ':estado' => intval($professor["estado"]), ':privado' =>  intval($professor["privado"]), 'cd' => intval($cod));
+        $parameters = array(':nome' => $professor["nome"], ':estado' => intval($professor["estado"]), ':privado' =>  intval($professor["privado"]), 'cd' => intval($cdProfessor));
         $retorno = $query->execute($parameters);
         if($retorno){
           return true;
