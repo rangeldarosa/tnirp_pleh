@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <h2 class="text-center">Listagem de professores</h2><br>
   <?php
   include APP . 'view/_templates/alerts/alerts.tpl.php';

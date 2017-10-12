@@ -1,14 +1,20 @@
 <?php
-$userType = 3;
-
 switch($userType) {
+  case 0:
+    if($configMenu["maquina"]["usaMenuLateral"])
+      include 'menuLateral/menuMaquina.tpl.php';
+    break;
   case 1:
-    include 'menuUser.tpl.php';
+    if($configMenu["user"]["usaMenuLateral"])
+      include 'menuLateral/menuUser.tpl.php';
     break;
   case 2:
-    include 'menuGerente.tpl.php';
+    if($configMenu["gerente"]["usaMenuLateral"])
+      include 'menuLateral/menuGerente.tpl.php';
     break;
   case 3:
-    include 'menuAdmin.tpl.php';
+    if($configMenu["admin"]["usaMenuLateral"])
+      include 'menuLateral/menuAdmin.tpl.php';
+  break;
 }
 ?>

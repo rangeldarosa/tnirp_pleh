@@ -1,14 +1,23 @@
+.noPaddingMenu {
+  padding:0;
+  margin:0;
+}
 .nav-side-menu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height:100vh;
   overflow: auto;
   font-family: verdana;
   font-size: 12px;
   font-weight: 200;
   background-color: #2e353d;
-  position: fixed;
-  top: 0px;
-  width: 300px;
-  height: 100%;
   color: #e1ffff;
+}
+@media (max-width: 990px) {
+  .nav-side-menu {
+    height: auto;
+  }
 }
 .nav-side-menu .brand {
   background-color: #23282e;
@@ -27,19 +36,6 @@
   margin: 0px;
   line-height: 35px;
   cursor: pointer;
-  /*
-    .collapsed{
-       .arrow:before{
-                 font-family: FontAwesome;
-                 content: "\f053";
-                 display: inline-block;
-                 padding-left:10px;
-                 padding-right: 10px;
-                 vertical-align: middle;
-                 float:right;
-            }
-     }
-*/
 }
 .nav-side-menu ul :not(collapsed) .arrow:before,
 .nav-side-menu li :not(collapsed) .arrow:before {
