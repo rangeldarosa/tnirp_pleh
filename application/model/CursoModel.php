@@ -28,10 +28,21 @@ class CursoModel{
         return $query->fetchAll();
     }
 
-    public function excluirCurso($curso){
-        $sql = "DELETE FROM curso WHERE CD_CURSO = :cd_curso";
+    public function listarCursosAtivos(){
+        $sql = "SELECT * FROM curso WHERE estado != 0";
         $query = $this->db->prepare($sql);
-        $parameters = array(':cd_curso' => $curso["cd_curso"]);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
+    public function desativarCurso($curso){
+        $sql = "UPDATE curso SET ESTADO = :estado WHERE CD_CURSO = :cd_curso";
+        $query = $this->db->prepare($sql);
+        $parameters = array(
+            ':estado' => $curso["estado"],
+            ':cd_curso' => $curso["cd_curso"]
+        );
         $retorno = $query->execute($parameters);
         return true;
     }
