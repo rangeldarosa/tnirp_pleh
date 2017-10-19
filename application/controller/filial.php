@@ -13,6 +13,7 @@
         {
             Util::validarLogin();
 
+            $filiais = $this->model->buscarTodosAsFiliais();
 
             require APP . 'view/_templates/header.php';
             require APP . 'view/filial/index.php';
@@ -63,19 +64,18 @@
 
         public function editarFilial($cdFilial)
         {
-          $professores = $this->model->buscarTodosAsFiliais();
-          $professor = $this->model->buscarFilialPorCd($cdFilial);
+          $filiais = $this->model->buscarTodosAsFiliais();
+          $filial = $this->model->buscarFilialPorCd($cdFilial);
 
           require APP . 'view/_templates/header.php';
-          require APP . 'view/professor/index.php';
+          require APP . 'view/filial/index.php';
           require APP . 'view/_templates/footer.php';
 
-          if($cdFilial && isset($_POST))
-          {
+          if($cdFilial && isset($_POST)) {
             $filialEdit = array();
             if(isset($_POST["cadFilialNome"]) && isset($_POST["cadFilialTaxaImpressaoColorida"])
             && isset($_POST["cadFilialTaxaImpressaoPretoEBranco"]) && isset($_POST["cadFilialCidade"])
-            && isset($_POST["cadFilialInstituicao"]) && isset($_POST["cadFilialEstado"])) {// esse estado referência ao estado de ativo e inativo
+            && isset($_POST["cadFilialInstituicao"]) && isset($_POST["cadFilialEstado"])) {
                 $filialEdit["nome"] = $_POST["cadFilialNome"];
                 $filialEdit["impc"] = $_POST["cadFilialTaxaImpressaoColorida"];
                 $filialEdit["imppb"] = $_POST["cadFilialTaxaImpressaoPretoEBranco"];

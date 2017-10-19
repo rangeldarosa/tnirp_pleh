@@ -13,6 +13,10 @@
             <ul id="menu-content" class="menu-content collapse out">
                 <li><a href="<?php echo URL;?>"><i class="fa fa-dashboard fa-lg"></i> Dashboard</a></li>
                 <li><a href="<?php echo URL;?>professor"><i class="fa fa-dashboard fa-lg"></i> Professores</a></li>
+                <li><a href="<?php echo URL;?>filial"><i class="fa fa-dashboard fa-lg"></i> Filial</a></li>
+                <li><a href="<?php echo URL;?>estado"><i class="fa fa-dashboard fa-lg"></i> Estado</a></li>
+                <li><a href="<?php echo URL;?>cidade"><i class="fa fa-dashboard fa-lg"></i> Cidade</a></li>
+                <li><a href="<?php echo URL;?>instituicao"><i class="fa fa-dashboard fa-lg"></i> Instituição</a></li>
             </ul>
      </div>
 </nav>

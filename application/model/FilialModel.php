@@ -14,7 +14,9 @@ class FilialModel
     }
     public function buscarTodosAsFiliais()
     {
-        $sql = "SELECT * FROM filial";
+        $sql = "SELECT f.*, inst.NOME_INSTITUICAO, cid.NOME_CIDADE, cid.ESTADO FROM filial f
+              INNER JOIN cidade cid ON f.Cidade_CD_CIDADE = cid.CD_CIDADE
+              INNER JOIN instituicao inst ON inst.CD_INSTITUICAO = f.Instituicao_CD_INSTITUICAO";
         $query = $this->db->prepare($sql);
         $query->execute();
 
