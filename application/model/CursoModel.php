@@ -37,12 +37,17 @@ class CursoModel{
     }
 
     public function desativarCurso($curso){
-        $sql = "UPDATE curso SET ESTADO = :estado WHERE CD_CURSO = :cd_curso";
+        $sql = "UPDATE curso SET ESTADO = 0 WHERE CD_CURSO = :cd_curso";
         $query = $this->db->prepare($sql);
-        $parameters = array(
-            ':estado' => $curso["estado"],
-            ':cd_curso' => $curso["cd_curso"]
-        );
+        $parameters = array(':cd_curso' => $curso["cd_curso"]);
+        $retorno = $query->execute($parameters);
+        return true;
+    }
+
+    public function ativarCurso($curso){
+        $sql = "UPDATE curso SET ESTADO = 1 WHERE CD_CURSO = :cd_curso";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':cd_curso' => $curso["cd_curso"]);
         $retorno = $query->execute($parameters);
         return true;
     }
