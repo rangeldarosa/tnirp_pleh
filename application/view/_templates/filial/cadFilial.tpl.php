@@ -33,3 +33,7 @@
     <input type="reset" class="btn btn-default btn-default-app" name="resetarDados" value="Resetar Dados">
   </form>
 </div>
+
+<?php
+var_dump($filais);
+?>
