@@ -51,16 +51,13 @@
             }
         }
 
-        public function verificaBloquearOuDesbloquear($cdFilial)
-        {
-            $filial = $this->model->buscarFilialPorCd($cdFilial);
-            if($filial->ESTADO === '0' ){
-                $this->model->desbloquearFilial($cdFilial);
-            }else{
-                $this->model->bloquearFilial($cdFilial);
-            }
+        public function desbloquearFilial($cdFilial){
+            $this->model->desbloquearFilial;
         }
 
+        public function bloquearFilial($cdFilial){
+            $this->model->bloquearFilial;
+        }
 
         public function editarFilial($cdFilial)
         {
