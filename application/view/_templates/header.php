@@ -11,8 +11,11 @@
 	<script type="text/javascript" src="<?php echo URL; ?>lib/jquery/jquery-3.2.1.min.js"></script>
 
 	<script src="<?php echo URL; ?>lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="<?php echo URL; ?>lib/dataTable/jquery.dataTables.min.js"></script>
+	<script src="<?php echo URL; ?>lib/dataTable/initDataTable.js"></script>
 
 	<link href="<?php echo URL; ?>lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<?php echo URL; ?>lib/dataTable/dataTables.min.css" rel="stylesheet">
   <link href="<?php echo URL; ?>lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
 	<link href="<?php echo URL; ?>lib/styles/main.css" rel="stylesheet">
 

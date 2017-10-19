@@ -32,7 +32,7 @@ class ProfessorModel
         $retorno = $query->execute($parameters);
         return true;
     }
-    
+
     public function editarProfessor($professor, $cdProfessor){
         $sql = "UPDATE PROFESSOR SET NOME=:nome, ESTADO=:estado, PRIVADO=:privado WHERE cd_professor=:cd";
         $query = $this->db->prepare($sql);
@@ -59,9 +59,9 @@ class ProfessorModel
         $parameters = array(':cd' => intval($cdProfessor));
         $retorno = $query->execute($parameters);
         if($retorno){
-            Util::retornarMensagemSucesso("Professor, bloqueado com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Professor bloqueado com sucesso");
         }else{
-            Util::retornarMensagemErro("Erro ao bloquear professor");
+            Util::retornarMensagemErro("Erro ao bloquear Professor", "ERROR NO UPDATE", "Algo errado no update do professor");
         }
         header('location: ' . URL . 'professor/');
     }
@@ -71,9 +71,9 @@ class ProfessorModel
         $parameters = array(':cd' => intval($cdProfessor));
         $retorno = $query->execute($parameters);
         if($retorno){
-            Util::retornarMensagemSucesso("Professor, desbloqueado com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Professor desbloqueado com sucesso");
         }else{
-            Util::retornarMensagemErro("Erro ao desbloqueado professor");
+            Util::retornarMensagemErro("Erro ao desbloquear Professor", "ERROR NO UPDATE", "Algo errado no update do professor");
         }
         header('location: ' . URL . 'professor/');
     }

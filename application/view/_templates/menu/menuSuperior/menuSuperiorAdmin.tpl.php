@@ -1,7 +1,7 @@
 <link href="<?php echo URL; ?>css/menuSuperiorAdmin.css" rel="stylesheet">
 <nav class="navbar navbar-default noPaddingMenu">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="<navbar-header">
+    <div class="navbar-header">
         <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -18,7 +18,7 @@
             <li><a href="#">Messages</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Login</a></li>
+            <li><a href="<?php echo URL?>login/logOut">Sair</a></li>
         </ul>
     </div>
 </nav>

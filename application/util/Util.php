@@ -2,29 +2,33 @@
 
 Class Util{
     static function validarLogin() {
-
-            session_start();
-
-            $loginEfetuado = $_SESSION["loginEfetuado"];
-
-            if($loginEfetuado) {
+            if(isset($_SESSION["loginEfetuado"]) && $_SESSION["loginEfetuado"] == true) {
                 return true;
             }
 
-            header('location: ' . URL . '/login' );
+            header('location: ' . URL . 'login' );
 
         }
 
-        static function retornarMensagemSucesso($mensagem){
-            $_SESSION["msgSucesso"] = $mensagem;
+        static function retornarMensagemSucesso($titulo, $causa, $mensagem){
+            $_SESSION["msgSucesso"] = array();
+            $_SESSION["msgSucesso"]["causa"] = $causa;
+            $_SESSION["msgSucesso"]["titulo"] = $titulo;
+            $_SESSION["msgSucesso"]["detalhes"] = $mensagem;
         }
 
-        static function retornarMensagemErro($mensagem){
-            $_SESSION["msgErro"] = $mensagem;
+        static function retornarMensagemErro($titulo, $causa, $mensagem){
+            $_SESSION["msgErro"] = array();
+            $_SESSION["msgErro"]["causa"] = $causa;
+            $_SESSION["msgErro"]["titulo"] = $titulo;
+            $_SESSION["msgErro"]["detalhes"] = $mensagem;
         }
 
-        static function retornarMensagemWarning($mensagem){
-            $_SESSION["msgWarning"] = $mensagem;
+        static function retornarMensagemWarning($titulo, $causa, $mensagem){
+            $_SESSION["msgWarning"] = array();
+            $_SESSION["msgWarning"]["causa"] = $causa;
+            $_SESSION["msgWarning"]["titulo"] = $titulo;
+            $_SESSION["msgWarning"]["detalhes"] = $mensagem;
         }
 
         static function dump($param){

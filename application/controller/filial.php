@@ -7,9 +7,9 @@
             require APP . 'util/Util.php';
             $this->model = new FilialModel($this->db);
         }
-        
-        
-        public function index() 
+
+
+        public function index()
         {
             Util::validarLogin();
 
@@ -18,21 +18,21 @@
             require APP . 'view/filial/index.php';
             require APP . 'view/_templates/footer.php';
         }
-        
-        public function listarFiliais() 
+
+        public function listarFiliais()
         {
             $filiais = $this->model->buscarTodosAsFiliais();
-    
+
             require APP . 'view/_templates/header.php';
             require APP . 'view/filial/index.php';
             require APP . 'view/_templates/footer.php';
         }
 
-        public function salvarFilial() 
+        public function salvarFilial()
         {
             $filial = array();
-            if(isset($_POST["cadFilialNome"]) && isset($_POST["cadFilialTaxaImpressaoColorida"]) 
-            && isset($_POST["cadFilialTaxaImpressaoPretoEBranco"]) && isset($_POST["cadFilialCidade"]) 
+            if(isset($_POST["cadFilialNome"]) && isset($_POST["cadFilialTaxaImpressaoColorida"])
+            && isset($_POST["cadFilialTaxaImpressaoPretoEBranco"]) && isset($_POST["cadFilialCidade"])
             && isset($_POST["cadFilialInstituicao"]) && isset($_POST["cadFilialEstado"])) {// esse estado referência ao estado de ativo e inativo
                 $filial["nome"] = $_POST["cadFilialNome"];
                 $filial["impc"] = $_POST["cadFilialTaxaImpressaoColorida"];
@@ -41,12 +41,12 @@
                 $filial["instituicao"] = $_POST["cadFilialInstituicao"];
                 $filial["status"] = $_POST["cadFilialEstado"];
                 if($this->model->salvarFilial($filial)) {
-                    Util::retornarMensagemSucesso("Filial, inserida com sucesso");
+                    Util::retornarMensagemSucesso("Sucesso", null, "Filial, inserida com sucesso");
                     header('location: ' . URL . 'filial/');
-                      
+
                 }
-            }else{
-                Util::retornarMensagemErro("Preencha todos os campos");
+            } else{
+                Util::retornarMensagemErro("Erro ao Cadastrar Filial", "Campos Vazio", "Preencha todos os campos");
             }
         }
 
@@ -65,16 +65,16 @@
         {
           $professores = $this->model->buscarTodosAsFiliais();
           $professor = $this->model->buscarFilialPorCd($cdFilial);
-    
+
           require APP . 'view/_templates/header.php';
           require APP . 'view/professor/index.php';
           require APP . 'view/_templates/footer.php';
-    
+
           if($cdFilial && isset($_POST))
           {
             $filialEdit = array();
-            if(isset($_POST["cadFilialNome"]) && isset($_POST["cadFilialTaxaImpressaoColorida"]) 
-            && isset($_POST["cadFilialTaxaImpressaoPretoEBranco"]) && isset($_POST["cadFilialCidade"]) 
+            if(isset($_POST["cadFilialNome"]) && isset($_POST["cadFilialTaxaImpressaoColorida"])
+            && isset($_POST["cadFilialTaxaImpressaoPretoEBranco"]) && isset($_POST["cadFilialCidade"])
             && isset($_POST["cadFilialInstituicao"]) && isset($_POST["cadFilialEstado"])) {// esse estado referência ao estado de ativo e inativo
                 $filialEdit["nome"] = $_POST["cadFilialNome"];
                 $filialEdit["impc"] = $_POST["cadFilialTaxaImpressaoColorida"];
@@ -83,17 +83,17 @@
                 $filialEdit["instituicao"] = $_POST["cadFilialInstituicao"];
                 $filialEdit["status"] = $_POST["cadFilialEstado"];
               if($this->model->editarFilial($filialEdit, $cdFilial)) {
-                Util::retornarMensagemSucesso("Filial, Alterado com sucesso");
+                Util::retornarMensagemSucesso("Sucesso", null, "Filial, Alterada com sucesso");
                 header('location: ' . URL . 'filial/');
               } else {
-                Util::retornarMensagemErro("Erro ao alterar Filial");
+                Util::retornarMensagemErro("Erro ao Editar Filial", "ERRO NO UPDATE", "Algo de Errado ao Atualizar Filial");
               }
             } else {
-              Util::retornarMensagemErro("Preencha todos os campos");
+              Util::retornarMensagemErro("Erro ao Editar Filial", "Campos Vazio", "Preencha todos os campos");
             }
           }
         }
 
 
-    }    
+    }
 ?>

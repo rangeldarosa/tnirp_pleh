@@ -8,14 +8,13 @@ class Professor extends Controller {
         require APP . 'util/Util.php';
         $this->model = new ProfessorModel($this->db);
     }
-    public function index() 
+    public function index()
     {
         Util::validarLogin();
 
         if(isset($_GET["id"])){
             $id = $_GET["id"];
             $professor = $this->model->buscarProfessorPorCd($id);
-            Util::dump($professor);
         }
 
         $professores = $this->model->buscarTodosProfessores();
@@ -24,7 +23,7 @@ class Professor extends Controller {
         require APP . 'view/_templates/footer.php';
     }
 
-    public function salvarProfessor() 
+    public function salvarProfessor()
     {
 
         $professor = array();
@@ -33,13 +32,13 @@ class Professor extends Controller {
           $professor["estado"] = $_POST["cadProfessoresStatus"];
           $professor["privado"] = $_POST["cadProfessoresPrivado"];
           if($this->model->salvarProfessor($professor)) {
-            Util::retornarMensagemSucesso("Professor, inserido com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Professor, inserido com sucesso");
             header('location: ' . URL . 'professor/');
           }
         }
     }
 
-    public function listarProfessores() 
+    public function listarProfessores()
     {
         $professores = $this->model->buscarTodosProfessores();
 
@@ -48,15 +47,13 @@ class Professor extends Controller {
         require APP . 'view/_templates/footer.php';
     }
 
-    public function verificaBloquearOuDesbloquear($cdProfessor)
-    {
-      $professor = $this->model->buscarProfessorPorCd($cdProfessor);
-      if($professor->ESTADO === '0' ){
-          $this->model->desbloquearProfessor($cdProfessor);
-      }else{
-          $this->model->bloquearProfessor($cdProfessor);
-      }
-  }
+    public function bloquearProfessor($cdProfessor) {
+      $this->model->bloquearProfessor($cdProfessor);
+    }
+
+    public function desbloquearProfessor($cdProfessor) {
+      $this->model->desbloquearProfessor($cdProfessor);
+    }
 
 
 
@@ -69,21 +66,20 @@ class Professor extends Controller {
       require APP . 'view/professor/index.php';
       require APP . 'view/_templates/footer.php';
 
-      if($cdProfessor && isset($_POST))
-      {
+      if($cdProfessor && isset($_POST))  {
         $professorEdit = array();
-        if(isset($_POST["cadProfessoresNome"]) && isset($_POST["cadProfessoresStatus"]) && isset( $_POST["cadProfessoresPrivado"])) {
+        if(!empty($_POST["cadProfessoresNome"]) && !empty($_POST["cadProfessoresStatus"]) && !empty( $_POST["cadProfessoresPrivado"])) {
           $professorEdit["nome"] = $_POST["cadProfessoresNome"];
           $professorEdit["estado"] = $_POST["cadProfessoresStatus"];
           $professorEdit["privado"] = $_POST["cadProfessoresPrivado"];
           if($this->model->editarProfessor($professorEdit, $cdProfessor)) {
-            Util::retornarMensagemSucesso("Professor, Alterado com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Professor, Alterado com sucesso");
             header('location: ' . URL . 'professor/');
           } else {
-            Util::retornarMensagemErro("Erro ao alterar professor");
+            Util::retornarMensagemErro("Erro ao alterar professor!", "ERRO NO UPDATE", "Aconteceu algo errado ao atualizar o professor");
           }
         } else {
-          Util::retornarMensagemErro("Preencha todos os campos");
+            Util::retornarMensagemErro("Erro ao alterar professor!", "Campos Vazio", "Preencha todos os campos");
         }
       }
     }

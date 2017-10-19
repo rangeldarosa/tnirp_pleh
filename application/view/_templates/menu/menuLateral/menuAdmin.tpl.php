@@ -1,6 +1,11 @@
 <link href="<?php echo URL; ?>css/menuAdmin.css" rel="stylesheet">
-<div class="nav-side-menu">
-    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+<nav class="nav-side-menu">
+    <button type="button" data-target="#menu-content" data-toggle="collapse" class="navbar-toggle buttom-nav-lateral">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
         <div class="menu-list">
               <div class="brand">
                 <?php echo !$isMenuSuperior ? '<a style="width:100%;" href="'.URL.'" class="navbar-brand text-center"><img style="margin: 0 auto; margin-top: 10px;" class="text-center" src="'.URL.'img/logoHD.png" height="45px"/></a><br><br>' : 'Menu Administrador'?>
@@ -10,4 +15,4 @@
                 <li><a href="<?php echo URL;?>professor"><i class="fa fa-dashboard fa-lg"></i> Professores</a></li>
             </ul>
      </div>
-</div>
+</nav>
