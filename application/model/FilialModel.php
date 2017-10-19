@@ -14,7 +14,7 @@ class FilialModel
     }
     public function buscarTodosAsFiliais()
     {
-        $sql = "SELECT f.*, inst.NOME_INSTITUICAO, cid.NOME_CIDADE, cid.ESTADO FROM filial f
+        $sql = "SELECT f.*, inst.NOME_INSTITUICAO, cid.NOME_CIDADE, cid.ESTADO nmestado FROM filial f
               INNER JOIN cidade cid ON f.Cidade_CD_CIDADE = cid.CD_CIDADE
               INNER JOIN instituicao inst ON inst.CD_INSTITUICAO = f.Instituicao_CD_INSTITUICAO";
         $query = $this->db->prepare($sql);
@@ -50,6 +50,7 @@ class FilialModel
         $query = $this->db->prepare($sql);
         $parameters = array(':cd' => intval($cdFilial));
         $retorno = $query->execute($parameters);
+        var_dump($retorno);
         if($retorno){
             Util::retornarMensagemSucesso("Sucesso", null, "Filial, Bloqueada com sucesso");
         }else{
@@ -64,6 +65,7 @@ class FilialModel
         $query = $this->db->prepare($sql);
         $parameters = array(':cd' => intval($cdFilial));
         $retorno = $query->execute($parameters);
+        var_dump($retorno);
         if($retorno){
             Util::retornarMensagemSucesso("Sucesso", null, "Filial, Desbloqueada com sucesso");
         }else{
