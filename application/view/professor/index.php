@@ -14,7 +14,6 @@
     </div>
   </div>
 
-  <!-- TODO  FALTA IMPLEMENTAR AS LISTAS -->
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Lista de Professores</h3>
