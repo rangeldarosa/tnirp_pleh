@@ -4,8 +4,10 @@
         function __construct()  {
             parent::__construct();
             require APP . 'model/FilialModel.php';
+            require APP . 'model/CidadeModel.php';
             require APP . 'util/Util.php';
             $this->model = new FilialModel($this->db);
+            $this->cidadeModel = new CidadeModel($this->db);
         }
 
 
@@ -14,6 +16,7 @@
             Util::validarLogin();
 
             $filiais = $this->model->buscarTodosAsFiliais();
+            $cidades = $this->cidadeModel->buscarTodasAsCidades();
 
             require APP . 'view/_templates/header.php';
             require APP . 'view/filial/index.php';
@@ -27,6 +30,10 @@
             require APP . 'view/_templates/header.php';
             require APP . 'view/filial/index.php';
             require APP . 'view/_templates/footer.php';
+        }
+
+        public function listarCidades(){
+            $cidades = $this->cidadeModel->buscarTodasAsCidades();
         }
 
         public function salvarFilial()
@@ -51,16 +58,13 @@
             }
         }
 
-        public function verificaBloquearOuDesbloquear($cdFilial)
-        {
-            $filial = $this->model->buscarFilialPorCd($cdFilial);
-            if($filial->ESTADO === '0' ){
-                $this->model->desbloquearFilial($cdFilial);
-            }else{
-                $this->model->bloquearFilial($cdFilial);
-            }
+        public function desbloquearFilial($cdFilial){
+            $this->model->desbloquearFilial($cdFilial);
         }
 
+        public function bloquearFilial($cdFilial){
+            $this->model->bloquearFilial($cdFilial);
+        }
 
         public function editarFilial($cdFilial)
         {
@@ -88,8 +92,6 @@
               } else {
                 Util::retornarMensagemErro("Erro ao Editar Filial", "ERRO NO UPDATE", "Algo de Errado ao Atualizar Filial");
               }
-            } else {
-              Util::retornarMensagemErro("Erro ao Editar Filial", "Campos Vazio", "Preencha todos os campos");
             }
           }
         }

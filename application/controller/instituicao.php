@@ -13,6 +13,7 @@
         {
             Util::validarLogin();
 
+            $instituicoes = $this->model->buscarTodosAsInstituicoes();
             require APP . 'view/_templates/header.php';
             require APP . 'view/instituicao/index.php';
             require APP . 'view/_templates/footer.php';
@@ -32,7 +33,7 @@
 
         public function listarInstituicoes()
         {
-            $professores = $this->model->buscarTodasAsCidades();
+            $instituicoes = $this->model->buscarTodosAsInstituicoes();
 
             require APP . 'view/_templates/header.php';
             require APP . 'view/instituicao/index.php';

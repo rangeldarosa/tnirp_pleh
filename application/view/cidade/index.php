@@ -20,7 +20,7 @@
     </div>
     <div class="panel-body">
       <?php
-        include APP . 'view/_templates/cidade/listCidade.tpl.php';
+        include APP . 'view/_templates/cidade/listCidades.tpl.php';
       ?>
     </div>
   </div>
