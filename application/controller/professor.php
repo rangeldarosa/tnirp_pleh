@@ -78,8 +78,6 @@ class Professor extends Controller {
           } else {
             Util::retornarMensagemErro("Erro ao alterar professor!", "ERRO NO UPDATE", "Aconteceu algo errado ao atualizar o professor");
           }
-        } else {
-            Util::retornarMensagemErro("Erro ao alterar professor!", "Campos Vazio", "Preencha todos os campos");
         }
       }
     }
