@@ -32,7 +32,7 @@
         }
         public function listarCidades()
         {
-            $professores = $this->model->buscarTodasAsCidades();
+            $cidades = $this->model->buscarTodasAsCidades();
 
             require APP . 'view/_templates/header.php';
             require APP . 'view/cidade/index.php';

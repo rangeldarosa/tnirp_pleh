@@ -9,7 +9,7 @@
     </div>
     <div class="panel-body">
       <?php
-      include APP . 'view/_templates/cidade/cadInstituicao.tpl.php';
+      include APP . 'view/_templates/instituicao/cadInstituicao.tpl.php';
       ?>
     </div>
   </div>
@@ -20,7 +20,7 @@
     </div>
     <div class="panel-body">
       <?php
-        include APP . 'view/_templates/cidade/listInstituicao.tpl.php';
+        include APP . 'view/_templates/instituicao/listInstituicoes.tpl.php';
       ?>
     </div>
   </div>
