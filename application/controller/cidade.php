@@ -12,6 +12,7 @@
         public function index()
         {
             Util::validarLogin();
+            $cidades = $this->model->buscarTodasAsCidades();
 
             require APP . 'view/_templates/header.php';
             require APP . 'view/cidade/index.php';
