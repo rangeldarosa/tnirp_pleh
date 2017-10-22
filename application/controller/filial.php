@@ -5,9 +5,11 @@
             parent::__construct();
             require APP . 'model/FilialModel.php';
             require APP . 'model/CidadeModel.php';
+            require APP . 'model/InstituicaoModel.php';
             require APP . 'util/Util.php';
             $this->model = new FilialModel($this->db);
             $this->cidadeModel = new CidadeModel($this->db);
+            $this->instituicaoModel = new InstituicaoModel($this->db);
         }
 
 
@@ -17,6 +19,7 @@
 
             $filiais = $this->model->buscarTodosAsFiliais();
             $cidades = $this->cidadeModel->buscarTodasAsCidades();
+            $instituicoes = $this->instituicaoModel->buscarTodosAsInstituicoes();
 
             require APP . 'view/_templates/header.php';
             require APP . 'view/filial/index.php';
@@ -26,6 +29,8 @@
         public function listarFiliais()
         {
             $filiais = $this->model->buscarTodosAsFiliais();
+            $cidades = $this->cidadeModel->buscarTodasAsCidades();
+            $instituicoes = $this->instituicaoModel->buscarTodosAsInstituicoes();
 
             require APP . 'view/_templates/header.php';
             require APP . 'view/filial/index.php';
@@ -36,12 +41,15 @@
             $cidades = $this->cidadeModel->buscarTodasAsCidades();
         }
 
-        public function salvarFilial()
-        {
+        public function listarInstituicoes(){
+            $instituicoes = $this->instituicaoModel->buscarTodosAsInstituicoes();
+        }
+
+        public function salvarFilial() {
             $filial = array();
             if(isset($_POST["cadFilialNome"]) && isset($_POST["cadFilialTaxaImpressaoColorida"])
             && isset($_POST["cadFilialTaxaImpressaoPretoEBranco"]) && isset($_POST["cadFilialCidade"])
-            && isset($_POST["cadFilialInstituicao"]) && isset($_POST["cadFilialEstado"])) {// esse estado referência ao estado de ativo e inativo
+            && isset($_POST["cadFilialInstituicao"]) && isset($_POST["cadFilialEstado"])) {
                 $filial["nome"] = $_POST["cadFilialNome"];
                 $filial["impc"] = $_POST["cadFilialTaxaImpressaoColorida"];
                 $filial["imppb"] = $_POST["cadFilialTaxaImpressaoPretoEBranco"];
@@ -55,6 +63,7 @@
                 }
             } else{
                 Util::retornarMensagemErro("Erro ao Cadastrar Filial", "Campos Vazio", "Preencha todos os campos");
+                header('location: ' . URL . 'filial/');
             }
         }
 
@@ -70,6 +79,8 @@
         {
           $filiais = $this->model->buscarTodosAsFiliais();
           $filial = $this->model->buscarFilialPorCd($cdFilial);
+          $cidades = $this->cidadeModel->buscarTodasAsCidades();
+          $instituicoes = $this->instituicaoModel->buscarTodosAsInstituicoes();
 
           require APP . 'view/_templates/header.php';
           require APP . 'view/filial/index.php';
@@ -79,13 +90,13 @@
             $filialEdit = array();
             if(isset($_POST["cadFilialNome"]) && isset($_POST["cadFilialTaxaImpressaoColorida"])
             && isset($_POST["cadFilialTaxaImpressaoPretoEBranco"]) && isset($_POST["cadFilialCidade"])
-            && isset($_POST["cadFilialInstituicao"]) && isset($_POST["cadFilialEstado"])) {
+            && isset($_POST["cadFilialInstituicao"]) && isset($_POST["cadFilialStatus"])) {
                 $filialEdit["nome"] = $_POST["cadFilialNome"];
                 $filialEdit["impc"] = $_POST["cadFilialTaxaImpressaoColorida"];
                 $filialEdit["imppb"] = $_POST["cadFilialTaxaImpressaoPretoEBranco"];
                 $filialEdit["cidade"] =   $_POST["cadFilialCidade"];
                 $filialEdit["instituicao"] = $_POST["cadFilialInstituicao"];
-                $filialEdit["status"] = $_POST["cadFilialEstado"];
+                $filialEdit["status"] = $_POST["cadFilialStatus"];
               if($this->model->editarFilial($filialEdit, $cdFilial)) {
                 Util::retornarMensagemSucesso("Sucesso", null, "Filial, Alterada com sucesso");
                 header('location: ' . URL . 'filial/');

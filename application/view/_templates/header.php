@@ -17,8 +17,7 @@
 	<link href="<?php echo URL; ?>lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo URL; ?>lib/dataTable/dataTables.min.css" rel="stylesheet">
   <link href="<?php echo URL; ?>lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
-	<link href="<?php echo URL; ?>lib/styles/main.css" rel="stylesheet">
-
+	<link href="<?php echo URL; ?>css/404.css" rel="stylesheet">
   <link href="<?php echo URL; ?>css/style.css" rel="stylesheet">
 </head>
 <body>

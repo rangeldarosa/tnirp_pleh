@@ -13,7 +13,7 @@
         ?>
         <tr>
             <td class="text-center"><?php echo $instituicao->CD_INSTITUICAO;?></td>
-            <td><?php echo $instituicao->NOME_INSTITUICAO;?></td>
+            <td><?php echo mb_strtoupper($instituicao->NOME_INSTITUICAO, 'UTF-8');?></td>
             <td class="text-center"><a title="Editar Instituição" href="<?php echo URL; ?>instituicao/editarInstituicao/<?php echo $instituicao->CD_INSTITUICAO;?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
             <td class="text-center"><a title="Bloquear Instituição" href="<?php echo URL.'instituicao/bloquearInstituicao/'.$instituicao->CD_INSTITUICAO;?>">
               <span class="glyphicon glyphicon-remove"></span>

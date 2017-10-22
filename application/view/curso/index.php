@@ -1,19 +1,26 @@
-<div class="container">
-    <div class="cadCursoArea">
-        <form action="<?php echo !isset($curso) ? URL.'curso/salvarCurso' : '';?>" method="post">
-            <div class="form-group">
-            <label for="cadCursoNome">Nome da Curso</label>
-            <input type="text" name="cadCursoNome" class="form-control input-controll-app" id="cadCursoNome" placeholder="Nome da Curso" required maxlength="60" value="<?php echo isset($curso) ? $curso->NOME : ''; ?>">
-            </div>
-            <div class="form-group">
-            <label for="cadCursoEstado">Estado da Curso</label>
-            <input type="text" name="cadCursoEstado" class="form-control input-controll-app" id="cadCursoEstado" placeholder="Estado da Curso" required maxlength="60" value="<?php echo isset($curso) ? $curso->ESTADO : ''; ?>">
-            </div>
-
-            <div class="text-center">
-            <input type="submit" class="btn btn-default btn-default-app" name="enviarDados" value="Enviar Dados">
-            <input type="reset" class="btn btn-default btn-default-app" name="resetarDados" value="Resetar Dados">
-            </div>
-        </form>
+<div class="container-fluid">
+  <h2 class="text-center">Listagem de Cursos</h2><br>
+  <?php
+  include APP . 'view/_templates/alerts/alerts.tpl.php';
+  ?>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Cadastro de Cursos</h3>
     </div>
-</div>
+    <div class="panel-body">
+      <?php
+      include APP . 'view/_templates/curso/cadCurso.tpl.php';
+      ?>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Lista de Cursos</h3>
+    </div>
+    <div class="panel-body">
+      <?php
+        include APP . 'view/_templates/curso/listCursos.tpl.php';
+      ?>
+    </div>
+  </div>

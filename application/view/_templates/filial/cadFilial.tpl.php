@@ -1,35 +1,55 @@
 <div class="cadFilialArea">
-  <form class="" action="" method="post">
+  <form action="<?php echo !isset($filial) ? URL.'filial/salvarFilial' : '';?>" method="post">
+
     <div class="form-group">
       <label for="cadFilialNome">Nome da Filial</label>
-      <input type="text" name="cadFilialNome" class="form-control input-controll-app" id="cadFilialNome" placeholder="Nome da Filial" required maxlength="60">
+      <input type="text" name="cadFilialNome" class="form-control input-controll-app" id="cadFilialNome" placeholder="Nome da Filial" required maxlength="255" value="<?php echo isset($filial) ? $filial->NOME : ''; ?>">
     </div>
+
     <div class="form-group">
-      <label for="cadFilialEndereco">Endereço da Filial</label>
-      <input type="text" name="cadFilialEndereco" class="form-control input-controll-app" id="cadFilialEndereco" placeholder="Endereço da Filial" required maxlength="60">
+      <label for="cadFilialValorPeB">Valor Preto/Branco</label>
+      <input type="text" name="cadFilialTaxaImpressaoPretoEBranco" class="form-control input-controll-app price" id="cadFilialValorPeB" placeholder="Valor Preto/Branco" required maxlength="10" value="<?php echo isset($filial) ? $filial->TAXA_IMPRESSAO_PRETO_E_BRANCO : ''; ?>">
     </div>
+
     <div class="form-group">
-      <label for="cadFilialEstado">Estado da Filial</label>
-      <select class="form-control select-controll-app" name="cadFilialEstado" id="cadFilialEstado" required>
-        <option value="">Selecione um Estado</option>
-        <option value="2">SANTA CATARINA</option>
+      <label for="cadFilialValorColor">Valor Colorido</label>
+      <input type="text" name="cadFilialTaxaImpressaoColorida" class="form-control input-controll-app price" id="cadFilialValorColor" placeholder="Valor Colorido" required maxlength="10" value="<?php echo isset($filial) ? $filial->TAXA_IMPRESSAO_COLORIDA : ''; ?>">
+    </div>
+
+    <div class="form-group">
+      <label for="cadFilialStatus">Status</label>
+      <select class="form-control select-controll-app" name="cadFilialStatus" id="cadFilialStatus" required>
+        <option value="1" <?php echo isset($filial) && ($filial->ESTADO == 1) ? 'selected' : ''; ?>>Ativa</option>
+        <option value="0" <?php echo isset($filial) && ($filial->ESTADO == 0) ? 'selected' : ''; ?>>Inativa</option>
       </select>
     </div>
+
     <div class="form-group">
-      <label for="cadFilialCidade">Cidade da Filial</label>
+      <label for="cadFilialInstituicao">Instituição</label>
+      <select class="form-control select-controll-app" name="cadFilialInstituicao" id="cadFilialInstituicao" required>
+          <option value="">Selecione a Instituição</option>
+          <?php
+          foreach ($instituicoes as $instituicao):?>
+            <option value="<?php echo $instituicao->CD_INSTITUICAO ?>" <?php echo isset($instituicao) && isset($filial) && ($filial->Instituicao_CD_INSTITUICAO == $instituicao->CD_INSTITUICAO) ? 'selected' : ''; ?>><?php echo mb_strtoupper($instituicao->NOME_INSTITUICAO, 'UTF-8')?></option>
+          <?php endforeach; ?>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cadFilialCidade">Cidade</label>
       <select class="form-control select-controll-app" name="cadFilialCidade" id="cadFilialCidade" required>
-        <option value="">Selecione uma Cidade</option>
-        <option value="12">TUBARÃO</option>
+          <option value="">Selecione a Cidade</option>
+          <?php
+          foreach ($cidades as $cidade):?>
+            <option value="<?php echo $cidade->CD_CIDADE ?>" <?php echo isset($cidade) &&  isset($filial) && ($filial->Cidade_CD_CIDADE == $cidade->CD_CIDADE) ? 'selected' : ''; ?>><?php echo mb_strtoupper($cidade->NOME_CIDADE, 'UTF-8')." - ".mb_strtoupper($cidade->ESTADO, 'UTF-8');?></option>
+          <?php endforeach; ?>
       </select>
     </div>
-    <div class="form-group">
-      <label for="cadProfessoresStatus">Status</label>
-      <select class="form-control select-controll-app" name="cadProfessoresStatus" id="cadProfessoresStatus" required>
-        <option value="1">Ativo</option>
-        <option value="0">Inativo</option>
-      </select>
+
+    <div class="text-center">
+      <input type="submit" class="btn btn-default btn-default-app" name="enviarDados" value="Enviar Dados">
+      <input type="reset" class="btn btn-default btn-default-app" name="resetarDados" value="Resetar Dados">
     </div>
-    <input type="submit" class="btn btn-default btn-default-app" name="enviarDados" value="Enviar Dados">
-    <input type="reset" class="btn btn-default btn-default-app" name="resetarDados" value="Resetar Dados">
+
   </form>
 </div>

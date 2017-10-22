@@ -18,12 +18,12 @@
         ?>
         <tr class="<?php echo $filial->ESTADO == 0 ? 'danger' : ''?>">
             <td class="text-center"><?php echo $filial->CD_FILIAL;?></td>
-            <td><?php echo $filial->NOME;?></td>
+            <td><?php echo mb_strtoupper($filial->NOME, 'UTF-8');?></td>
             <td class="text-center"><?php echo $filial->TAXA_IMPRESSAO_COLORIDA;?></td>
             <td class="text-center"><?php echo $filial->TAXA_IMPRESSAO_PRETO_E_BRANCO;?></td>
-            <td class="text-center"><?php echo $filial->NOME_INSTITUICAO;?></td>
-            <td class="text-center"><?php echo $filial->NOME_CIDADE;?></td>
-            <td class="text-center"><?php echo $filial->ESTADO;?></td>
+            <td class="text-center"><?php echo mb_strtoupper($filial->NOME_INSTITUICAO, 'UTF-8');?></td>
+            <td class="text-center"><?php echo mb_strtoupper($filial->NOME_CIDADE, 'UTF-8');?></td>
+            <td class="text-center"><?php echo mb_strtoupper($filial->nmestado, 'UTF-8');?></td>
             <td class="text-center"><a title="Editar Filial" href="<?php echo URL; ?>filial/editarFilial/<?php echo $filial->CD_FILIAL;?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
             <td class="text-center"><a title="Bloquear/Desbloquear Filial" href="<?php echo $filial->ESTADO == '1' ? URL.'filial/bloquearFilial/'.$filial->CD_FILIAL : URL.'filial/desbloquearFilial/'.$filial->CD_FILIAL;?>">
               <span class="glyphicon glyphicon-<?php echo $filial->ESTADO == '1' ? 'remove' : 'ok';?>"></span>

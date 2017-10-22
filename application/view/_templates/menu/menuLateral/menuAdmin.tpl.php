@@ -11,12 +11,22 @@
                 <?php echo !$isMenuSuperior ? '<a style="width:100%;" href="'.URL.'" class="navbar-brand text-center"><img style="margin: 0 auto; margin-top: 10px;" class="text-center" src="'.URL.'img/logoHD.png" height="45px"/></a><br><br>' : 'Menu Administrador'?>
                 </div>
             <ul id="menu-content" class="menu-content collapse out">
-                <li><a href="<?php echo URL;?>"><i class="fa fa-dashboard fa-lg"></i> Dashboard</a></li>
-                <li><a href="<?php echo URL;?>professor"><i class="fa fa-dashboard fa-lg"></i> Professores</a></li>
-                <li><a href="<?php echo URL;?>filial"><i class="fa fa-dashboard fa-lg"></i> Filial</a></li>
-                <li><a href="<?php echo URL;?>estado"><i class="fa fa-dashboard fa-lg"></i> Estado</a></li>
-                <li><a href="<?php echo URL;?>cidade"><i class="fa fa-dashboard fa-lg"></i> Cidade</a></li>
-                <li><a href="<?php echo URL;?>instituicao"><i class="fa fa-dashboard fa-lg"></i> Instituição</a></li>
+                <a href="<?php echo URL;?>"><li class="<?php echo !isset($_GET['url']) || empty($_GET['url']) ? 'active' : ''?>"><i class="fa fa-dashboard fa-lg"></i> Dashboard</li></a>
+                <a href="<?php echo URL;?>ano"><li class="<?php echo isset($_GET['url']) && ($_GET['url'] == 'ano') ? 'active' : ''?>"><i class="fa fa-dashboard fa-lg"></i> Ano</li></a>
+                <a href="<?php echo URL;?>arquivo"><li class="<?php echo isset($_GET['url']) && ($_GET['url'] == 'arquivo') ? 'active' : ''?>"><i class="fa fa-dashboard fa-lg"></i> Arquivo</li></a>
+                <a href="<?php echo URL;?>curso"><li class="<?php echo isset($_GET['url']) && ($_GET['url'] == 'curso') ? 'active' : ''?>"><i class="fa fa-dashboard fa-lg"></i> Curso</li></a>
+                <a href="<?php echo URL;?>filial"><li class="<?php echo isset($_GET['url']) && ($_GET['url'] == 'filial') ? 'active' : ''?>"><i class="fa fa-dashboard fa-lg"></i> Filial</li></a>
+                <a href="<?php echo URL;?>professor"><li class="<?php echo isset($_GET['url']) && ($_GET['url'] == 'professor') ? 'active' : ''?>"><i class="fa fa-dashboard fa-lg"></i> Professor</li></a>
+                <a href="<?php echo URL;?>instituicao"><li class="<?php echo isset($_GET['url']) && ($_GET['url'] == 'instituicao') ? 'active' : ''?>"><i class="fa fa-dashboard fa-lg"></i> Instituição</li></a>
+
+                <li data-toggle="collapse" data-target="#localizacao" class="<?php echo isset($_GET['url']) && ($_GET['url'] == 'cidade') || ($_GET['url'] == 'estado') ? 'active' : 'collapsed'?>">
+                  <a href="#"><i class="fa fa-gift fa-lg"></i> Localização <span class="arrow"></span></a>
+                </li>
+                <ul class="sub-menu <?php echo isset($_GET['url']) && ($_GET['url'] == 'cidade') ? 'collapse in' : 'collapse'?>" id="localizacao">
+                  <a href="<?php echo URL;?>cidade"><li class="<?php echo isset($_GET['url']) && ($_GET['url'] == 'cidade') ? 'active' : ''?>"><i class="fa fa-dashboard fa-lg"></i> Cidade</li></a>
+                </ul>
+                <a href="<?php echo URL;?>disciplina"><li class="<?php echo isset($_GET['url']) && ($_GET['url'] == 'disciplina') ? 'active' : ''?>"><i class="fa fa-dashboard fa-lg"></i> Materia</li></a>
+                <a href="<?php echo URL;?>usuario"><li class="<?php echo isset($_GET['url']) && ($_GET['url'] == 'usuario') ? 'active' : ''?>"><i class="fa fa-dashboard fa-lg"></i> Usuários</li></a>
             </ul>
      </div>
 </nav>

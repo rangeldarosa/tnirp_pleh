@@ -18,8 +18,8 @@
             <td><?php echo $disciplina->NOME;?></td>
             <td class="text-center"><?php echo $disciplina->PRIVADO == '1' ? 'Sim' : 'Não';?></td>
             <td class="text-center"><?php echo $disciplina->ESTADO == '1' ? 'Sim' : 'Não';?></td>
-            <td><a title="Editar Disciplina" href="<?php echo URL; ?>disciplina/editarDisciplina/<?php echo $disciplina->CD_DISCIPLINA;?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
-            <td><a title="Bloquear/Desbloquear Disciplina" href="<?php echo $disciplina->ESTADO == '1' ? URL.'disciplina/bloquearDisciplina/'.$disciplina->CD_DISCIPLINA : URL.'disciplina/desbloquearDisciplina/'.$disciplina->CD_DISCIPLINA;?>">
+            <td class="text-center"><a title="Editar Disciplina" href="<?php echo URL; ?>disciplina/editarDisciplina/<?php echo $disciplina->CD_DISCIPLINA;?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
+            <td class="text-center"><a title="Bloquear/Desbloquear Disciplina" href="<?php echo $disciplina->ESTADO == '1' ? URL.'disciplina/bloquearDisciplina/'.$disciplina->CD_DISCIPLINA : URL.'disciplina/desbloquearDisciplina/'.$disciplina->CD_DISCIPLINA;?>">
               <span class="glyphicon glyphicon-<?php echo $disciplina->ESTADO == '1' ? 'remove' : 'ok';?>"></span>
             </a></td>
         </tr>

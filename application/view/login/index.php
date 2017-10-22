@@ -32,16 +32,17 @@
                 <?php
                   include APP . 'view/_templates/alerts/alerts.tpl.php';
                 ?>
-								<label for="login" id="loginl">Login:</label> <br/>
-								<input class="form-control" type="text" name="login" id="loginh"/> <br/>
 
-								<label for="senha" id="senhal">Senha:</label> <br/>
-								<input class="form-control" type="password" name="senha" id="senha"/> <br/>
+                <div style="margin-bottom: 5px;" class="input-group margin-bottom-sm">
+                  <span class="input-group-addon" for="login"><i class="fa fa-user fa-fw" aria-hidden="true"></i></span>
+                  <input class="form-control" type="text" name="login" id="login" placeholder="Digite o Login"/> <br/>
+                </div>
 
-								<div class="pull-right">
-									<input type="submit" class="btn btn-primary btn-submit-app" value="Fazer Login">
-								</div>
-								<div class="clearfix"></div>
+                <div style="margin-bottom: 5px;"class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
+		              <input class="form-control" type="password" name="senha" id="senha" placeholder="Digite a Senha"/> <br/>
+                </div>
+                  <button type="submit" class="btn btn-primary btn-submit-app btn-block">Fazer Login <i class="fa fa-sign-in" aria-hidden="true"></i></button>              
 							</form>
 						</div>
 					</div>

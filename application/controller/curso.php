@@ -11,9 +11,11 @@
 
         public function index(){
             Util::validarLogin();
+            
+            $cursos = $this->model->listarCursos();
 
             require APP . 'view/_templates/header.php';
-           require APP . 'view/curso/index.php';
+            require APP . 'view/curso/index.php';
             require APP . 'view/_templates/footer.php';
         }
 
@@ -29,11 +31,11 @@
               }
             }
         }
-        
-        public function listarCursos(){
-            $cursos = $this->model->listarCursos();
 
-            require APP . 'view/_templates/header.php';
+        public function listarCursos(){
+
+ 			$cursos = $this->model->listarCursos();           
+			 require APP . 'view/_templates/header.php';
             require APP . 'view/curso/index.php';
             require APP . 'view/_templates/footer.php';
         }

@@ -15,6 +15,7 @@
         <tr class="<?php echo $curso->ESTADO == 0 ? 'danger' : ''?>">
             <td class="text-center"><?php echo $curso->CD_CURSO;?></td>
             <td><?php echo $curso->NOME;?></td>
+            <td><?php echo $curso->ESTADO == 0 ? 'Desativado' : 'Ativo';?></td>
             <td class="text-center"><a title="Editar Curso" href="<?php echo URL; ?>curso/editarCurso/<?php echo $curso->CD_CURSO;?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
             <td class="text-center"><a title="Bloquear/Desbloquear Curso" href="<?php echo $curso->ESTADO == '1' ? URL.'curso/bloquearCurso/'.$curso->CD_CURSO : URL.'curso/desbloquearCurso/'.$curso->CD_CURSO;?>">
               <span class="glyphicon glyphicon-<?php echo $curso->ESTADO == '1' ? 'remove' : 'ok';?>"></span>
