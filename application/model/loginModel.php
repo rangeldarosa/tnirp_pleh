@@ -11,7 +11,7 @@ class LoginModel {
     }
 
     public function validarLogin($login, $senha) {
-        $sql = "SELECT cd_usuario, login, senha, estado FROM usuario where login = :login and senha = :senha ";
+        $sql = "SELECT cd_usuario, login, senha, nivel_de_acesso, estado FROM usuario where login = :login and senha = :senha ";
         $query = $this->db->prepare($sql);
         $parameters = array(':login' => $login, ':senha' => $senha);
         $query->execute($parameters);

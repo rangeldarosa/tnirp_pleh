@@ -34,5 +34,29 @@ Class Util{
         static function dump($param){
             var_dump($param);
         }
+        static function validarNivelUsuario(){
+            if(isset($_SESSION["usuario"]->nivel_de_acesso) && intval($_SESSION["usuario"]->nivel_de_acesso)>=1){
+                return true;
+            }else{
+                header('location: ' . URL . '' );
+                retornarMensagemErro("ERRO!","Nível de permissão insuficiente",null);
+            }
+        }
+        static function validarNivelGerente(){
+            if(isset($_SESSION["usuario"]->nivel_de_acesso) && intval($_SESSION["usuario"]->nivel_de_acesso)>=2){
+                return true;
+            }else{
+                header('location: ' . URL . '' );
+                retornarMensagemErro("ERRO!","Nível de permissão insuficiente",null);
+            }
+        }
+        static function vaidarNivelAdmin(){
+            if(isset($_SESSION["usuario"]->nivel_de_acesso) && intval($_SESSION["usuario"]->nivel_de_acesso)==3){
+                return true;
+            }else{
+                header('location: ' . URL . '' );
+                retornarMensagemErro("ERRO!","Nível de permissão insuficiente",null);
+            }
+        }
 }
 ?>
