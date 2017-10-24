@@ -12,6 +12,7 @@
         public function index()
         {
             Util::validarLogin();
+            Util::validarNivelGerente();
 
             $instituicoes = $this->model->buscarTodosAsInstituicoes();
             require APP . 'view/_templates/header.php';

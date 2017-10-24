@@ -13,6 +13,7 @@ class Disciplina extends Controller {
      public function index() {
                 
         Util::validarLogin();
+        Util::validarNivelGerente();
         
         if(isset($_GET["id"])){
             $id = $_GET["id"];

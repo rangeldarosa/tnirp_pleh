@@ -11,6 +11,7 @@
 
         public function index(){
             Util::validarLogin();
+            Util::validarNivelGerente();
             
             $cursos = $this->model->listarCursos();
 

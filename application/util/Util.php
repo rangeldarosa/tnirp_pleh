@@ -17,7 +17,7 @@ Class Util{
             $_SESSION["msgSucesso"]["detalhes"] = $mensagem;
         }
 
-        static function retornarMensagemErro($titulo, $causa, $mensagem){
+        public function retornarMensagemErro($titulo, $causa, $mensagem){
             $_SESSION["msgErro"] = array();
             $_SESSION["msgErro"]["causa"] = $causa;
             $_SESSION["msgErro"]["titulo"] = $titulo;
@@ -38,24 +38,27 @@ Class Util{
             if(isset($_SESSION["usuario"]->nivel_de_acesso) && intval($_SESSION["usuario"]->nivel_de_acesso)>=1){
                 return true;
             }else{
+                self::retornarMensagemErro("ERRO!","Nível de permissão insuficiente",null);
                 header('location: ' . URL . '' );
-                retornarMensagemErro("ERRO!","Nível de permissão insuficiente",null);
+                die;
             }
         }
         static function validarNivelGerente(){
             if(isset($_SESSION["usuario"]->nivel_de_acesso) && intval($_SESSION["usuario"]->nivel_de_acesso)>=2){
                 return true;
             }else{
+                self::retornarMensagemErro("ERRO!","Nível de permissão insuficiente",null);
                 header('location: ' . URL . '' );
-                retornarMensagemErro("ERRO!","Nível de permissão insuficiente",null);
+                die;
             }
         }
         static function vaidarNivelAdmin(){
             if(isset($_SESSION["usuario"]->nivel_de_acesso) && intval($_SESSION["usuario"]->nivel_de_acesso)==3){
                 return true;
             }else{
+                self::retornarMensagemErro("ERRO!","Nível de permissão insuficiente",null);
                 header('location: ' . URL . '' );
-                retornarMensagemErro("ERRO!","Nível de permissão insuficiente",null);
+                die;
             }
         }
 }

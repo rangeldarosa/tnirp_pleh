@@ -16,6 +16,7 @@
         public function index()
         {
             Util::validarLogin();
+            Util::validarNivelGerente();
 
             $filiais = $this->model->buscarTodosAsFiliais();
             $cidades = $this->cidadeModel->buscarTodasAsCidades();
