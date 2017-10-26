@@ -24,14 +24,18 @@
     <div class="form-group">
       <label for="cadProfessoresStatus">Disciplinas</label>
       <select class="multi-select-app" multiple="multiple" name="cadProfessorDisciplina[]" required>
-        <option value="1" selected>Ativo</option>
-        <option value="2" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
-        <option value="3" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
-        <option value="4" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
-        <option value="5" selected>Inativo</option>
-        <option value="6" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
-        <option value="7" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
-        <option value="8" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
+        <?php
+        if(!empty($listaDisciplina) && is_array($listaDisciplina) && isset($listaDisciplina)) {
+          foreach($listaDisciplina as key => value) {
+            echo '<option value="'.value[CD_DISCIPLINA].'">'.value["NOME"].'</option>';
+          }
+        }
+        if(!empty($listaDisciplinaRelacionada) && is_array($listaDisciplinaRelacionada) && isset($listaDisciplinaRelacionada)) {
+          foreach($listaDisciplinaRelacionada as keyrel => valueRel) {
+            echo '<option value="'.valueRel[CD_DISCIPLINA].'" selected>'.value["NOME"].'</option>';
+          }
+        }
+        ?>
       </select>
     </div>
 
