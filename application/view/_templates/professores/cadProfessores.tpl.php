@@ -8,7 +8,7 @@
 
     <div class="form-group">
       <label for="cadProfessoresPrivado">Privado</label>
-      <select class="form-control select-controll-app" name="cadProfessoresPrivado" id="cadProfessoresPrivado" required>
+      <select class="select-controll-app" name="cadProfessoresPrivado" id="cadProfessoresPrivado" required>
         <option value="1" <?php echo isset($professor) && ($professor->PRIVADO == 1) ? 'selected' : ''; ?>>Privado</option>
         <option value="0" <?php echo isset($professor) && ($professor->PRIVADO == 0) ? 'selected' : ''; ?>>Público</option>
       </select>
@@ -16,9 +16,22 @@
 
     <div class="form-group">
       <label for="cadProfessoresStatus">Status</label>
-      <select class="form-control select-controll-app" name="cadProfessoresStatus" id="cadProfessoresStatus" required>
+      <select class="select-controll-app" name="cadProfessoresStatus" required>
         <option value="1" <?php echo isset($professor) && ($professor->ESTADO == 1) ? 'selected' : ''; ?>>Ativo</option>
         <option value="0" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="cadProfessoresStatus">Disciplinas</label>
+      <select class="multi-select-app" multiple="multiple" name="cadProfessorDisciplina[]" required>
+        <option value="1" selected>Ativo</option>
+        <option value="2" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
+        <option value="3" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
+        <option value="4" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
+        <option value="5" selected>Inativo</option>
+        <option value="6" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
+        <option value="7" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
+        <option value="8" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
       </select>
     </div>
 

@@ -10,12 +10,23 @@
 
 	<script type="text/javascript" src="<?php echo URL; ?>lib/jquery/jquery-3.2.1.min.js"></script>
 
+
 	<script src="<?php echo URL; ?>lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<link href="<?php echo URL; ?>lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
 	<script src="<?php echo URL; ?>lib/dataTable/jquery.dataTables.min.js"></script>
 	<script src="<?php echo URL; ?>lib/dataTable/initDataTable.js"></script>
+  <link href="<?php echo URL; ?>lib/dataTable/dataTables.min.css" rel="stylesheet">
 
-	<link href="<?php echo URL; ?>lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link href="<?php echo URL; ?>lib/dataTable/dataTables.min.css" rel="stylesheet">
+	<script src="<?php echo URL; ?>lib/custom-select-search/jquery-customselect.js"></script>
+	<script src="<?php echo URL; ?>lib/custom-select-search/initCustomSelect.js"></script>
+  <link href="<?php echo URL; ?>lib/custom-select-search/jquery-customselect.css" rel="stylesheet">
+
+	<script src="<?php echo URL; ?>lib/custom-multi-select/js/jquery.multi-select.js"></script>
+	<script src="<?php echo URL; ?>lib/custom-multi-select/js/jquery.quicksearch.js"></script>
+	<script src="<?php echo URL; ?>lib/custom-multi-select/initCustomMultiSelect.js"></script>
+  <link href="<?php echo URL; ?>lib/custom-multi-select/css/multi-select.css" rel="stylesheet">
+
   <link href="<?php echo URL; ?>lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
 	<link href="<?php echo URL; ?>css/404.css" rel="stylesheet">
   <link href="<?php echo URL; ?>css/style.css" rel="stylesheet">
