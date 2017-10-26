@@ -5,8 +5,12 @@ class Professor extends Controller {
 
         parent::__construct();
         require APP . 'model/ProfessorModel.php';
+        require APP . 'model/AuxiliarProfessorDisciplinaModel.php';
+        require APP . 'model/DisciplinaModel.php';
         require APP . 'util/Util.php';
         $this->model = new ProfessorModel($this->db);
+        $this->modelAuxiliarProfessorDisciplina = new AuxiliarProfessorDisciplinaModel($this->db);
+        $this->modelDisciplina = new DisciplinaModel($this->db);
     }
     public function index()
     {
@@ -18,6 +22,8 @@ class Professor extends Controller {
             $professor = $this->model->buscarProfessorPorCd($id);
         }
 
+        $listaDisciplina = $this->modelDisciplina->buscarTodasDisciplinas();
+        
         $professores = $this->model->buscarTodosProfessores();
         require APP . 'view/_templates/header.php';
         require APP . 'view/professor/index.php';
@@ -63,6 +69,11 @@ class Professor extends Controller {
       $professores = $this->model->buscarTodosProfessores();
       $professor = $this->model->buscarProfessorPorCd($cdProfessor);
 
+      $listaDisciplina = $this->modelAuxiliarProfessorDisciplina->listarDisciplinasNaoRelacionadas($cdProfessor);
+      $listaDisciplinaRelacionada = $this->modelAuxiliarProfessorDisciplina->listarDisciplinasRelacionadas($cdProfessor);
+
+      //var_dump($listaDisciplina);
+     // var_dump($listaDisciplinaRelacionada);
       require APP . 'view/_templates/header.php';
       require APP . 'view/professor/index.php';
       require APP . 'view/_templates/footer.php';
