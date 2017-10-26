@@ -6,6 +6,7 @@
             require APP . 'model/FilialModel.php';
             require APP . 'model/CidadeModel.php';
             require APP . 'model/InstituicaoModel.php';
+            require APP . 'model/AuxiliarFilialAnoModel.php'
             require APP . 'util/Util.php';
             $this->model = new FilialModel($this->db);
             $this->cidadeModel = new CidadeModel($this->db);
@@ -82,6 +83,8 @@
           $filial = $this->model->buscarFilialPorCd($cdFilial);
           $cidades = $this->cidadeModel->buscarTodasAsCidades();
           $instituicoes = $this->instituicaoModel->buscarTodosAsInstituicoes();
+          $listaAnos = $this->modelAuxFilialAno->listarAnosNaoRelacionados($cdFilial);
+          $listaAnosRelacionados = $this->modelAuxFilialAno->listarAnosRelacionados($cdFilial);
 
           require APP . 'view/_templates/header.php';
           require APP . 'view/filial/index.php';
