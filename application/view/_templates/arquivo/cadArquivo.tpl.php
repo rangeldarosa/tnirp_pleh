@@ -42,6 +42,58 @@
       </select>
     </div>
 
+      <hr>
+
+
+    <div class="form-group">
+      <label for="cadProfessoresStatus">Instituição</label>
+      <select class="select-controll-app" name="cadProfessoresStatus" required>
+        <option value="1" <?php echo isset($professor) && ($professor->ESTADO == 1) ? 'selected' : ''; ?>>Ativo</option>
+        <option value="0" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cadProfessoresStatus">Filial</label>
+      <select class="select-controll-app" name="cadProfessoresStatus" required>
+        <option value="1" <?php echo isset($professor) && ($professor->ESTADO == 1) ? 'selected' : ''; ?>>Ativo</option>
+        <option value="0" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cadProfessoresStatus">Ano</label>
+      <select class="select-controll-app" name="cadProfessoresStatus" required>
+        <option value="1" <?php echo isset($professor) && ($professor->ESTADO == 1) ? 'selected' : ''; ?>>Ativo</option>
+        <option value="0" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cadProfessoresStatus">Curso</label>
+      <select class="select-controll-app" name="cadProfessoresStatus" required>
+        <option value="1" <?php echo isset($professor) && ($professor->ESTADO == 1) ? 'selected' : ''; ?>>Ativo</option>
+        <option value="0" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cadProfessoresStatus">Professor</label>
+      <select class="select-controll-app" name="cadProfessoresStatus" required>
+        <option value="1" <?php echo isset($professor) && ($professor->ESTADO == 1) ? 'selected' : ''; ?>>Ativo</option>
+        <option value="0" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cadProfessoresStatus">Disciplina</label>
+      <select class="select-controll-app" name="cadProfessoresStatus" required>
+        <option value="1" <?php echo isset($professor) && ($professor->ESTADO == 1) ? 'selected' : ''; ?>>Ativo</option>
+        <option value="0" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
+      </select>
+    </div>
+
+
     <div class="text-center">
       <input type="submit" class="btn btn-default btn-default-app" name="enviarDados" value="Enviar Dados">
       <input type="reset" class="btn btn-default btn-default-app" name="resetarDados" value="Resetar Dados">

@@ -13,7 +13,6 @@
         <option value="0" <?php echo isset($professor) && ($professor->PRIVADO == 0) ? 'selected' : ''; ?>>Público</option>
       </select>
     </div>
-
     <div class="form-group">
       <label for="cadProfessoresStatus">Status</label>
       <select class="select-controll-app" name="cadProfessoresStatus" required>
@@ -21,18 +20,23 @@
         <option value="0" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
       </select>
     </div>
+        <hr/>
     <div class="form-group">
       <label for="cadProfessoresStatus">Disciplinas</label>
       <select class="multi-select-app" multiple="multiple" name="cadProfessorDisciplina[]" required>
         <?php
         if(!empty($listaDisciplina) && is_array($listaDisciplina) && isset($listaDisciplina)) {
           foreach($listaDisciplina as $value) {
-            echo '<option value="'.$value->CD_DISCIPLINA.'">'.$value->NOME.'</option>';
+        ?>
+          <option value="<?php echo $value->CD_DISCIPLINA ?>" <?php echo $value->ESTADO == 0 ? 'disabled' : '' ?>><?php echo $value->NOME?> </option>
+        <?php
           }
         }
         if(!empty($listaDisciplinaRelacionada) && is_array($listaDisciplinaRelacionada) && isset($listaDisciplinaRelacionada)) {
           foreach($listaDisciplinaRelacionada as $valueRel) {
-            echo '<option value="'.$valueRel->CD_DISCIPLINA.'" selected>'.$valueRel->NOME.'</option>';
+            ?>
+              <option value="<?php echo $valueRel->CD_DISCIPLINA ?>" <?php echo $valueRel->ESTADO == 0 ? 'disabled' : '' ?> selected><?php echo $valueRel->NOME?> </option>
+            <?php
           }
         }
         ?>

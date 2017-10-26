@@ -25,7 +25,7 @@
                 <ul class="sub-menu <?php echo isset($_GET['url']) && ($_GET['url'] == 'cidade') ? 'collapse in' : 'collapse'?>" id="localizacao">
                   <a href="<?php echo URL;?>cidade"><li class="<?php echo isset($_GET['url']) && ($_GET['url'] == 'cidade') ? 'active' : ''?>"><i class="fa fa-dashboard fa-lg"></i> Cidade</li></a>
                 </ul>
-                <a href="<?php echo URL;?>disciplina"><li class="<?php echo isset($_GET['url']) && ($_GET['url'] == 'disciplina') ? 'active' : ''?>"><i class="fa fa-dashboard fa-lg"></i> Materia</li></a>
+                <a href="<?php echo URL;?>disciplina"><li class="<?php echo isset($_GET['url']) && ($_GET['url'] == 'disciplina') ? 'active' : ''?>"><i class="fa fa-dashboard fa-lg"></i> Disciplinas</li></a>
                 <a href="<?php echo URL;?>usuario"><li class="<?php echo isset($_GET['url']) && ($_GET['url'] == 'usuario') ? 'active' : ''?>"><i class="fa fa-dashboard fa-lg"></i> Usuários</li></a>
             </ul>
      </div>
