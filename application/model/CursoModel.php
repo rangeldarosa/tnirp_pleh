@@ -28,6 +28,22 @@ class CursoModel{
         return $query->fetchAll();
     }
 
+    public function listarUltimoCursoSalvo(){
+        $sql = "SELECT * FROM curso ORDER BY CD_CURSO DESC LIMIT 1";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
+    public function buscarCursoPorCodigo($codigoCurso){
+        $sql = "SELECT * FROM curso WHERE cd_curso = :curso ";
+        $query = $this->db->prepare($sql);
+        $parameters = array('curso'=>$codigoCurso);
+        $query->execute($parameters);
+        return $query->fetch();
+    }
+
     public function listarCursosAtivos(){
         $sql = "SELECT * FROM curso WHERE estado != 0";
         $query = $this->db->prepare($sql);
@@ -59,11 +75,9 @@ class CursoModel{
         $parameters = array(
             ':nome' => $curso["nome"], 
             ':estado' => $curso["estado"],
-            ':cd_curso' => $curso["cd_curso"],
+            ':cd_curso' => $curso["codigo"],
         );
-
         $retorno = $query->execute($parameters);
-        var_dump($retorno);
         return true;
     }
 }
