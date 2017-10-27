@@ -6,7 +6,7 @@
             require APP . 'model/FilialModel.php';
             require APP . 'model/CidadeModel.php';
             require APP . 'model/InstituicaoModel.php';
-            require APP . 'model/AuxiliarFilialAnoModel.php'
+            require APP . 'model/AuxiliarFilialAnoModel.php';
             require APP . 'util/Util.php';
             $this->model = new FilialModel($this->db);
             $this->cidadeModel = new CidadeModel($this->db);

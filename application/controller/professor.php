@@ -72,8 +72,6 @@ class Professor extends Controller {
       $listaDisciplina = $this->modelAuxiliarProfessorDisciplina->listarDisciplinasNaoRelacionadas($cdProfessor);
       $listaDisciplinaRelacionada = $this->modelAuxiliarProfessorDisciplina->listarDisciplinasRelacionadas($cdProfessor);
 
-      //var_dump($listaDisciplina);
-     // var_dump($listaDisciplinaRelacionada);
       require APP . 'view/_templates/header.php';
       require APP . 'view/professor/index.php';
       require APP . 'view/_templates/footer.php';

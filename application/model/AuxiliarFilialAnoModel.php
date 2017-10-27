@@ -12,15 +12,12 @@ class CursoModel{
     }
 
     public function salvarAuxFilialAno($filial, $ano){
-        $retorno ""
-        foreach($filial['anos'] as $ano)
-            $sql = "INSERT INTO aux_ano_filial (fk_cd_ano, fk_cd_filial) values (:ano, :filial";
+        foreach($filial['anos'] as $anos){
+            $sql = "INSERT INTO aux_ano_filial (fk_cd_ano, fk_cd_filial) values (:ano, :filial)";
             $query = $this->db->prepare($sql);
-            $parameters = array(':cd_filial' => $filial ["cd_filial"], ':cd_ano' => $ano["cd_ano"]);
+            $parameters = array(':filial' => $filial["cd_filial"], ':ano' => $anos);
             $retorno = $query->execute($parameters);
-            
         }
-        var_dump($retorno);
         return true;
     }
 
@@ -42,7 +39,7 @@ class CursoModel{
     }
 
     public function deletarFilialAno($filial, $ano){
-        $sql = "delete from aux_ano_filial where fk_cd_ano = :fk_cd_ano"
+        $sql = "delete from aux_ano_filial where fk_cd_ano = :fk_cd_ano";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd' => $cdFilial);
         $query->execute($parameters);
