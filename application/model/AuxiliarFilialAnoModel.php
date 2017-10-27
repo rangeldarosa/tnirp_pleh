@@ -1,6 +1,6 @@
 <?php
 
-class CursoModel{
+class AuxiliarFilialAnoModel{
 
     function __construct($db){
         require_once APP . 'util/Util.php';

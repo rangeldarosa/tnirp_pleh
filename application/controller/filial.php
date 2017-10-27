@@ -8,9 +8,11 @@
             require APP . 'model/InstituicaoModel.php';
             require APP . 'model/AuxiliarFilialAnoModel.php';
             require APP . 'util/Util.php';
+
             $this->model = new FilialModel($this->db);
             $this->cidadeModel = new CidadeModel($this->db);
             $this->instituicaoModel = new InstituicaoModel($this->db);
+            $this->modelAuxFilialAno = new AuxiliarFilialAnoModel($this->db);
         }
 
 
