@@ -47,6 +47,15 @@ class FilialModel
         return $query->fetch();
     }
 
+    public function buscarFilialPorInsituicaoCombo($id) {
+      $sql = "SELECT f.* FROM filial f
+            WHERE f.Instituicao_CD_INSTITUICAO = :cd";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':cd' => $id);
+        $query->execute($parameters);
+        return $query->fetchAll();
+    }
+
     public function bloquearFilial($cdFilial)
     {
         $sql = "UPDATE filial SET ESTADO = 0 WHERE CD_FILIAL = :cd";

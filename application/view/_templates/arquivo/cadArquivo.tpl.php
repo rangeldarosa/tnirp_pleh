@@ -22,11 +22,6 @@
     </div>
 
     <div class="form-group">
-      <label for="cadArquivoCaminho">Caminho do Arquivo</label>
-      <input type="text" name="cadArquivoCaminho" class="form-control input-controll-app" id="cadArquivoCaminho" placeholder="Caminho do Arquivo" required maxlength="255" value="<?php echo isset($arquivo) ? $arquivo->CAMINHO_PARA_O_ARQUIVO : ''; ?>">
-    </div>
-
-    <div class="form-group">
       <label for="cadArquivoArqPrivado">Privado</label>
       <select class="form-control select-controll-app" name="cadArquivoArqPrivado" id="cadArquivoArqPrivado" required>
         <option value="1" <?php echo isset($arquivo) && ($arquivo->ARQUIVO_PRIVADO == 1) ? 'selected' : ''; ?>>Privado</option>
@@ -43,23 +38,24 @@
     </div>
 
       <hr>
-
-
     <div class="form-group">
-      <label for="cadProfessoresStatus">Instituição</label>
-      <select class="select-controll-app" name="cadProfessoresStatus" required>
-        <option value="1" <?php echo isset($professor) && ($professor->ESTADO == 1) ? 'selected' : ''; ?>>Ativo</option>
-        <option value="0" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
+      <label for="cadArquivoInstituicao">Instituição</label>
+      <select id="cadArquivoInstituicao" onchange="appConfig.ajaxDynamicSimpleCombo('#'+this.id, 'filial', 'buscarFilialPorInsituicaoCombo', '#loadComboFilial', 'limparComboFilialPorInstituicao')" class="select-controll-app" name="cadArquivoInstituicao" required>
+          <<option value="">Selecione uma Instituição</option>
+          <?php
+            if (is_array($listarInstituicoesCombo)) {
+              foreach ($listarInstituicoesCombo as $key) {
+                ?>
+                <option value="<?php echo $key->CD_INSTITUICAO ?>" <?php echo $key->ESTADO==0 ? "disabled" : "" ?>><?php echo mb_strtoupper($key->NOME_INSTITUICAO, 'UTF-8')?></option>
+                <?php
+              }
+            }
+          ?>
       </select>
     </div>
 
-    <div class="form-group">
-      <label for="cadProfessoresStatus">Filial</label>
-      <select class="select-controll-app" name="cadProfessoresStatus" required>
-        <option value="1" <?php echo isset($professor) && ($professor->ESTADO == 1) ? 'selected' : ''; ?>>Ativo</option>
-        <option value="0" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
-      </select>
-    </div>
+    <!-- CAMPO SELECT É CARREGADO ATRAVEZ DO AJAX DENTRO DA DIV-->
+    <div id="loadComboFilial"></div>
 
     <div class="form-group">
       <label for="cadProfessoresStatus">Ano</label>

@@ -11,12 +11,12 @@
         <?php
         foreach($instituicoes as $instituicao) {
         ?>
-        <tr>
+        <tr class="<?php echo $instituicao->ESTADO == 0 ? 'danger' : ''?>">
             <td class="text-center"><?php echo $instituicao->CD_INSTITUICAO;?></td>
             <td><?php echo mb_strtoupper($instituicao->NOME_INSTITUICAO, 'UTF-8');?></td>
             <td class="text-center"><a title="Editar Instituição" href="<?php echo URL; ?>instituicao/editarInstituicao/<?php echo $instituicao->CD_INSTITUICAO;?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
-            <td class="text-center"><a title="Bloquear Instituição" href="<?php echo URL.'instituicao/bloquearInstituicao/'.$instituicao->CD_INSTITUICAO;?>">
-              <span class="glyphicon glyphicon-remove"></span>
+            <td class="text-center"><a title="Bloquear/Desbloquear Instituição" href="<?php echo $instituicao->ESTADO == '1' ? URL.'instituicao/bloquearInstituicao/'.$instituicao->CD_INSTITUICAO : URL.'instituicao/desbloquearInstituicao/'.$instituicao->CD_INSTITUICAO;?>">
+              <span class="glyphicon glyphicon-<?php echo $instituicao->ESTADO == '1' ? 'remove' : 'ok';?>"></span>
             </a></td>
         </tr>
         <?php

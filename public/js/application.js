@@ -1,39 +1,104 @@
-$(function() {
 
-    // just a super-simple JS demo
+appConfig = {}
 
-    var demoHeaderBox;
+initialize = function () {
+  $(document).ready(function(){
+    appConfig.initDataTable();
+    appConfig.initCustomMultiSelect();
+    appConfig.initCustomSelect();
+  });
+}
 
-    // simple demo to show create something via javascript on the page
-    if ($('#javascript-header-demo-box').length !== 0) {
-    	demoHeaderBox = $('#javascript-header-demo-box');
-    	demoHeaderBox
-    		.hide()
-    		.text('Hello from JavaScript! This line has been added by public/js/application.js')
-    		.css('color', 'green')
-    		.fadeIn('slow');
-    }
+appConfig.ajaxDynamicSimpleCombo = function(idComboAtual, controller, metodo, areaLoadSelect, limparComboMetodo) {
+  if($(idComboAtual).val() == '' || $(idComboAtual).val() == undefined) {
+    metodo = limparComboMetodo;
+  }
+  var urlLoad = url+controller+"/"+metodo+"/"+$(idComboAtual).val();
+  $(areaLoadSelect).load(urlLoad,function(data, sucess, response){
+    appConfig.initCustomSelect();
+  });
+};
 
-    // if #javascript-ajax-button exists
-    if ($('#javascript-ajax-button').length !== 0) {
+appConfig.initCustomSelect = function () {
+  $(document).ready(function() {
+    $(".select-controll-app").customselect({
+      search: true,
+      mobilecheck: false,
+      showblank: false,
+      showdisabled: true
+    });
+  });
+}
 
-        $('#javascript-ajax-button').on('click', function(){
+appConfig.initDataTable = function () {
+  $(document).ready(function(){
+      $('.table-list').DataTable({
+      "language": {
+        "sEmptyTable": "Nenhum registro encontrado",
+        "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+        "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+        "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+        "sInfoPostFix": "",
+        "sInfoThousands": ".",
+        "sLengthMenu": "_MENU_ Resultados por página",
+        "sLoadingRecords": "Carregando...",
+        "sProcessing": "Processando...",
+        "sZeroRecords": "Nenhum registro encontrado",
+        "sSearch": "Pesquisar",
+      "oPaginate": {
+          "sNext": "Próximo",
+          "sPrevious": "Anterior",
+          "sFirst": "Primeiro",
+          "sLast": "Último"
+      },
+        "oAria": {
+            "sSortAscending": ": Ordenar colunas de forma ascendente",
+            "sSortDescending": ": Ordenar colunas de forma descendente"
+        }
+      }
+    });
+  });
+}
 
-            // send an ajax-request to this URL: current-server.com/songs/ajaxGetStats
-            // "url" is defined in views/_templates/footer.php
-            $.ajax(url + "/songs/ajaxGetStats")
-                .done(function(result) {
-                    // this will be executed if the ajax-call was successful
-                    // here we get the feedback from the ajax-call (result) and show it in #javascript-ajax-result-box
-                    $('#javascript-ajax-result-box').html(result);
-                })
-                .fail(function() {
-                    // this will be executed if the ajax-call had failed
-                })
-                .always(function() {
-                    // this will ALWAYS be executed, regardless if the ajax-call was success or not
-                });
+appConfig.initCustomMultiSelect = function () {
+  $(function() {
+    $('.multi-select-app').multiSelect({
+      selectableHeader: "<div class='custom-header'>Selecione</div><input type='text' class='search-input form-control' autocomplete='off' placeholder='Pesquise'>",
+      selectionHeader: "<div class='custom-header'>Selecionados</div><input type='text' class='search-input form-control' autocomplete='off' placeholder='Pesquise'>",
+      afterInit: function(ms){
+        var that = this,
+            $selectableSearch = that.$selectableUl.prev(),
+            $selectionSearch = that.$selectionUl.prev(),
+            selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
+            selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
+        that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+        .on('keydown', function(e){
+          if (e.which === 40){
+            that.$selectableUl.focus();
+            return false;
+          }
         });
-    }
 
+        that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+        .on('keydown', function(e){
+          if (e.which == 40){
+            that.$selectionUl.focus();
+            return false;
+          }
+        });
+      },
+      afterSelect: function(){
+        this.qs1.cache();
+        this.qs2.cache();
+      },
+      afterDeselect: function(){
+        this.qs1.cache();
+        this.qs2.cache();
+      }
+    });
+  });
+}
+
+$(window).bind("load", function() {
+  initialize();
 });

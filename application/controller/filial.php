@@ -79,8 +79,7 @@
             $this->model->bloquearFilial($cdFilial);
         }
 
-        public function editarFilial($cdFilial)
-        {
+        public function editarFilial($cdFilial) {
           $filiais = $this->model->buscarTodosAsFiliais();
           $filial = $this->model->buscarFilialPorCd($cdFilial);
           $cidades = $this->cidadeModel->buscarTodasAsCidades();
@@ -111,6 +110,19 @@
               }
             }
           }
+        }
+
+        public function limparComboFilialPorInstituicao() {
+          Util::validarLogin();
+          Util::validarNivelGerente();
+          require APP . 'view/_templates/arquivo/ajax/carregaComboFilialByInstituicao.php';
+        }
+
+        public function buscarFilialPorInsituicaoCombo($id) {
+          Util::validarLogin();
+          Util::validarNivelGerente();
+          $listaFilialInstituicao = $this->model->buscarFilialPorInsituicaoCombo($id);
+          require APP . 'view/_templates/arquivo/ajax/carregaComboFilialByInstituicao.php';
         }
 
 
