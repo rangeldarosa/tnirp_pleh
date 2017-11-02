@@ -14,12 +14,38 @@ class Ano extends Controller {
         Util::validarNivelGerente();
 
         $anos=$this->model->buscarTodosOsAnos();
+        
 
         require APP . 'view/_templates/header.php';
         require APP . 'view/ano/index.php';
         require APP . 'view/_templates/footer.php';
         
     }
+
+
+    public function limparComboAnoPorFilialEInstituicao() {
+      Util::validarLogin();
+      Util::validarNivelGerente();
+      //require APP . 'view/_templates/arquivo/ajax/carregaComboFilialByInstituicao.php';
+    }
+
+    public function buscarAnoPorFilial($cdFilial, $cdInstituicao) {
+      Util::validarLogin();
+      Util::validarNivelGerente();
+
+      var_dump($cdFilial);
+      var_dump($cdInstituicao);
+      $identificadores = array();
+      $identificadores["cdFilial"] = $cdFilial;
+      $identificadores["cdInstituicao"] = $cdInstituicao;
+
+      $listaAnoFilial = $this->model->buscarAnoPorFilialEInstituicaoCombo($identificadores);
+
+      //http://localhost/tnirp_pleh/ano/buscarAnoPorFilial/1/1
+      //require APP . 'view/_templates/arquivo/ajax/carregaComboFilialByInstituicao.php';
+    }
+
+
 
     public function salvarAno(){
         $ano = array();

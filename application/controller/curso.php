@@ -22,6 +22,32 @@
             require APP . 'view/_templates/footer.php';
         }
 
+        public function limparComboCursoPorAno() {
+            Util::validarLogin();
+            Util::validarNivelGerente();
+            //require APP . 'view/_templates/arquivo/ajax/carregaComboFilialByInstituicao.php';
+          }
+      
+          public function buscarCursoPorAno($cdFilial, $cdInstituicao, $cdAno) {
+            Util::validarLogin();
+            Util::validarNivelGerente();
+      
+            var_dump($cdFilial);
+            var_dump($cdInstituicao);
+            var_dump($cdAno);
+            $identificadores = array();
+            $identificadores["cdFilial"] = $cdFilial;
+            $identificadores["cdInstituicao"] = $cdInstituicao;
+            $identificadores["cdAno"] = $cdAno;
+      
+            $listaAnoFilial = $this->model->buscarCursoPorAnoFilialInstituicao($identificadores);
+
+            var_dump($listaAnoFilial);
+      
+            //http://localhost/tnirp_pleh/curso/buscarCursoPorAno/1/1/1
+            //require APP . 'view/_templates/arquivo/ajax/carregaComboFilialByInstituicao.php';
+          }
+
         public function salvarCurso(){
             $curso = array();
 

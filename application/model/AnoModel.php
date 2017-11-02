@@ -10,6 +10,18 @@ class AnoModel {
         }
     }
 
+    public function buscarAnoPorFilialEInstituicaoCombo($identificadores){
+        $sql = "select ano.* from ano, aux_ano_filial, filial
+        where ano.cd_ano = aux_ano_filial.fk_cd_ano
+        and filial.cd_filial = aux_ano_filial.FK_CD_FILIAL
+        and filial.CD_FILIAL = :cd_filial
+        and filial.instituicao_cd_instituicao = :cd_instituicao;";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':cd_filial' => $identificadores["cdFilial"], ':cd_instituicao' => $identificadores["cdInstituicao"]);
+        $query->execute($parameters);
+        return $query->fetchAll();
+    }
+
     public function buscarTodosOsAnos(){
         $sql = "SELECT * FROM ano";
         $query = $this->db->prepare($sql);

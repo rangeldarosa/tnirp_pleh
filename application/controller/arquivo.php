@@ -6,12 +6,12 @@ class Arquivo extends Controller {
         parent::__construct();
         require APP . 'util/Util.php';
         require APP . 'model/InstituicaoModel.php';
-        $this->model = new InstituicaoModel($this->db);
+        $this->instituicaoModel = new InstituicaoModel($this->db);
     }
 
     public function index() {
         Util::validarLogin();
-        $listarInstituicoesCombo = $this->model->buscarTodosAsInstituicoes();
+        $listarInstituicoesCombo = $this->instituicaoModel->buscarTodosAsInstituicoes();
         require APP . 'view/_templates/header.php';
         require APP . 'view/arquivo/index.php';
         require APP . 'view/_templates/footer.php';

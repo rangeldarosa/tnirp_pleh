@@ -20,6 +20,21 @@ class CursoModel{
             return true;
     }
 
+    public function buscarCursoPorAnoFilialInstituicao($identificadores){
+        $sql = "select curso.* from curso, aux_ano_curso, ano, aux_ano_filial, filial
+        where curso.cd_curso = aux_ano_curso.fk_cd_curso
+        and ano.cd_ano = aux_ano_curso.fk_cd_ano
+        and ano.cd_ano = aux_ano_filial.fk_cd_ano
+        and filial.cd_filial = aux_ano_filial.fk_cd_filial
+        and filial.Instituicao_CD_INSTITUICAO = :cd_instituicao
+        and filial.cd_filial = :cd_filial
+        and ano.cd_ano = :cd_ano;";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':cd_instituicao' =>$identificadores["cdInstituicao"], ':cd_filial'=>$identificadores["cdFilial"], ':cd_ano'=>$identificadores["cdAno"] );
+        $query->execute($parameters);
+        return $query->fetchAll();
+    }
+
     public function listarCursos(){
         $sql = "SELECT * FROM curso";
         $query = $this->db->prepare($sql);
