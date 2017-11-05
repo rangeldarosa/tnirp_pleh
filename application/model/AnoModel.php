@@ -10,19 +10,19 @@ class AnoModel {
         }
     }
 
-    public function buscarAnoPorFilialEInstituicaoCombo($identificadores){
+    public function buscarAnoPorFilialEInstituicaoCombo($cdFilial, $cdInstituicao){
         $sql = "select ano.* from ano, aux_ano_filial, filial
         where ano.cd_ano = aux_ano_filial.fk_cd_ano
         and filial.cd_filial = aux_ano_filial.FK_CD_FILIAL
         and filial.CD_FILIAL = :cd_filial
         and filial.instituicao_cd_instituicao = :cd_instituicao;";
         $query = $this->db->prepare($sql);
-        $parameters = array(':cd_filial' => $identificadores["cdFilial"], ':cd_instituicao' => $identificadores["cdInstituicao"]);
+        $parameters = array(':cd_filial' => $cdFilial, ':cd_instituicao' => $cdInstituicao);
         $query->execute($parameters);
         return $query->fetchAll();
     }
 
-    public function buscarAnoPorFilialEInstituicaoComboAtivo($filial, $instituicao){
+    public function buscarAnoPorFilialEInstituicaoComboAtivo($cdFilial, $cdInstituicao){
         $sql = "select ano.* from ano, aux_ano_filial, filial
         where ano.cd_ano = aux_ano_filial.fk_cd_ano
         and filial.cd_filial = aux_ano_filial.FK_CD_FILIAL
@@ -30,7 +30,7 @@ class AnoModel {
         and filial.instituicao_cd_instituicao = :cd_instituicao;
         and ano.ESTADO = 1";
         $query = $this->db->prepare($sql);
-        $parameters = array(':cd_filial' => $filial, ':cd_instituicao' => $instituicao);
+        $parameters = array(':cd_filial' => $cdFilial, ':cd_instituicao' => $cdInstituicao);
         $query->execute($parameters);
         return $query->fetchAll();
     }
