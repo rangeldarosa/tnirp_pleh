@@ -11,7 +11,7 @@
         foreach ($listas as $pasta) {
     ?>
           <?php if($modo == 'instituicao') { ?>
-              <div class="<?php echo $gridType ?>" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $pasta->CD_INSTITUICAO?>/null/null/null/null/null')">
+              <div class="<?php echo $gridType ?>" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $pasta->CD_INSTITUICAO?>/null/null/null/null/null/null')">
                 <div class="pastas-container text-center">
                   <img src="<?php echo URL?>public/img/folder.ico" width="100%" />
                   <span style="<?php echo $styleTypeName ?>"><?php echo  mb_strtoupper($pasta->NOME_INSTITUICAO, 'UTF-8'); ?></span>
@@ -19,7 +19,7 @@
               </div>
           <?php } ?>
           <?php if($modo == 'filial') { ?>
-              <div class="<?php echo $gridType ?>" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $idInstituicaoView ?>/<?php echo $pasta->CD_FILIAL?>/null/null/null/null')">
+              <div class="<?php echo $gridType ?>" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $idInstituicaoView ?>/<?php echo $pasta->CD_FILIAL?>/null/null/null/null/null')">
                 <div class="pastas-container text-center">
                   <img src="<?php echo URL?>public/img/folder.ico" width="100%" />
                   <span style="<?php echo $styleTypeName ?>"><?php echo  mb_strtoupper($pasta->NOME, 'UTF-8');?></span><br/>
@@ -28,7 +28,7 @@
               </div>
           <?php } ?>
           <?php if($modo == 'ano') { ?>
-              <div class="<?php echo $gridType ?>" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $idInstituicaoView ?>/<?php echo $idFilialView?>/<?php echo $pasta->CD_ANO?>/null/null/null')">
+              <div class="<?php echo $gridType ?>" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $idInstituicaoView ?>/<?php echo $idFilialView?>/<?php echo $pasta->CD_ANO?>/null/null/null/null')">
                 <div class="pastas-container text-center">
                   <img src="<?php echo URL?>public/img/folder.ico" width="100%" />
                   <span style="<?php echo $styleTypeName ?>"><?php echo  mb_strtoupper($pasta->NOME, 'UTF-8');?></span><br/>
@@ -36,7 +36,7 @@
               </div>
           <?php } ?>
           <?php if($modo == 'curso') { ?>
-              <div class="<?php echo $gridType ?>" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $idInstituicaoView ?>/<?php echo $idFilialView?>/<?php echo $idCursoView?>/<?php echo $pasta->CD_CURSO?>/null/null')">
+              <div class="<?php echo $gridType ?>" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $idInstituicaoView ?>/<?php echo $idFilialView?>/<?php echo $idCursoView?>/<?php echo $pasta->CD_CURSO?>/null/null/null')">
                 <div class="pastas-container text-center">
                   <img src="<?php echo URL?>public/img/folder.ico" width="100%" />
                   <span style="<?php echo $styleTypeName ?>"><?php echo  mb_strtoupper($pasta->NOME, 'UTF-8');?></span><br/>

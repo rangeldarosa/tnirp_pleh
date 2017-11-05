@@ -1,6 +1,6 @@
 <script>
   $(document).ready(function() {
-    appConfig.ajaxDynamicSimple('pastas', 'buscaPastasByPages', '#loadPastas', 'limparPastasByPages', 'instituicao/1/null/null/null/null/null');
+    appConfig.ajaxDynamicSimple('pastas', 'buscaPastasByPages', '#loadPastas', 'limparPastasByPages', 'instituicao/1/null/null/null/null/null/null/null');
   });
 </script>
 <div class="container-fluid">
