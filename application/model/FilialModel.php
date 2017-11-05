@@ -48,8 +48,19 @@ class FilialModel
     }
 
     public function buscarFilialPorInsituicaoCombo($id) {
-      $sql = "SELECT f.* FROM filial f
+      $sql = "SELECT f.*, cid.NOME_CIDADE, cid.ESTADO nmestado FROM filial f
+            INNER JOIN cidade cid ON f.Cidade_CD_CIDADE = cid.CD_CIDADE
             WHERE f.Instituicao_CD_INSTITUICAO = :cd";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':cd' => $id);
+        $query->execute($parameters);
+        return $query->fetchAll();
+    }
+
+    public function buscarFilialPorInsituicaoAtivo($id) {
+      $sql = "SELECT f.*, cid.NOME_CIDADE, cid.ESTADO nmestado FROM filial f
+            INNER JOIN cidade cid ON f.Cidade_CD_CIDADE = cid.CD_CIDADE
+            WHERE f.Instituicao_CD_INSTITUICAO = :cd AND f.ESTADO=1";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd' => $id);
         $query->execute($parameters);

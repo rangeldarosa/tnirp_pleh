@@ -1,0 +1,7 @@
+<?php
+
+class PastasModel {
+ // INSERT DA FILA DE IMPRESSÃO AQUI OU NA FILADEIMPRESSAO MODEL;;;
+}
+?>
+

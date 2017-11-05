@@ -1,0 +1,12 @@
+.pastas-area .pastas-container {
+  padding:15px;
+  border: 1px solid #CCC;
+  border-radius: 5px;
+}
+
+.pastas-area .pastas-container:hover {
+  padding:15px;
+  border: 1px solid #AAA;
+  border-radius: 5px;
+  cursor: pointer;
+}

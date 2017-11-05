@@ -22,6 +22,11 @@
     </div>
 
     <div class="form-group">
+      <label for="cadArquivoFile"><i class="fa fa-lg fa-file-pdf-o" aria-hidden="true"></i> Arquivo</label>
+      <input type="file" name="cadArquivoFile" class="form-control input-file-app" id="cadArquivoFile">
+    </div>
+
+    <div class="form-group">
       <label for="cadArquivoArqPrivado">Privado</label>
       <select class="form-control select-controll-app" name="cadArquivoArqPrivado" id="cadArquivoArqPrivado" required>
         <option value="1" <?php echo isset($arquivo) && ($arquivo->ARQUIVO_PRIVADO == 1) ? 'selected' : ''; ?>>Privado</option>
@@ -40,7 +45,7 @@
       <hr>
     <div class="form-group">
       <label for="cadArquivoInstituicao">Instituição</label>
-      <select id="cadArquivoInstituicao" onchange="appConfig.ajaxDynamicSimpleCombo('#'+this.id, 'filial', 'buscarFilialPorInsituicaoCombo', '#loadComboFilial', 'limparComboFilialPorInstituicao')" class="select-controll-app" name="cadArquivoInstituicao" required>
+      <select id="cadArquivoInstituicao" onchange="appConfig.ajaxDynamicSimpleCombo('filial', 'buscarFilialPorInsituicaoCombo', '#loadComboFilial', 'limparComboFilialPorInstituicao', this.value)" class="select-controll-app" name="cadArquivoInstituicao" required>
           <<option value="">Selecione uma Instituição</option>
           <?php
             if (is_array($listarInstituicoesCombo)) {

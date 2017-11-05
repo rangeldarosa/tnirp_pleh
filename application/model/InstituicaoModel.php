@@ -43,6 +43,14 @@ class InstituicaoModel
         return $query->fetchAll();
     }
 
+    public function buscarTodosAsInstituicoesAtivas() {
+        $sql = "SELECT * FROM instituicao WHERE instituicao.ESTADO=1";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
     public function editarInstituicao($instituicao, $cdInstituicao){
         $sql = "UPDATE instituicao SET NOME_INSTITUICAO=:nome, ESTADO=:estado WHERE CD_INSTITUICAO=:cd";
         $query = $this->db->prepare($sql);

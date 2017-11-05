@@ -27,6 +27,7 @@
   <link href="<?php echo URL; ?>lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" >
 	<link href="<?php echo URL; ?>css/404.css" rel="stylesheet">
   <link href="<?php echo URL; ?>css/style.css" rel="stylesheet">
+  <link href="<?php echo URL; ?>css/pastas.css" rel="stylesheet">
 </head>
 <body>
   <!-- MENUS DINÂNICOS, LATERAL E SUPERIOR POR USUARIO:
@@ -35,7 +36,7 @@
   -->
   <?php
     include APP . 'config/configMenu.php';
-    $userType = 3;
+    $userType = (int)$_SESSION['usuario']->nivel_de_acesso;
     $isMenuLateral = false;
     $isMenuSuperior = false;
     if($userType == 0) {

@@ -9,14 +9,22 @@ initialize = function () {
   });
 }
 
-appConfig.ajaxDynamicSimpleCombo = function(idComboAtual, controller, metodo, areaLoadSelect, limparComboMetodo) {
-  if($(idComboAtual).val() == '' || $(idComboAtual).val() == undefined) {
+appConfig.ajaxDynamicSimpleCombo = function(controller, metodo, areaLoadSelect, limparComboMetodo, id) {
+  if(id == '' || id == undefined) {
     metodo = limparComboMetodo;
   }
-  var urlLoad = url+controller+"/"+metodo+"/"+$(idComboAtual).val();
+  var urlLoad = url+controller+"/"+metodo+"/"+id;
   $(areaLoadSelect).load(urlLoad,function(data, sucess, response){
     appConfig.initCustomSelect();
   });
+};
+
+appConfig.ajaxDynamicSimple = function(controller, metodo, areaLoadSelect, limparComboMetodo, id) {
+  if(id == '' || id == undefined) {
+    metodo = limparComboMetodo;
+  }
+  var urlLoad = url+controller+"/"+metodo+"/"+id;
+  $(areaLoadSelect).load(urlLoad,function(data, sucess, response){});
 };
 
 appConfig.initCustomSelect = function () {

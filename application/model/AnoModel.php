@@ -22,6 +22,19 @@ class AnoModel {
         return $query->fetchAll();
     }
 
+    public function buscarAnoPorFilialEInstituicaoComboAtivo($filial, $instituicao){
+        $sql = "select ano.* from ano, aux_ano_filial, filial
+        where ano.cd_ano = aux_ano_filial.fk_cd_ano
+        and filial.cd_filial = aux_ano_filial.FK_CD_FILIAL
+        and filial.CD_FILIAL = :cd_filial
+        and filial.instituicao_cd_instituicao = :cd_instituicao;
+        and ano.ESTADO = 1";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':cd_filial' => $filial, ':cd_instituicao' => $instituicao);
+        $query->execute($parameters);
+        return $query->fetchAll();
+    }
+
     public function buscarTodosOsAnos(){
         $sql = "SELECT * FROM ano";
         $query = $this->db->prepare($sql);
@@ -42,7 +55,7 @@ class AnoModel {
         $sql = "INSERT INTO ano (NOME, ESTADO) values (:nome, :estado)";
         $query = $this->db->prepare($sql);
         $parameters = array(':nome' => $ano["nome"], ':estado' => $ano["estado"]);
-        $retorno = $query->execute($parameters);    
+        $retorno = $query->execute($parameters);
         var_dump($retorno);
         return true;
     }
