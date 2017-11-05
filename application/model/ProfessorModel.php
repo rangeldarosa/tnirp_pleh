@@ -15,6 +15,46 @@ class ProfessorModel
         }
     }
 
+    public function buscarProfessorPorCursoAnoFilialInstituicao($cdCurso, $cdInstituicao, $cdFilial, $cdAno){
+        $sql = "select professor.* from professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
+                where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
+                and filial.CD_FILIAL = aux_ano_filial.FK_CD_FILIAL
+                and ano.CD_ANO = aux_ano_filial.FK_CD_ANO
+                and ano.CD_ANO = aux_ano_curso.FK_CD_ANO
+                and curso.CD_CURSO = aux_ano_curso.FK_CD_CURSO
+                and curso.CD_CURSO = aux_curso_professor.FK_CD_CURSO
+                and professor.CD_PROFESSOR = aux_curso_professor.FK_CD_PROFESSOR
+                and curso.CD_CURSO = :cd_curso
+                and instituicao.CD_INSTITUICAO = :cd_instituicao
+                and filial.CD_FILIAL = :cd_filial
+                and ano.CD_ANO = :cd_ano; ";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':cd_curso' => $cdCurso,':cd_instituicao' =>$cdInstituicao, ':cd_filial'=>$cdFilial, ':cd_ano'=>$cdAno );
+        $query->execute($parameters);
+        return $query->fetchAll();
+    }
+
+    public function buscarProfessorPorCursoAnoFilialInstituicaoAtivos($cdInstituicao, $cdFilial, $cdAno){
+        $sql = "select professor.* from professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
+                where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
+                and filial.CD_FILIAL = aux_ano_filial.FK_CD_FILIAL
+                and ano.CD_ANO = aux_ano_filial.FK_CD_ANO
+                and ano.CD_ANO = aux_ano_curso.FK_CD_ANO
+                and curso.CD_CURSO = aux_ano_curso.FK_CD_CURSO
+                and curso.CD_CURSO = aux_curso_professor.FK_CD_CURSO
+                and professor.CD_PROFESSOR = aux_curso_professor.FK_CD_PROFESSOR
+                and curso.CD_CURSO = :cd_curso
+                and instituicao.CD_INSTITUICAO = :cd_instituicao
+                and filial.CD_FILIAL = :cd_filial
+                and ano.CD_ANO = :cd_ano
+                and professor.estado = 1 ";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':cd_curso' => $cdCurso,':cd_instituicao' =>$cdInstituicao, ':cd_filial'=>$cdFilial, ':cd_ano'=>$cdAno );
+        $query->execute($parameters);
+        return $query->fetchAll();
+    }
+
+
     public function buscarTodosProfessores()
     {
         $sql = "SELECT * FROM professor";
