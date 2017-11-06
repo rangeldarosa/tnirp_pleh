@@ -1,6 +1,6 @@
 <?php
 
-class DisciplinaModel   
+class DisciplinaModel
 {
     /**
      * @param object $db A PDO database connection
@@ -16,7 +16,10 @@ class DisciplinaModel
     }
 
     public function buscarDisciplinaPorProfessorCursoAnoFilialInstituicao($cdProfessor,$cdCurso, $cdInstituicao, $cdFilial, $cdAno){
-        $sql = "select disciplina.* from disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
+        $sql = "select disciplina.*, 
+                instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
+                ano.nome NOME_ANO, curso.NOME NOME_CURSO, professor.NOME NOME_PROFESSOR, disciplina.NOME NOME_DISCIPLINA
+                from disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
                 where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
                 and filial.CD_FILIAL = aux_ano_filial.FK_CD_FILIAL
                 and ano.CD_ANO = aux_ano_filial.FK_CD_ANO
@@ -37,8 +40,11 @@ class DisciplinaModel
         return $query->fetchAll();
     }
 
-    public function buscarDisciplinaPorProfessorCursoAnoFilialInstituicaoAtivos($cdProfessor,$cdInstituicao, $cdFilial, $cdAno){
-        $sql = "select disciplina.* from disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
+    public function buscarDisciplinaPorProfessorCursoAnoFilialInstituicaoAtivos($cdProfessor,$cdInstituicao, $cdFilial, $cdAno, $cdCurso){
+        $sql = "select disciplina.*,
+                instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
+                ano.nome NOME_ANO, curso.NOME NOME_CURSO, professor.NOME NOME_PROFESSOR, disciplina.NOME NOME_DISCIPLINA
+              from disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
                 where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
                 and filial.CD_FILIAL = aux_ano_filial.FK_CD_FILIAL
                 and ano.CD_ANO = aux_ano_filial.FK_CD_ANO
@@ -66,17 +72,22 @@ class DisciplinaModel
         $sql = "SELECT * FROM disciplina";
         $query = $this->db->prepare($sql);
         $query->execute();
-
         return $query->fetchAll();
     }
 
-    public function salvarDisciplina($disciplina){
-        
-                $sql = "INSERT INTO disciplina (NOME, ESTADO, PRIVADO) values (:nome, :estado, :privado)";
-                $query = $this->db->prepare($sql);
-                $parameters = array(':nome' => $disciplina["nome"], ':estado' => intval($disciplina["estado"]), ':privado' =>  intval($disciplina["privado"]));
-                $retorno = $query->execute($parameters);
-                return true;
+    public function buscarDisciplinaPorCd($idDisciplina) {
+        $sql = "SELECT * FROM disciplina WHERE cd_disciplina=:cd";
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':cd' => $idDisciplina));
+        return $query->fetchAll();
+    }
+
+    public function salvarDisciplina($disciplina) {
+        $sql = "INSERT INTO disciplina (NOME, ESTADO, PRIVADO) values (:nome, :estado, :privado)";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':nome' => $disciplina["nome"], ':estado' => intval($disciplina["estado"]), ':privado' =>  intval($disciplina["privado"]));
+        $retorno = $query->execute($parameters);
+        return true;
     }
 
     public function editarDisciplina($disciplina, $cdDisciplina){

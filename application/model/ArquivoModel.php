@@ -11,12 +11,10 @@
         }
 
 
-        public function buscarTodosOsAqruios()
-        {
+        public function buscarTodosOsAqruios()  {
             $sql = "SELECT * FROM arquivo";
             $query = $this->db->prepare($sql);
             $query->execute();
-    
             return $query->fetchAll();
         }
 
@@ -45,9 +43,11 @@
             $query->execute($parameters);
             return $query->fetchAll();
         }
-    
-        public function buscarArquivosPorDisciplinaProfessorCursoAnoFilialInstituicaoAtivos($cdDisciplina,$cdProfessor,$cdInstituicao, $cdFilial, $cdAno){
-            $sql = "select * from arquivo,aux_disciplina_arquivo,disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
+
+        public function buscarArquivosPorDisciplinaProfessorCursoAnoFilialInstituicaoAtivos($cdDisciplina,$cdProfessor,$cdInstituicao, $cdFilial, $cdAno ,$cdCurso){
+            $sql = "select arquivo.NOME NMARQUIVO, arquivo.*, instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
+                    ano.nome NOME_ANO, curso.NOME NOME_CURSO, professor.NOME NOME_PROFESSOR, disciplina.NOME NOME_DISCIPLINA
+                    from arquivo,aux_disciplina_arquivo,disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
                     where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
                     and filial.CD_FILIAL = aux_ano_filial.FK_CD_FILIAL
                     and ano.CD_ANO = aux_ano_filial.FK_CD_ANO
@@ -71,4 +71,6 @@
             $query->execute($parameters);
             return $query->fetchAll();
         }
+    }
+
 ?>

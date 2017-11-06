@@ -16,7 +16,10 @@ class ProfessorModel
     }
 
     public function buscarProfessorPorCursoAnoFilialInstituicao($cdCurso, $cdInstituicao, $cdFilial, $cdAno){
-        $sql = "select professor.* from professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
+        $sql = "select professor.*,
+                instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
+                ano.nome NOME_ANO, curso.NOME NOME_CURSO
+                from professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
                 where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
                 and filial.CD_FILIAL = aux_ano_filial.FK_CD_FILIAL
                 and ano.CD_ANO = aux_ano_filial.FK_CD_ANO
@@ -34,8 +37,11 @@ class ProfessorModel
         return $query->fetchAll();
     }
 
-    public function buscarProfessorPorCursoAnoFilialInstituicaoAtivos($cdInstituicao, $cdFilial, $cdAno){
-        $sql = "select professor.* from professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
+    public function buscarProfessorPorCursoAnoFilialInstituicaoAtivos($cdInstituicao, $cdFilial, $cdAno, $cdCurso){
+        $sql = "select professor.*,
+                instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
+                ano.nome NOME_ANO, curso.NOME NOME_CURSO
+                from professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
                 where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
                 and filial.CD_FILIAL = aux_ano_filial.FK_CD_FILIAL
                 and ano.CD_ANO = aux_ano_filial.FK_CD_ANO
