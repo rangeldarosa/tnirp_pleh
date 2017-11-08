@@ -46,6 +46,29 @@
       </select>
     </div>
 
+    <hr/>
+    <div class="form-group">
+      <label for="cadFiliaisStatus">Anos</label>
+      <select class="multi-select-app" multiple="multiple" name="cadFilialAno[]" required>
+        <?php
+        if(!empty($listaAno) && is_array($listaAno) && isset($listaAno)) {
+          foreach($listaAno as $value) {
+        ?>
+          <option value="<?php echo $value->CD_ANO ?>" <?php echo $value->ESTADO == 0 ? 'disabled' : '' ?>><?php echo $value->NOME?> </option>
+        <?php
+          }
+        }
+        if(!empty($listaAnoRelacionado) && is_array($listaAnoRelacionado) && isset($listaAnoRelacionado)) {
+          foreach($listaAnoRelacionado as $valueRel) {
+            ?>
+              <option value="<?php echo $valueRel->CD_ANO ?>" <?php echo $valueRel->ESTADO == 0 ? 'disabled' : '' ?> selected><?php echo $valueRel->NOME?> </option>
+            <?php
+          }
+        }
+        ?>
+      </select>
+    </div>
+
     <div class="text-center">
       <input type="submit" class="btn btn-default btn-default-app" name="enviarDados" value="Enviar Dados">
       <input type="reset" class="btn btn-default btn-default-app" name="resetarDados" value="Resetar Dados">
