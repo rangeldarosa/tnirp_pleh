@@ -35,43 +35,36 @@ class Pastas extends Controller {
         $showNavTop = false;
         if($idInstituicao !== 'null') {
           $idInstituicaoView = $idInstituicao;
-          $instituicaoEscolhida = $this->instituicaoModel->buscarInstituicaoPorCd($idInstituicao);
           $navTopAtual[0] = array();
           $navTopAtual[0]['active'] = false;
         }
         if($idFilial !== 'null') {
           $idFilialView = $idFilial;
-          $filialEscolhida = $this->filialModel->buscarFilialPorCd($idFilial);
           $navTopAtual[1] = array();
           $navTopAtual[1]['active'] = false;
         }
         if($idAno !== 'null') {
           $idAnoView = $idAno;
-          $anoEscolhido = $this->anoModel->buscarAnoPorCd($idAno);
           $navTopAtual[2] = array();;
           $navTopAtual[2]['active'] = false;
         }
         if($idCurso !== 'null') {
           $idCursoView = $idCurso;
-          $cursoEscolhido = $this->cursoModel->buscarCursoPorCodigo($idCurso);
           $navTopAtual[3] = array();
           $navTopAtual[3]['active'] = false;
         }
         if($idProfessor !== 'null') {
           $idProfessorView = $idProfessor;
-          $professorEscolhido = $this->professorModel->buscarProfessorPorCd($idProfessor);
           $navTopAtual[4] = array();
           $navTopAtual[4]['active'] = false;
         }
         if($idDisciplina !== 'null') {
           $idDisciplinaView = $idDisciplina;
-          $disciplinaEscolhida = $this->disciplinaModel->buscarDisciplinaPorCd($idProfessor);
           $navTopAtual[5] = array();
           $navTopAtual[5]['active'] = false;
         }
         if($idArquivo !== 'null') {
           $idArquivoView = $idArquivo;
-          $arquivoEscolhida = $this->arquivoModel->buscarDisciplinaPorCd($idProfessor);
           $navTopAtual[6] = array();
           $navTopAtual[6]['active'] = false;
         }
@@ -221,10 +214,12 @@ class Pastas extends Controller {
           }
         }
         if($modo == 'openFile') {
+          $modelTitle = 'Preencha as Opções';
           $backMethod = 'buscaPastasByPages';
           $nextMethod = 'buscaPastasByPages';
           $backMode = "appConfig.ajaxDynamicSimple('pastas', 'buscaPastasByPages', '#loadPastas', 'limparPastasByPages', 'arquivo/1/".$idInstituicao."/".$idFilial."/".$idAno."/".$idCurso."/".$idProfessor."/".$idDisciplina."/".$idArquivo."')";
           $nextType = 'print';
+          $base64 = Util::recuperarPaginaDoPDFEmBase64('arquivo', 1);
           $styleTypeName = 'font-size: 12px;font-weight:bold;';
           $styleTypeSubName = 'font-size: 10px;color:#777;';
           $listas = $this->arquivoModel->buscarArquivosPorDisciplinaProfessorCursoAnoFilialInstituicaoAtivos((int)$idDisciplina, (int)$idProfessor, (int) $idInstituicao, (int) $idFilial, (int) $idAno, (int) $idCurso);

@@ -90,6 +90,16 @@
                 </div>
               </div>
           <?php } ?>
+          <?php if($modo == 'openFile') { ?>
+            <div class="openFile">
+              <div style='position:relative; overflow:hidden; display: inline-block; border:1px solid red; width:80%'>
+              <img src="<?php echo $base64; ?>" width='100%' />
+              <div style='position:absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.0)'></div>
+              </div>
+              <?php var_dump($pasta);?>
+            </div>
+          <?php } ?>
+          </div>
     <?php
         }
       } else {
@@ -115,7 +125,6 @@
       }
     ?>
   </section>
-  </div>
   <!--
   <div class="panel-footer text-center">
     <ul class="pagination" style="margin: 0; padding:0;">
