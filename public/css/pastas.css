@@ -1,20 +1,29 @@
 .container-pastas {
   display: flex;
+  flex-wrap: wrap;
   align-items: stretch;
   align-self: baseline;
+  overflow: auto;
 }
 
-.pastas-area .pastas-container {
-  margin-left: 10px;
+/*.pastas-area .pastas-container {
   text-align: center;
   padding:15px;
   border: 1px solid #CCC;
   border-radius: 5px;
-}
+}*/
 
-.pastas-area .pastas-container:hover {
+.container-pastas .pastas-container div.pastas-container-item {
   padding:15px;
   border: 1px solid #AAA;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.container-pastas .pastas-container div.pastas-container-item {
+  text-align: center;
+  padding:10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 100%;
 }
