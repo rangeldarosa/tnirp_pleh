@@ -62,22 +62,6 @@
     <!-- CAMPO SELECT É CARREGADO ATRAVEZ DO AJAX DENTRO DA DIV-->
     <div id="loadComboFilial"></div>
 
-    <div class="form-group">
-      <label for="cadArquivoFilial">Filial</label>
-      <select id="cadArquivoFilial" onchange="appConfig.ajaxDynamicSimpleCombo('ano', 'buscarAnoPorFilialCombo', '#loadComboAno', 'limparComboAnoPorFilialEInstituicao', this.value)" class="select-controll-app" name="cadArquivoFilial" required>
-          <<option value="">Selecione uma Filial</option>
-          <?php
-            if (is_array($listarFiliaisCombo)) {
-              foreach ($listarFiliaisCombo as $key) {
-                ?>
-                <option value="<?php echo $key->CD_FILIAL ?>" <?php echo $key->ESTADO==0 ? "disabled" : "" ?>><?php echo mb_strtoupper($key->NOME_FILIAL, 'UTF-8')?></option>
-                <?php
-              }
-            }
-          ?>
-      </select>
-    </div>
-
     <div id="loadComboAno"></div>
 
     <div class="form-group">

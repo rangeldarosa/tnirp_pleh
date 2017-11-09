@@ -14,19 +14,11 @@ class Ano extends Controller {
         Util::validarNivelGerente();
 
         $anos=$this->model->buscarTodosOsAnos();
-        
 
         require APP . 'view/_templates/header.php';
         require APP . 'view/ano/index.php';
         require APP . 'view/_templates/footer.php';
-        
-    }
 
-
-    public function limparComboAnoPorFilialEInstituicao() {
-      Util::validarLogin();
-      Util::validarNivelGerente();
-      //require APP . 'view/_templates/arquivo/ajax/carregaComboFilialByInstituicao.php';
     }
 
     public function buscarAnoPorFilial($cdFilial, $cdInstituicao) {
@@ -57,18 +49,17 @@ class Ano extends Controller {
                 header('location: ' . URL . 'ano/');
             }
         }
-        
+
     }
     public function bloquearAno($cdAno) {
         $this->model->bloquearAno($cdAno);
       }
-  
+
       public function desbloquearAno($cdAno) {
         $this->model->desbloquearAno($cdAno);
       }
-    
-    public function editarAno($cdAno)
-    {
+
+    public function editarAno($cdAno) {
       $anos = $this->model->buscarTodosOsAnos();
       $ano = $this->model->buscarAnoPorCd($cdAno);
 
@@ -89,6 +80,19 @@ class Ano extends Controller {
           }
         }
       }
+    }
+    
+    public function limparComboAnoPorFilialEInstituicao() {
+      Util::validarLogin();
+      Util::validarNivelGerente();
+      require APP . 'view/_templates/arquivo/ajax/carregaComboAnoByFilial.php';
+    }
+
+    public function buscarAnoPorFilialCombo($idInstituicao, $idFilial) {
+      Util::validarLogin();
+      Util::validarNivelGerente();
+      $listaAnoFilial = $this->model->buscarAnoPorFilialEInstituicaoCombo($idInstituicao, $idFilial);
+      require APP . 'view/_templates/arquivo/ajax/carregaComboAnoByFilial.php';
     }
 
 }
