@@ -219,7 +219,7 @@ class Pastas extends Controller {
           $nextMethod = 'buscaPastasByPages';
           $backMode = "appConfig.ajaxDynamicSimple('pastas', 'buscaPastasByPages', '#loadPastas', 'limparPastasByPages', 'arquivo/1/".$idInstituicao."/".$idFilial."/".$idAno."/".$idCurso."/".$idProfessor."/".$idDisciplina."/".$idArquivo."')";
           $nextType = 'print';
-          $base64 = Util::recuperarPaginaDoPDFEmBase64('arquivo', 1);
+          $base64 = Util::recuperarPaginaDoPDFEmBase64('arquivo', 6);
           $styleTypeName = 'font-size: 12px;font-weight:bold;';
           $styleTypeSubName = 'font-size: 10px;color:#777;';
           $listas = $this->arquivoModel->buscarArquivosPorDisciplinaProfessorCursoAnoFilialInstituicaoAtivos((int)$idDisciplina, (int)$idProfessor, (int) $idInstituicao, (int) $idFilial, (int) $idAno, (int) $idCurso);
