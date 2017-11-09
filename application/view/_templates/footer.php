@@ -8,5 +8,6 @@
     </script>
 
     <script src="<?php echo URL; ?>js/application.js"></script>
+    <script src="<?php echo URL; ?>js/initFunctions.js"></script>
 </body>
 </html>

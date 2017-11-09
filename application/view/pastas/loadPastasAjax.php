@@ -92,11 +92,15 @@
           <?php } ?>
           <?php if($modo == 'openFile') { ?>
             <div class="openFile">
-              <div style='position:relative; overflow:hidden; display: inline-block; border:1px solid red; width:80%'>
-              <img src="<?php echo $base64; ?>" width='100%' />
-              <div style='position:absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.0)'></div>
+              <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                  <div style='position:relative; overflow:hidden; display: inline-block; border:1px solid #CCC; border-radius: 5px; width:80%'>
+                  <img src="<?php echo $base64; ?>" width='100%' />
+                  <div style='position:absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.0)'></div>
+                </div>
               </div>
-              <?php var_dump($pasta);?>
+              <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                <?php var_dump($pasta);?>
+              </div>
             </div>
           <?php } ?>
     <?php
