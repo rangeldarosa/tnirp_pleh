@@ -29,7 +29,7 @@ appConfig.ajaxDynamicSimple = function(controller, metodo, areaLoadSelect, limpa
 
 appConfig.initCustomSelect = function () {
   $(document).ready(function() {
-    $(".select-controll-app").customselect({
+    $("select").customselect({
       search: true,
       mobilecheck: false,
       showblank: false,
@@ -106,7 +106,3 @@ appConfig.initCustomMultiSelect = function () {
     });
   });
 }
-
-$(window).bind("load", function() {
-  initialize();
-});

@@ -29,46 +29,65 @@
     ?>
           <?php if($modo == 'instituicao') { ?>
               <div class="<?php echo $gridType; ?> pastas-container" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $pasta->CD_INSTITUICAO?>/null/null/null/null/null/null')">
-                  <img src="<?php echo URL?>public/img/folder.ico" width="100%" />
-                  <span style="<?php echo $styleTypeName ?>"><?php echo  mb_strtoupper($pasta->NOME_INSTITUICAO, 'UTF-8'); ?></span>
+                  <div class="pastas-container-item">
+                    <img src="<?php echo URL?>public/img/folder.ico" width="100%" />
+                    <span style="<?php echo $styleTypeName ?>"><?php echo  mb_strtoupper($pasta->NOME_INSTITUICAO, 'UTF-8'); ?></span>
+                  </div>
               </div>
           <?php } ?>
           <?php if($modo == 'filial') { ?>
               <div class="<?php echo $gridType; ?> pastas-container" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $idInstituicaoView ?>/<?php echo $pasta->CD_FILIAL?>/null/null/null/null/null')">
-                  <img src="<?php echo URL?>public/img/folder.ico" width="100%" />
-                  <span style="<?php echo $styleTypeName ?>"><?php echo  mb_strtoupper($pasta->NOME, 'UTF-8');?></span><br/>
-                  <span style="<?php echo $styleTypeSubName ?>"><?php echo  mb_strtoupper($pasta->NOME_CIDADE, 'UTF-8'); ?> - <?php echo  mb_strtoupper($pasta->nmestado, 'UTF-8'); ?></span>
+                  <div class="pastas-container-item">
+                    <img src="<?php echo URL?>public/img/folder.ico" width="100%" />
+                    <span style="<?php echo $styleTypeName ?>"><?php echo  mb_strtoupper($pasta->NOME, 'UTF-8');?></span><br/>
+                    <span style="<?php echo $styleTypeSubName ?>"><?php echo  mb_strtoupper($pasta->NOME_CIDADE, 'UTF-8'); ?> - <?php echo  mb_strtoupper($pasta->nmestado, 'UTF-8'); ?></span>
+                  </div>
               </div>
           <?php } ?>
           <?php if($modo == 'ano') { ?>
               <div class="<?php echo $gridType; ?> pastas-container" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $idInstituicaoView ?>/<?php echo $idFilialView?>/<?php echo $pasta->CD_ANO?>/null/null/null/null')">
+                <div class="pastas-container-item">
                   <img src="<?php echo URL?>public/img/folder.ico" width="100%" />
                   <span style="<?php echo $styleTypeName ?>"><?php echo  mb_strtoupper($pasta->NOME, 'UTF-8');?></span><br/>
+                </div>
               </div>
           <?php } ?>
           <?php if($modo == 'curso') { ?>
               <div class="<?php echo $gridType; ?> pastas-container" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $idInstituicaoView ?>/<?php echo $idFilialView?>/<?php echo $idAnoView?>/<?php echo $pasta->CD_CURSO?>/null/null/null/null')">
+                <div class="pastas-container-item">
                   <img src="<?php echo URL?>public/img/folder.ico" width="100%" />
                   <span style="<?php echo $styleTypeName ?>"><?php echo  mb_strtoupper($pasta->NOME, 'UTF-8');?></span><br/>
+                </div>
               </div>
           <?php } ?>
           <?php if($modo == 'professor') { ?>
               <div class="<?php echo $gridType; ?> pastas-container" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $idInstituicaoView ?>/<?php echo $idFilialView?>/<?php echo $idAnoView?>/<?php echo $idCursoView?>/<?php echo $pasta->CD_PROFESSOR?>/null/null/null')">
+                <div class="pastas-container-item">
                   <img src="<?php echo URL?>public/img/folder.ico" width="100%" />
                   <span style="<?php echo $styleTypeName ?>"><?php echo  mb_strtoupper($pasta->NOME, 'UTF-8');?></span><br/>
+                </div>
               </div>
           <?php } ?>
           <?php if($modo == 'disciplina') { ?>
               <div class="<?php echo $gridType; ?> pastas-container" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $idInstituicaoView ?>/<?php echo $idFilialView?>/<?php echo $idAnoView?>/<?php echo $idCursoView?>/<?php echo $idProfessorView?>/<?php echo $pasta->CD_DISCIPLINA?>/null/null')">
+                <div class="pastas-container-item">
                   <img src="<?php echo URL?>public/img/folder.ico" width="100%" />
                   <span style="<?php echo $styleTypeName ?>"><?php echo  mb_strtoupper($pasta->NOME, 'UTF-8');?></span><br/>
+                </div>
               </div>
           <?php } ?>
           <?php if($modo == 'arquivo') { ?>
               <div class="<?php echo $gridType; ?> pastas-container" onclick="appConfig.ajaxDynamicSimple('pastas', '<?php echo $nextMethod; ?>', '#loadPastas', 'limparPastasByPages', '<?php echo $nextType; ?>/1/<?php echo $idInstituicaoView ?>/<?php echo $idFilialView?>/<?php echo $idAnoView?>/<?php echo $idCursoView?>/<?php echo $idProfessorView?>/<?php echo $idDisciplinaView?>/<?php echo $pasta->CD_ARQUIVO?>/null')">
-                  <img src="<?php echo URL?>public/img/pdf.png" width="100%" />
+                <div class="pastas-container-item">
+                  <img src="<?php echo URL?>public/img/pdf.png" width="70%" /><br/>
                   <span style="<?php echo $styleTypeName ?>"><?php echo  mb_strtoupper($pasta->NMARQUIVO, 'UTF-8');?></span><br/>
-                  <span style="<?php echo $styleTypeSubName ?>"><?php echo  mb_strtoupper($pasta->PAGINAS, 'UTF-8');?> Paginas</span>
+                  <span style="<?php echo $styleTypeSubName ?>"><?php echo  $pasta->PAGINAS ?> Paginas</span><br>
+                  <div style="margin-top: 10px;">
+                    <span style="<?php echo $stylePricePB ?>">Valor Preto e Branco: <strong><?php echo Util::formatCashCurrent($pasta->VALOR_PRETO_E_BRANCO*$pasta->PAGINAS); ?></strong></span><br>
+                    <span style="<?php echo $stylePriceColorido ?>">Valor Colorido: <strong><?php echo Util::formatCashCurrent($pasta->VALOR_COLORIDO*$pasta->PAGINAS); ?></strong></span><br>
+                    <span style="<?php echo $styleValorVariacao ?>"><?php echo VALOR_DESCRICAO_VARIACAO ?></span><br>
+                  </div>
+                </div>
               </div>
           <?php } ?>
     <?php

@@ -78,7 +78,7 @@ class Pastas extends Controller {
 
         if($modo == 'instituicao') {
           $modelTitle = 'Selecione sua Instituição';
-          $gridType = 'col-lg-1 col-sm-3 col-md-4 col-xs-6';
+          $gridType = 'col-lg-2 col-sm-3 col-md-4 col-xs-12';
           $backMethod = 'buscaPastasByPages';
           $nextMethod = 'buscaPastasByPages';
           $nextType = 'filial';
@@ -87,7 +87,7 @@ class Pastas extends Controller {
         }
         if($modo == 'filial') {
           $modelTitle = 'Selecione a Filial';
-          $gridType = 'col-lg-1 col-sm-3 col-md-4 col-xs-6';
+          $gridType = 'col-lg-2 col-sm-3 col-md-4 col-xs-12';
           $backMethod = 'buscaPastasByPages';
           $nextMethod = 'buscaPastasByPages';
           $backMode = "appConfig.ajaxDynamicSimple('pastas', 'buscaPastasByPages', '#loadPastas', 'limparPastasByPages', 'instituicao/1/".$idInstituicao."/".$idFilial."/".$idAno."/".$idCurso."/".$idProfessor."/".$idDisciplina."/".$idArquivo."')";
@@ -104,7 +104,7 @@ class Pastas extends Controller {
         }
         if($modo == 'ano') {
           $modelTitle = 'Selecione o Ano';
-          $gridType = 'col-lg-1 col-sm-3 col-md-4 col-xs-6';
+          $gridType = 'col-lg-2 col-sm-3 col-md-4 col-xs-12';
           $backMethod = 'buscaPastasByPages';
           $nextMethod = 'buscaPastasByPages';
           $backMode = "appConfig.ajaxDynamicSimple('pastas', 'buscaPastasByPages', '#loadPastas', 'limparPastasByPages', 'filial/1/".$idInstituicao."/".$idFilial."/".$idAno."/".$idCurso."/".$idProfessor."/".$idDisciplina."/".$idArquivo."')";
@@ -123,7 +123,7 @@ class Pastas extends Controller {
         }
         if($modo == 'curso') {
           $modelTitle = 'Selecione o Curso';
-          $gridType = 'col-lg-1 col-sm-3 col-md-4 col-xs-6';
+          $gridType = 'col-lg-2 col-sm-3 col-md-4 col-xs-12';
           $backMethod = 'buscaPastasByPages';
           $nextMethod = 'buscaPastasByPages';
           $backMode = "appConfig.ajaxDynamicSimple('pastas', 'buscaPastasByPages', '#loadPastas', 'limparPastasByPages', 'ano/1/".$idInstituicao."/".$idFilial."/".$idAno."/".$idCurso."/".$idProfessor."/".$idDisciplina."/".$idArquivo."')";
@@ -144,7 +144,7 @@ class Pastas extends Controller {
         }
         if($modo == 'professor') {
           $modelTitle = 'Selecione o Professor';
-          $gridType = 'col-lg-1 col-sm-3 col-md-4 col-xs-6';
+          $gridType = 'col-lg-2 col-sm-3 col-md-4 col-xs-12';
           $backMethod = 'buscaPastasByPages';
           $nextMethod = 'buscaPastasByPages';
           $backMode = "appConfig.ajaxDynamicSimple('pastas', 'buscaPastasByPages', '#loadPastas', 'limparPastasByPages', 'curso/1/".$idInstituicao."/".$idFilial."/".$idAno."/".$idCurso."/".$idProfessor."/".$idDisciplina."/".$idArquivo."')";
@@ -167,7 +167,7 @@ class Pastas extends Controller {
         }
         if($modo == 'disciplina') {
           $modelTitle = 'Selecione a Disciplina';
-          $gridType = 'col-lg-1 col-sm-3 col-md-4 col-xs-6';
+          $gridType = 'col-lg-2 col-sm-3 col-md-4 col-xs-12';
           $backMethod = 'buscaPastasByPages';
           $nextMethod = 'buscaPastasByPages';
           $backMode = "appConfig.ajaxDynamicSimple('pastas', 'buscaPastasByPages', '#loadPastas', 'limparPastasByPages', 'professor/1/".$idInstituicao."/".$idFilial."/".$idAno."/".$idCurso."/".$idProfessor."/".$idDisciplina."/".$idArquivo."')";
@@ -192,13 +192,16 @@ class Pastas extends Controller {
         }
         if($modo == 'arquivo') {
           $modelTitle = 'Selecione o Documento';
-          $gridType = 'col-lg-1 col-sm-3 col-md-4 col-xs-6';
+          $gridType = 'col-lg-2 col-sm-3 col-md-4 col-xs-12';
           $backMethod = 'buscaPastasByPages';
           $nextMethod = 'buscaPastasByPages';
           $backMode = "appConfig.ajaxDynamicSimple('pastas', 'buscaPastasByPages', '#loadPastas', 'limparPastasByPages', 'disciplina/1/".$idInstituicao."/".$idFilial."/".$idAno."/".$idCurso."/".$idProfessor."/".$idDisciplina."/".$idArquivo."')";
           $nextType = 'openFile';
-          $styleTypeName = 'font-size: 12px;font-weight:bold;';
-          $styleTypeSubName = 'font-size: 10px;color:#777;';
+          $styleTypeName = 'font-size: 16px;font-weight:bold;line-height:1;';
+          $styleTypeSubName = 'font-size: 13px;color:#F00;line-height:1;';
+          $stylePriceColorido = 'font-size: 14px;color: #F00;margin-top:5px;line-height:2;';
+          $stylePricePB = 'font-size: 14px;color: #000;';
+          $styleValorVariacao = 'font-size: 11px;color: #777;font-weight:bold;position: relative;width: 100%;bottom: -10px;';
           $listas = $this->arquivoModel->buscarArquivosPorDisciplinaProfessorCursoAnoFilialInstituicaoAtivos((int)$idDisciplina, (int)$idProfessor, (int) $idInstituicao, (int) $idFilial, (int) $idAno, (int) $idCurso);
           if(isset($listas) && is_array($listas) && !empty($listas)) {
             $navTopAtual[0]['nome'] = $listas[0]->NOME_INSTITUICAO;
