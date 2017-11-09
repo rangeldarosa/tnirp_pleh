@@ -73,5 +73,29 @@
             return VALOR_PREFIX_MOEDA.' '.Util::formatNumber($value, VALOR_CASAS_DECIMAIS, VALOR_PREFIX_CENTAVOS, VALOR_PREFIX_MILHAR);
           }
 
+          public static function recuperarPaginaDoPDFEmBase64($nomeDocumento, $pagina) {
+
+            $dir = dirname(__FILE__); 
+            $dir = str_replace("application\controller","", $dir);
+            $dir = str_replace("application/controller","", $dir);
+            $dir .= "documentos/";
+    
+            // exec("convert -alpha off input.pdf -resize 500x700! -background white -flatten -quality 90 output.jpg");
+    
+            $comando = "convert -alpha off -density 288 ". $dir . $nomeDocumento .".pdf[". $pagina ."] -resize 1000x1000 -background white -flatten -quality 90 ". $dir ."imagem_convertida.jpg";
+            exec($comando);
+            
+            $comando = "composite -dissolve 90% -gravity center ". $dir ."copyright.png ". $dir ."imagem_convertida.jpg ". $dir ."imagem_convertida.jpg";
+            exec($comando);
+    
+            
+            $path = $dir ."imagem_convertida.jpg";
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+            return $base64;
+
+          }
+
   }
 ?>
