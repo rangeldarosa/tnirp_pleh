@@ -76,8 +76,8 @@
           public static function recuperarPaginaDoPDFEmBase64($nomeDocumento, $pagina) {
 
             $dir = dirname(__FILE__);
-            $dir = str_replace("application\controller","", $dir);
-            $dir = str_replace("application/controller","", $dir);
+            $dir = str_replace("application\util","", $dir);
+            $dir = str_replace("application/util","", $dir);
             $dir .= "documentos/";
 
             // exec("convert -alpha off input.pdf -resize 500x700! -background white -flatten -quality 90 output.jpg");
