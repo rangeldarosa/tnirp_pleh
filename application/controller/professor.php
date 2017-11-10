@@ -23,7 +23,7 @@ class Professor extends Controller {
         }
 
         $listaDisciplina = $this->modelDisciplina->buscarTodasDisciplinas();
-        
+
         $professores = $this->model->buscarTodosProfessores();
         require APP . 'view/_templates/header.php';
         require APP . 'view/professor/index.php';
@@ -90,5 +90,18 @@ class Professor extends Controller {
           }
         }
       }
+    }
+
+    public function limparComboProfessorPorCurso() {
+      Util::validarLogin();
+      Util::validarNivelGerente();
+      require APP . 'view/_templates/arquivo/ajax/carregaComboProfessorByCurso.php';
+    }
+
+    public function buscarProfessorPorCursoCombo($cdCurso, $cdInstituicao, $cdFilial, $cdAno) {
+      Util::validarLogin();
+      Util::validarNivelGerente();
+      $listaAnoFilial = $this->model->buscarProfessorPorCursoAnoFilialInstituicao($cdCurso, $cdInstituicao, $cdFilial, $cdAno);
+      require APP . 'view/_templates/arquivo/ajax/carregaComboProfessorByCurso.php';
     }
 }

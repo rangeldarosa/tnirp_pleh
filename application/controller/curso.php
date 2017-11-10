@@ -14,7 +14,7 @@
         public function index(){
             Util::validarLogin();
             Util::validarNivelGerente();
-            
+
             $cursos = $this->model->listarCursos();
 
             require APP . 'view/_templates/header.php';
@@ -22,16 +22,11 @@
             require APP . 'view/_templates/footer.php';
         }
 
-        public function limparComboCursoPorAno() {
+
+          public function buscarCursoPorAno($cdInstituicao, $cdFilial, $cdAno) {
             Util::validarLogin();
             Util::validarNivelGerente();
-            //require APP . 'view/_templates/arquivo/ajax/carregaComboFilialByInstituicao.php';
-          }
-      
-          public function buscarCursoPorAno($cdFilial, $cdInstituicao, $cdAno) {
-            Util::validarLogin();
-            Util::validarNivelGerente();
-      
+
             var_dump($cdFilial);
             var_dump($cdInstituicao);
             var_dump($cdAno);
@@ -39,11 +34,11 @@
             $identificadores["cdFilial"] = $cdFilial;
             $identificadores["cdInstituicao"] = $cdInstituicao;
             $identificadores["cdAno"] = $cdAno;
-      
+
             $listaAnoFilial = $this->model->buscarCursoPorAnoFilialInstituicao($identificadores);
 
             var_dump($listaAnoFilial);
-      
+
             //http://localhost/tnirp_pleh/curso/buscarCursoPorAno/1/1/1
             //require APP . 'view/_templates/arquivo/ajax/carregaComboFilialByInstituicao.php';
           }
@@ -76,11 +71,11 @@
             require APP . 'view/_templates/header.php';
             require APP . 'view/curso/index.php';
             require APP . 'view/_templates/footer.php';
-            
+
             if($cdCurso && isset($_POST))  {
 
                 $cursoEdit = array();
-                
+
                 if(!empty($_POST["cadCursoNome"]) && !empty($_POST["cadCursoStatus"])) {
                     $cursoEdit["codigo"] = $cdCurso;
                     $cursoEdit["nome"] = $_POST["cadCursoNome"];
@@ -89,7 +84,7 @@
 
                     if($this->model->alterarCurso($cursoEdit, $cdCurso)) {
 
-                        $this->auxiliarAnoCurso->deletarCursoAno($cdCurso); 
+                        $this->auxiliarAnoCurso->deletarCursoAno($cdCurso);
                         if($cursoEdit["anos"]){
                             $this->auxiliarAnoCurso->salvarAuxiliarAnoCurso($cursoEdit);
                         }
@@ -105,10 +100,23 @@
 
         public function listarCursos(){
 
- 			$cursos = $this->model->listarCursos();           
+ 			$cursos = $this->model->listarCursos();
 			 require APP . 'view/_templates/header.php';
             require APP . 'view/curso/index.php';
             require APP . 'view/_templates/footer.php';
         }
+
+        public function limparComboCursoPorAno() {
+            Util::validarLogin();
+            Util::validarNivelGerente();
+            require APP . 'view/_templates/arquivo/ajax/carregaComboCursoByAno.php';
+          }
+
+          public function buscarCursoPorAnoCombo($idInstituicao, $idFilial, $idAno) {
+            Util::validarLogin();
+            Util::validarNivelGerente();
+            $listaCursoAno = $this->model->buscarCursoPorAnoFilialInstituicao($idInstituicao, $idFilial, $idAno);
+            require APP . 'view/_templates/arquivo/ajax/carregaComboCursoByAno.php';
+          }
     }
 ?>

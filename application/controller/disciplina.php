@@ -3,7 +3,7 @@
 class Disciplina extends Controller {
 
     function __construct()  {
-        
+
         parent::__construct();
         require APP . 'model/DisciplinaModel.php';
         require APP . 'util/Util.php';
@@ -11,15 +11,15 @@ class Disciplina extends Controller {
      }
 
      public function index() {
-                
+
         Util::validarLogin();
         Util::validarNivelGerente();
-        
+
         if(isset($_GET["id"])){
             $id = $_GET["id"];
             $professor = $this->model->listarDisciplina($id);
         }
-        
+
         $disciplinas = $this->model->buscarTodasDisciplinas();
         require APP . 'view/_templates/header.php';
         require APP . 'view/disciplina/index.php';
@@ -84,5 +84,18 @@ class Disciplina extends Controller {
             Util::retornarMensagemErro("Erro ao alterar disciplina!", "Campos Vazio", "Preencha todos os campos");
         }
       }
+    }
+
+    public function limparComboDisciplinaPorProfessor() {
+      Util::validarLogin();
+      Util::validarNivelGerente();
+      require APP . 'view/_templates/arquivo/ajax/carregaComboDisciplinaByProfessor.php';
+    }
+
+    public function buscarDisciplinaPorProfessorCombo($cdProfessor, $cdCurso, $cdInstituicao, $cdFilial, $cdAno) {
+      Util::validarLogin();
+      Util::validarNivelGerente();
+      $listaAnoFilial = $this->model->buscarDisciplinaPorProfessorCursoAnoFilialInstituicao($cdProfessor, $cdCurso, $cdInstituicao, $cdFilial, $cdAno);
+      require APP . 'view/_templates/arquivo/ajax/carregaComboDisciplinaByProfessor.php';
     }
 }

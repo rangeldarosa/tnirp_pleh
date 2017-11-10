@@ -64,75 +64,11 @@
 
     <div id="loadComboAno"></div>
 
-    <div class="form-group">
-      <label for="cadArquivoAno">Ano</label>
-      <select id="cadArquivoAno" onchange="appConfig.ajaxDynamicSimpleCombo('curso', 'buscarCursoPorAnoCombo', '#loadComboCurso', 'limparComboCursoPorAno', this.value)" class="select-controll-app" name="cadArquivoAno" required>
-          <<option value="">Selecione um Ano</option>
-          <?php
-            if (is_array($listarAnosCombo)) {
-              foreach ($listarAnosCombo as $key) {
-                ?>
-                <option value="<?php echo $key->CD_ANO ?>" <?php echo $key->ESTADO==0 ? "disabled" : "" ?>><?php echo mb_strtoupper($key->NOME_ANO, 'UTF-8')?></option>
-                <?php
-              }
-            }
-          ?>
-      </select>
-    </div>
-
     <div id="loadComboCurso"></div>
-
-    <div class="form-group">
-      <label for="cadArquivoCurso">Curso</label>
-      <select id="cadArquivoCurso" onchange="appConfig.ajaxDynamicSimpleCombo('professor', 'buscarProfessorPorCursoCombo', '#loadComboCurso', 'limparComboProfessorPorCurso', this.value)" class="select-controll-app" name="cadArquivoCurso" required>
-          <<option value="">Selecione um Curso</option>
-          <?php
-            if (is_array($listarCursosCombo)) {
-              foreach ($listarCursosCombo as $key) {
-                ?>
-                <option value="<?php echo $key->CD_CURSO ?>" <?php echo $key->ESTADO==0 ? "disabled" : "" ?>><?php echo mb_strtoupper($key->NOME_CURSO, 'UTF-8')?></option>
-                <?php
-              }
-            }
-          ?>
-      </select>
-    </div>
 
     <div id="loadComboProfessor"></div>
 
-    <div class="form-group">
-      <label for="cadArquivoProfessor">Professor</label>
-      <select id="cadArquivoProfessor" onchange="appConfig.ajaxDynamicSimpleCombo('disciplina', 'buscarDisciplinaPorProfessorCombo', '#loadComboProfessor', 'limparComboDisciplinaPorProfessor', this.value)" class="select-controll-app" name="cadArquivoProfessor" required>
-          <<option value="">Selecione um Professor</option>
-          <?php
-            if (is_array($listarProfessoresCombo)) {
-              foreach ($listarProfessoresCombo as $key) {
-                ?>
-                <option value="<?php echo $key->CD_PROFESSOR ?>" <?php echo $key->ESTADO==0 ? "disabled" : "" ?>><?php echo mb_strtoupper($key->NOME_PROFESSOR, 'UTF-8')?></option>
-                <?php
-              }
-            }
-          ?>
-      </select>
-    </div>
-
     <div id="loadComboDisciplina"></div>
-
-    <div class="form-group">
-      <label for="cadArquivoDisciplina">Disciplina</label>
-      <select id="cadArquivoDisciplina"  class="select-controll-app" name="cadArquivoDisciplina" required>
-          <<option value="">Selecione uma Disciplina</option>
-          <?php
-            if (is_array($listarDisciplinasCombo)) {
-              foreach ($listarDisciplinasCombo as $key) {
-                ?>
-                <option value="<?php echo $key->CD_DISCIPLINA ?>" <?php echo $key->ESTADO==0 ? "disabled" : "" ?>><?php echo mb_strtoupper($key->NOME_DISCIPLINA, 'UTF-8')?></option>
-                <?php
-              }
-            }
-          ?>
-      </select>
-    </div>
 
     <div class="text-center">
       <input type="submit" class="btn btn-default btn-default-app" name="enviarDados" value="Enviar Dados">
