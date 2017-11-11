@@ -69,6 +69,11 @@ class Pastas extends Controller {
           $navTopAtual[6]['active'] = false;
         }
 
+        if($modo == 'find') {
+          $modelTitle = 'Resultado da Busca';
+          var_dump($_POST['searchValue']);
+        }
+
         if($modo == 'instituicao') {
           $modelTitle = 'Selecione sua Instituição';
           $gridType = 'col-lg-2 col-sm-3 col-md-4 col-xs-12';
@@ -76,7 +81,7 @@ class Pastas extends Controller {
           $nextMethod = 'buscaPastasByPages';
           $nextType = 'filial';
           $styleTypeName = 'font-size: 14px;font-weight:bold;';
-          $listas = $this->instituicaoModel->buscarTodosAsInstituicoesAtivas();
+          $listas = $this->instituicaoModel->findInstituicoesWhileHaveFilial();
         }
         if($modo == 'filial') {
           $modelTitle = 'Selecione a Filial';

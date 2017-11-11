@@ -51,6 +51,19 @@ class InstituicaoModel
         return $query->fetchAll();
     }
 
+    // BUSCA CASO TENHA UMA FILIAL
+    public function findInstituicoesWhileHaveFilial() {
+        $sql = "SELECT instituicao.* FROM instituicao
+                WHERE instituicao.ESTADO=1 AND
+                (SELECT count(1) FROM filial f
+                      INNER JOIN cidade cid ON f.Cidade_CD_CIDADE = cid.CD_CIDADE
+                      WHERE f.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO) > 0";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
     public function editarInstituicao($instituicao, $cdInstituicao){
         $sql = "UPDATE instituicao SET NOME_INSTITUICAO=:nome, ESTADO=:estado WHERE CD_INSTITUICAO=:cd";
         $query = $this->db->prepare($sql);

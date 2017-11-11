@@ -22,6 +22,23 @@
     <h3 class="panel-title"><strong><?php echo $modelTitle ?></strong></h3>
   </div>
   <div class="panel-body">
+    <div class="row">
+      <div class="col lg-12 col-sm-12 col-xs-12 col-md-12">
+        <div class="form-busca">
+          <form name="buscaFolder" class="form" id="formAjaxPost" onsubmit="appConfig.ajaxDynamicFormPost('#'+this.id, 'POST', false, '.container-pastas')" method="POST" action="<?php echo URL?>pastas/<?php echo $nextMethod; ?>/find/1/null/null/null/null/null/null/null">
+          <div class="input-group stylish-input-group">
+            <input type="text" class="form-control" name="searchValue" value="<?php echo isset($_POST['searchValue']) ? isset($_POST['searchValue']) : '';?>" placeholder="Pesquise por: Filial, Instituição, Ano, Curso, Professor, Disciplina ou Arquivo" />
+                <span class="input-group-addon">
+                    <button type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix" style="clear:both;"></div><br>
     <section class="container-pastas">
     <?php
       if(!empty($listas) && is_array($listas)) {
@@ -93,6 +110,12 @@
           <?php if($modo == 'openFile') { ?>
             <div class="openFile">
               <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                <div class="paginator paginatorLeft">
+                  <a href="#" class="previous round"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+                </div>
+                <div class="paginator paginatorRight">
+                  <a href="#" class="next round"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                </div>
                   <div style='position:relative; overflow:hidden; display: inline-block; border:1px solid #CCC; border-radius: 5px; width:100%'>
                   	<img src="<?php echo $base64; ?>" width='100%' />
                   	<div style='position:absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.0)'></div>
@@ -117,7 +140,7 @@
                 <div class="message">
                   <strong>Oooopss! Algo Errado Aconteceu</strong><br>
                   Experimente alguma ação abaixo<br>
-                  <a onclick="<?php echo $backMode ?>"><button class="btn btn-success btn-lg btn-default"><span class="glyphicon glyphicon glyphicon-arrow-left"></span> Voltar</button></a>
+                  <a onclick="<?php echo isset($backMode) ? $backMode : '' ?>"><button class="btn btn-success btn-lg btn-default"><span class="glyphicon glyphicon glyphicon-arrow-left"></span> Voltar</button></a>
                   <a href="<?php echo URL?>pastas"><button class="btn btn-warning btn-lg btn-default"><span class="glyphicon glyphicon-home"></span> Ir para o Início</button></a>
 
                 </div>

@@ -106,3 +106,17 @@ appConfig.initCustomMultiSelect = function () {
     });
   });
 }
+
+appConfig.ajaxDynamicFormPost = function(selectorForm, type, cache, areaLoad) {
+    console.log(selectorForm);
+    e.preventDefault();
+    $.ajax({
+        type     : type,
+        cache    : cache,
+        url      : $(this).attr('action'),
+        data     : $(this).serialize(),
+        success  : function(data) {
+            $(areaLoad).empty().append(data);
+        }
+    });
+}
