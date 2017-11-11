@@ -62,38 +62,13 @@
     <!-- CAMPO SELECT É CARREGADO ATRAVEZ DO AJAX DENTRO DA DIV-->
     <div id="loadComboFilial"></div>
 
-    <div class="form-group">
-      <label for="cadProfessoresStatus">Ano</label>
-      <select class="select-controll-app" name="cadProfessoresStatus" required>
-        <option value="1" <?php echo isset($professor) && ($professor->ESTADO == 1) ? 'selected' : ''; ?>>Ativo</option>
-        <option value="0" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
-      </select>
-    </div>
+    <div id="loadComboAno"></div>
 
-    <div class="form-group">
-      <label for="cadProfessoresStatus">Curso</label>
-      <select class="select-controll-app" name="cadProfessoresStatus" required>
-        <option value="1" <?php echo isset($professor) && ($professor->ESTADO == 1) ? 'selected' : ''; ?>>Ativo</option>
-        <option value="0" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
-      </select>
-    </div>
+    <div id="loadComboCurso"></div>
 
-    <div class="form-group">
-      <label for="cadProfessoresStatus">Professor</label>
-      <select class="select-controll-app" name="cadProfessoresStatus" required>
-        <option value="1" <?php echo isset($professor) && ($professor->ESTADO == 1) ? 'selected' : ''; ?>>Ativo</option>
-        <option value="0" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
-      </select>
-    </div>
+    <div id="loadComboProfessor"></div>
 
-    <div class="form-group">
-      <label for="cadProfessoresStatus">Disciplina</label>
-      <select class="select-controll-app" name="cadProfessoresStatus" required>
-        <option value="1" <?php echo isset($professor) && ($professor->ESTADO == 1) ? 'selected' : ''; ?>>Ativo</option>
-        <option value="0" <?php echo isset($professor) && ($professor->ESTADO == 0) ? 'selected' : ''; ?>>Inativo</option>
-      </select>
-    </div>
-
+    <div id="loadComboDisciplina"></div>
 
     <div class="text-center">
       <input type="submit" class="btn btn-default btn-default-app" name="enviarDados" value="Enviar Dados">

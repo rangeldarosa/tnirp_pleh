@@ -2,8 +2,8 @@
   if(isset($listaFilialInstituicao) && is_array($listaFilialInstituicao)) {
 ?>
     <div class="form-group">
-      <label for="cadArquivoInstituicao">Filial</label>
-      <select id="carregaComboFilialByInstituicao" class="form-control select-controll-app" name="cadArquivoFilial" required>
+      <label for="cadArquivoFilial">Filial</label>
+      <select id="cadArquivoFilial" onchange="appConfig.ajaxDynamicSimpleCombo('ano', 'buscarAnoPorFilialCombo', '#loadComboAno', 'limparComboAnoPorFilialEInstituicao', this.value+'/'+document.getElementById('cadArquivoInstituicao').value)" class="select-controll-app" name="cadArquivoFilial" required>
         <option value="">Selecione uma Filial</option>
     <?php
       foreach ($listaFilialInstituicao as $key) {
@@ -16,8 +16,8 @@
   } else {
 ?>
     <div class="form-group">
-      <label for="cadArquivoInstituicao">Filial</label>
-      <select id="carregaComboFilialByInstituicao" style="border: 1px solid #F00" class="form-control select-controll-app" name="cadArquivoFilial" required>
+      <label for="cadArquivoFilial">Filial</label>
+      <select id="cadArquivoFilial" onchange="appConfig.ajaxDynamicSimpleCombo('ano', 'buscarAnoPorFilialCombo', '#loadComboAno', 'limparComboAnoPorFilialEInstituicao', this.value)" class="select-controll-app" name="cadArquivoFilial" required>
         <option value="">Instituição sem Filial ou não foi escolhida</option>
       </select>
     </div>

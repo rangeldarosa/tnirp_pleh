@@ -18,7 +18,7 @@ class Application {
     {
         // create array with URL parts in $url
         $this->splitUrl();
-        session_start(md5(base64_encode('hdprint')));
+        session_start();
         // check for controller: no controller given ? then load start-page
         if (!$this->url_controller) {
 
