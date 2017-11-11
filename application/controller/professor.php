@@ -101,7 +101,7 @@ class Professor extends Controller {
     public function buscarProfessorPorCursoCombo($cdCurso, $cdInstituicao, $cdFilial, $cdAno) {
       Util::validarLogin();
       Util::validarNivelGerente();
-      $listaAnoFilial = $this->model->buscarProfessorPorCursoAnoFilialInstituicao($cdCurso, $cdInstituicao, $cdFilial, $cdAno);
+      $listaProfessorCurso = $this->model->buscarProfessorPorCursoAnoFilialInstituicao($cdCurso, $cdInstituicao, $cdFilial, $cdAno);
       require APP . 'view/_templates/arquivo/ajax/carregaComboProfessorByCurso.php';
     }
 }

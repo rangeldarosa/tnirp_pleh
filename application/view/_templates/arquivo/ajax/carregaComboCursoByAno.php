@@ -3,7 +3,7 @@
 ?>
     <div class="form-group">
       <label for="cadArquivoCurso">Curso</label>
-      <select id="cadArquivoCurso" onchange="appConfig.ajaxDynamicSimpleCombo('professor', 'buscarProfessorPorCursoCombo', '#loadComboCurso', 'limparComboProfessorPorCurso', this.value+'/'+document.getElementById('cadArquivoInstituicao').value+'/'+document.getElementById('cadArquivoFilial').value+'/'+document.getElementById('cadArquivoAno').value)" class="select-controll-app" name="cadArquivoCurso" required>
+      <select id="cadArquivoCurso" onchange="appConfig.ajaxDynamicSimpleCombo('professor', 'buscarProfessorPorCursoCombo', '#loadComboProfessor', 'limparComboProfessorPorCurso', this.value+'/'+document.getElementById('cadArquivoInstituicao').value+'/'+document.getElementById('cadArquivoFilial').value+'/'+document.getElementById('cadArquivoAno').value)" class="select-controll-app" name="cadArquivoCurso" required>
         <option value="">Selecione um Curso</option>
     <?php
       foreach ($listaCursoAno as $key) {

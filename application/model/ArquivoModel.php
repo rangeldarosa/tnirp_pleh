@@ -10,15 +10,6 @@
             }
         }
 
-
-        public function buscarTodosOsAqruios()  {
-            $sql = "SELECT * FROM arquivo";
-            $query = $this->db->prepare($sql);
-            $query->execute();
-            return $query->fetchAll();
-        }
-
-
         public function buscarArquivosPorDisciplinaProfessorCursoAnoFilialInstituicao($cdDisciplina,$cdProfessor,$cdCurso, $cdInstituicao, $cdFilial, $cdAno){
             $sql = "select * from arquivo,aux_disciplina_arquivo,disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
                     where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
@@ -69,6 +60,22 @@
             $query = $this->db->prepare($sql);
             $parameters = array(':cd_curso' => $cdCurso,':cd_instituicao' =>$cdInstituicao, ':cd_filial'=>$cdFilial, ':cd_ano'=>$cdAno, ':cd_professor'=>$cdProfessor, ':cd_disciplina'=>$cdDisciplina );
             $query->execute($parameters);
+            return $query->fetchAll();
+        }
+
+        public function buscarTodosOsArquivos(){
+            $sql = "SELECT ARQUIVO.* FROM ARQUIVO";
+            $query = $this->db->prepare($sql);
+            $query->execute(array());
+            return $query->fetchAll();
+        }
+        public function buscarNomeDisciplinaByArquivo($cdArquivo){
+            $sql = "SELECT DISCIPLINA.NOME FROM DISCIPLINA
+              INNER JOIN aux_disciplina_arquivo ON DISCIPLINA.CD_DISCIPLINA = aux_disciplina_arquivo.FK_CD_DISCIPLINA
+              WHERE aux_disciplina_arquivo.FK_CD_ARQUIVO = :cdArquivo";
+            $query = $this->db->prepare($sql);
+            $query->execute(array(':cdArquivo' => $cdArquivo));
+          //  return $query->fetchAll(PDO::FETCH_ASSOC); // ARRAY DENTRO DE ARRAY
             return $query->fetchAll();
         }
     }

@@ -24,14 +24,15 @@ class CursoModel{
         $sql = "select curso.*,
         instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
         ano.nome NOME_ANO
-        from curso, aux_ano_curso, ano, aux_ano_filial, filial
+        from curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
         where curso.cd_curso = aux_ano_curso.fk_cd_curso
         and ano.cd_ano = aux_ano_curso.fk_cd_ano
         and ano.cd_ano = aux_ano_filial.fk_cd_ano
         and filial.cd_filial = aux_ano_filial.fk_cd_filial
         and filial.Instituicao_CD_INSTITUICAO = :cd_instituicao
+        and filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
         and filial.cd_filial = :cd_filial
-        and ano.cd_ano = :cd_ano;";
+        and ano.cd_ano = :cd_ano";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd_instituicao' =>$cdInstituicao, ':cd_filial'=>$cdFilial, ':cd_ano'=>$cdAno );
         $query->execute($parameters);

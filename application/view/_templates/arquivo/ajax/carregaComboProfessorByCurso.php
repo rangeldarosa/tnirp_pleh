@@ -3,7 +3,7 @@
 ?>
     <div class="form-group">
       <label for="cadArquivoProfessor">Professor</label>
-      <select id="cadArquivoProfessor" onchange="appConfig.ajaxDynamicSimpleCombo('disciplina', 'buscarDisciplinaPorProfessorCombo', '#loadComboProfessor', 'limparComboDisciplinaPorProfessor', this.value+'/'+document.getElementById('cadArquivoInstituicao').value+'/'+document.getElementById('cadArquivoFilial').value+'/'+document.getElementById('cadArquivoAno').value+'/'+document.getElementById('cadArquivoCurso').value)" class="select-controll-app" name="cadArquivoProfessor" required>
+      <select id="cadArquivoProfessor" onchange="appConfig.ajaxDynamicSimpleCombo('disciplina', 'buscarDisciplinaPorProfessorCombo', '#loadComboDisciplina', 'limparComboDisciplinaPorProfessor', this.value+'/'+document.getElementById('cadArquivoInstituicao').value+'/'+document.getElementById('cadArquivoFilial').value+'/'+document.getElementById('cadArquivoAno').value+'/'+document.getElementById('cadArquivoCurso').value)" class="select-controll-app" name="cadArquivoProfessor" required>
         <option value="">Selecione um Professor</option>
     <?php
       foreach ($listaProfessorCurso as $key) {
@@ -17,7 +17,7 @@
 ?>
     <div class="form-group">
       <label for="cadArquivoProfessor">Professor</label>
-      <select id="cadArquivoProfessor" onchange="appConfig.ajaxDynamicSimpleCombo('disciplina', 'buscarDisciplinaPorProfessorCombo', '#loadComboProfessor', 'limparComboDisciplinaPorProfessor', this.value)" class="select-controll-app" name="cadArquivoProfessor" required>
+      <select id="cadArquivoProfessor" onchange="appConfig.ajaxDynamicSimpleCombo('disciplina', 'buscarDisciplinaPorProfessorCombo', '#loadComboDisciplina', 'limparComboDisciplinaPorProfessor', this.value)" class="select-controll-app" name="cadArquivoProfessor" required>
         <option value="">Curso sem Professor ou não foi escolhido</option>
       </select>
     </div>

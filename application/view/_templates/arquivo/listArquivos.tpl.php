@@ -4,10 +4,10 @@
       <thead>
             <th class="text-center" width="70">Cod <span class="glyphicon glyphicon-sort"></span></th>
             <th>Nome <span class="glyphicon glyphicon-sort"></span></th>
+            <th>Disciplinas <span class="glyphicon glyphicon-sort"></span></th>
             <th class="text-center">Valor preto e branco <span class="glyphicon glyphicon-sort"></span></th>
             <th class="text-center">Valor colorido <span class="glyphicon glyphicon-sort"></span></th>
             <th class="text-center">Páginas <span class="glyphicon glyphicon-sort"></span></th>
-            <th class="text-center">Caminho <span class="glyphicon glyphicon-sort"></span></th>
             <th class="text-center" width="100">Arquivo privado <span class="glyphicon glyphicon-sort"></span></th>
             <th class="text-center" width="70">Privado <span class="glyphicon glyphicon-sort"></span></th>
             <th><span class="glyphicon glyphicon-pencil"></span></th>
@@ -20,10 +20,16 @@
         <tr>
             <td class="text-center"><?php echo $arquivo->CD_ARQUIVO;?></td>
             <td><?php echo $arquivo->NOME;?></td>
+            <td><?php for ($i = 0; $i < count($arquivo->DISCIPLINAS); $i++) {
+              if($i<count($arquivo->DISCIPLINAS)-1) {
+                echo $arquivo->DISCIPLINAS[$i]->NOME. " / ";
+              } else {
+                echo $arquivo->DISCIPLINAS[$i]->NOME;
+              }
+            } ?></td>
             <td class="text-center"><?php echo $arquivo->VALOR_PRETO_E_BRANCO;?></td>
             <td class="text-center"><?php echo $arquivo->VALOR_COLORIDO;?></td>
             <td class="text-center"><?php echo $arquivo->PAGINAS;?></td>
-            <td class="text-center"><?php echo $arquivo->CAMINHO_PARA_O_ARQUIVO;?></td>
             <td class="text-center"><?php echo $arquivo->ARQUIVO_PRIVADO == '1' ? 'Sim' : 'Não';?></td>
             <td class="text-center"><?php echo $arquivo->ESTADO == '1' ? 'Sim' : 'Não';?></td>
             <td class="text-center"><a title="Editar Arquivo" href="<?php echo URL; ?>arquivo/editarArquivo/<?php echo $arquivo->CD_ARQUIVO;?>"><span class="glyphicon glyphicon-pencil"></span></a></td>

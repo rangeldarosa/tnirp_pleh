@@ -9,15 +9,51 @@ initialize = function () {
   });
 }
 
-appConfig.ajaxDynamicSimpleCombo = function(controller, metodo, areaLoadSelect, limparComboMetodo, id) {
+appConfig.ajaxDynamicSimpleCombo = function(controller, metodo, areaLoadSelect, limparComboMetodo, id, idSelected) {
   if(id == '' || id == undefined) {
     metodo = limparComboMetodo;
   }
   var urlLoad = url+controller+"/"+metodo+"/"+id;
+  if(idSelected == '' || idSelected == undefined) {
+    var urlLoad = url+controller+"/"+metodo+"/"+id+"/"+idSelected;
+  }
   $(areaLoadSelect).load(urlLoad,function(data, sucess, response){
     appConfig.initCustomSelect();
   });
 };
+
+appConfig.clearCombo = function(limparFilial, limparAno, limparCurso, limparProfessor, limparDisciplina) {
+  if(limparAno && document.getElementById('cadArquivoAno') !== undefined && document.getElementById('cadArquivoAno') !== null) {
+    if(document.getElementById('cadArquivoAno').value !== '') {
+      appConfig.ajaxDynamicSimpleCombo('ano', 'buscarAnoPorFilialCombo', '#loadComboAno', 'limparComboAnoPorFilialEInstituicao' , document.getElementById('cadArquivoFilial').value+'/'+document.getElementById('cadArquivoInstituicao').value);
+    }
+  }
+  if(limparDisciplina && document.getElementById('cadArquivoDisciplina') !== undefined && document.getElementById('cadArquivoDisciplina') !== null) {
+    if(document.getElementById('cadArquivoDisciplina').value !== '') {
+      appConfig.ajaxDynamicSimpleCombo('disciplina', 'buscarDisciplinaPorProfessorCombo', '#loadComboDisciplina', 'limparComboDisciplinaPorProfessor', document.getElementById('cadArquivoProfessor').value+'/'+document.getElementById('cadArquivoInstituicao').value+'/'+document.getElementById('cadArquivoFilial').value+'/'+document.getElementById('cadArquivoAno').value+'/'+document.getElementById('cadArquivoCurso').value);
+    }
+  }
+  if(limparFilial && document.getElementById('cadArquivoFilial') !== undefined && document.getElementById('cadArquivoFilial') !== null) {
+    if(document.getElementById('cadArquivoFilial').value !== '') {
+      appConfig.ajaxDynamicSimpleCombo('filial', 'buscarFilialPorInsituicaoCombo', '#loadComboFilial', 'limparComboFilialPorInstituicao', document.getElementById('cadArquivoInstituicao').value);
+    }
+  }
+  if(limparProfessor && document.getElementById('cadArquivoProfessor') !== undefined && document.getElementById('cadArquivoProfessor') !== null) {
+    if(document.getElementById('cadArquivoProfessor').value !== '') {
+      appConfig.ajaxDynamicSimpleCombo('professor', 'buscarProfessorPorCursoCombo', '#loadComboProfessor', 'limparComboProfessorPorCurso', document.getElementById('cadArquivoCurso').value+'/'+document.getElementById('cadArquivoInstituicao').value+'/'+document.getElementById('cadArquivoFilial').value+'/'+document.getElementById('cadArquivoAno').value);
+    }
+  }
+  if(limparCurso && document.getElementById('cadArquivoCurso') !== undefined && document.getElementById('cadArquivoCurso') !== null) {
+    if(document.getElementById('cadArquivoCurso').value !== '') {
+      appConfig.ajaxDynamicSimpleCombo('curso', 'buscarCursoPorAnoCombo', '#loadComboCurso', 'limparComboCursoPorAno', document.getElementById('cadArquivoAno').value+'/'+document.getElementById('cadArquivoInstituicao').value+'/'+document.getElementById('cadArquivoFilial').value);
+    }
+  }
+  return initComboCallBack();
+}
+
+var initComboCallBack = function () {
+    appConfig.initCustomSelect();
+}
 
 appConfig.ajaxDynamicSimple = function(controller, metodo, areaLoadSelect, limparComboMetodo, id) {
   if(id == '' || id == undefined) {

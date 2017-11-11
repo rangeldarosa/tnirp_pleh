@@ -95,7 +95,7 @@ class Disciplina extends Controller {
     public function buscarDisciplinaPorProfessorCombo($cdProfessor, $cdCurso, $cdInstituicao, $cdFilial, $cdAno) {
       Util::validarLogin();
       Util::validarNivelGerente();
-      $listaAnoFilial = $this->model->buscarDisciplinaPorProfessorCursoAnoFilialInstituicao($cdProfessor, $cdCurso, $cdInstituicao, $cdFilial, $cdAno);
+      $listaDisciplinaProfessor = $this->model->buscarDisciplinaPorProfessorCursoAnoFilialInstituicao($cdProfessor, $cdCurso, $cdInstituicao, $cdFilial, $cdAno);
       require APP . 'view/_templates/arquivo/ajax/carregaComboDisciplinaByProfessor.php';
     }
 }

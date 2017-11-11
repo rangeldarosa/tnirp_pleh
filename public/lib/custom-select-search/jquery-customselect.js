@@ -384,7 +384,11 @@
           var moveTo = selected - 1;
           moveTo = moveTo < 0 ? options.length - 1 : moveTo;
 
-          methods._selectMove(moveTo);
+          if(!$options.showblank) {
+            methods._selectMove(moveTo+1);
+          } else {
+            methods._selectMove(moveTo);
+          }
         },
 
         // Move Selection Down
@@ -394,8 +398,11 @@
 
           var moveTo = selected + 1;
           moveTo = moveTo > options.length - 1 ? 0 : moveTo;
-
-          methods._selectMove(moveTo);
+          if(!$options.showblank) {
+            methods._selectMove(moveTo+1);
+          } else {
+            methods._selectMove(moveTo);
+          }
         },
 
         // Destroy customselect instance
@@ -409,7 +416,11 @@
         // Move Selection to Index
         _selectMove: function(index) {
           var options   = $this.find("ul li.active");
+        if(index > 0 && !$options.showblank) {
+          options.removeClass("option-hover").eq(index-1).addClass("option-hover");
+        } else {
           options.removeClass("option-hover").eq(index).addClass("option-hover");
+        }
 
           var scroll = $this.find("div div");
           if(scroll.css("overflow-y") == "scroll") {
