@@ -3,9 +3,11 @@
 
         function __construct()  {
             parent::__construct();
+            require APP . 'model/FilialModel.php';
             require APP . 'model/UsuarioModel.php';
             require APP . 'util/Util.php';
             $this->model = new UsuarioModel($this->db);
+            $this->filialModel = new FilialModel($this->db);
         }
 
 
@@ -13,7 +15,7 @@
         {
             Util::validarLogin();
             Util::validarNivelGerente();
-
+            $filiais = $this->filialModel->buscarTodosAsFiliais();
             $usuarios = $this->model->buscarTodososUsuarios();
             require APP . 'view/_templates/header.php';
             require APP . 'view/usuario/index.php';
@@ -23,10 +25,11 @@
         public function salvarUsuario()
         {
             $usuario = array();
-            if(isset($_POST["cadUsuarioLogin"]) && isset($_POST["cadUsuarioSenha"]) && isset($_POST["cadUsuarioNivelAcesso"])) {
+            if(isset($_POST["cadUsuarioLogin"]) && isset($_POST["cadUsuarioSenha"]) && isset($_POST["cadUsuarioNivelAcesso"]) && isset($_POST['cadUsuarioFilial'])) {
               $usuario["nome"] = $_POST["cadUsuarioLogin"];
               $usuario["senha"] = $_POST["cadUsuarioSenha"];
               $usuario["nivel_de_acesso"] = $_POST["cadUsuarioNivelAcesso"];
+              $usuario["cadUsuarioFilial"] = $_POST["cadUsuarioFilial"];
               $usuario["estado"] = 1;
               if($this->model->salvarUsuario($usuario)) {
                 Util::retornarMensagemSucesso("Sucesso", null, "Usuario, inserida com sucesso");
@@ -47,10 +50,10 @@
         public function bloquearUsuario($cdUsuario) {
             $this->model->bloquearUsuario($cdUsuario);
           }
-      
+
           public function desbloquearUsuario($cdUsuario) {
             $this->model->desbloquearUsuario($cdUsuario);
           }
-      
+
     }
 ?>

@@ -12,6 +12,18 @@
     </div>
 
     <div class="form-group">
+      <label for="cadUsuarioFilial">Filial de Acesso</label>
+      <select id="cadUsuarioFilial" class="select-controll-app" name="cadUsuarioFilial" required>
+        <option value="">Selecione uma Filial</option>
+    <?php
+      foreach ($filiais as $key) {
+          echo "<option value='$key->CD_FILIAL'>".mb_strtoupper($key->NOME, 'UTF-8')."</option>";
+      }
+    ?>
+    </select>
+    </div>
+
+    <div class="form-group">
       <label for="cadUsuarioNivelAcesso">Nivel de Acesso</label>
       <select class="form-control select-controll-app" name="cadUsuarioNivelAcesso" id="cadUsuarioNivelAcesso" required>
         <option value="0" <?php echo isset($usuario) && ($usuario->NIVEL_DE_ACESSO == 0) ? 'selected' : ''; ?>>Aluno</option>

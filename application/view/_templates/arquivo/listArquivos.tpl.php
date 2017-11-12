@@ -4,7 +4,11 @@
       <thead>
             <th class="text-center" width="70">Cod <span class="glyphicon glyphicon-sort"></span></th>
             <th>Nome <span class="glyphicon glyphicon-sort"></span></th>
-            <th>Disciplinas <span class="glyphicon glyphicon-sort"></span></th>
+            <th>Curso <span class="glyphicon glyphicon-sort"></span></th>
+            <th>Disciplina <span class="glyphicon glyphicon-sort"></span></th>
+            <th>Professor <span class="glyphicon glyphicon-sort"></span></th>
+            <th>Ano <span class="glyphicon glyphicon-sort"></span></th>
+            <th>Filial <span class="glyphicon glyphicon-sort"></span></th>
             <th class="text-center">Valor preto e branco <span class="glyphicon glyphicon-sort"></span></th>
             <th class="text-center">Valor colorido <span class="glyphicon glyphicon-sort"></span></th>
             <th class="text-center">Páginas <span class="glyphicon glyphicon-sort"></span></th>
@@ -20,13 +24,11 @@
         <tr>
             <td class="text-center"><?php echo $arquivo->CD_ARQUIVO;?></td>
             <td><?php echo $arquivo->NOME;?></td>
-            <td><?php for ($i = 0; $i < count($arquivo->DISCIPLINAS); $i++) {
-              if($i<count($arquivo->DISCIPLINAS)-1) {
-                echo $arquivo->DISCIPLINAS[$i]->NOME. " / ";
-              } else {
-                echo $arquivo->DISCIPLINAS[$i]->NOME;
-              }
-            } ?></td>
+            <td><?php echo $arquivo->NOME_CURSO;?></td>
+            <td><?php echo $arquivo->NOME_DISCIPLINA;?></td>
+            <td><?php echo $arquivo->NOME_PROFESSOR;?></td>
+            <td><?php echo $arquivo->NOME_ANO;?></td>
+            <td><?php echo $arquivo->NOME_FILIAL;?></td>
             <td class="text-center"><?php echo $arquivo->VALOR_PRETO_E_BRANCO;?></td>
             <td class="text-center"><?php echo $arquivo->VALOR_COLORIDO;?></td>
             <td class="text-center"><?php echo $arquivo->PAGINAS;?></td>
