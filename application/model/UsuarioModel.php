@@ -27,9 +27,9 @@ class UsuarioModel {
     }
 
     public function salvarUsuario($usuario){
-        $sql = "INSERT INTO usuario (LOGIN, SENHA, NIVEL_DE_ACESSO, ESTADO) values (:nome, :senha, :nivel_de_acesso, :estado)";
+        $sql = "INSERT INTO usuario (LOGIN, SENHA, NIVEL_DE_ACESSO, ESTADO, FK_CD_FILIAL) values (:nome, :senha, :nivel_de_acesso, :estado, :fk_cd_filial)";
         $query = $this->db->prepare($sql);
-        $parameters = array(':nome' => $usuario["nome"], ':senha' => $usuario["senha"], ':nivel_de_acesso' => intval($usuario["nivel_de_acesso"]), ':estado' => intval($usuario["estado"]));
+        $parameters = array(':nome' => $usuario["nome"], ':senha' => $usuario["senha"], ':nivel_de_acesso' => intval($usuario["nivel_de_acesso"]),':fk_cd_filial'=>intval($usuario["cadUsuarioFilial"]) ,':estado' => intval($usuario["estado"]));
         $retorno = $query->execute($parameters);    
         var_dump($retorno);
         return true;
