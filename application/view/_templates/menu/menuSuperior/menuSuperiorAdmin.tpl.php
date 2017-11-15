@@ -13,7 +13,7 @@
 
     <div id="navbarCollapse" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-            <li class="<?php echo !isset($_GET['url']) || empty($_GET['url']) ? 'active' : ''?>"><a href="<?php echo URL?>">Home</a></li>
+            <!-- <li class="<?php /*echo !isset($_GET['url']) || empty($_GET['url']) ? 'active' : ''?>"><a href="<?php echo URL*/?>">Home</a></li> -->
             <li class="<?php echo !empty($_GET['url']) && $_GET['url']=="pastas" ? 'active' : ''?>"><a href="<?php echo URL?>pastas">Pastas</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">

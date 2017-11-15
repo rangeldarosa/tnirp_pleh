@@ -30,6 +30,14 @@
   <link href="<?php echo URL; ?>css/pastas.css" rel="stylesheet">
 </head>
 <body>
+  <div class="loading-area" id="loading-area" style="display:none;">
+    <div class="loading-icon" id="loading-area">
+      <div class="loading-content">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><br>
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
   <!-- MENUS DINÂNICOS, LATERAL E SUPERIOR POR USUARIO:
     MAQUINA, USER, GERENTE, ADMIN
     CONFIGURAÇÃO PARA VERIFICAR SE VAI HABILITAR CADA MENU EM config/Configmenu.php

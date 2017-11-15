@@ -11,7 +11,8 @@ class UsuarioModel {
     }
 
     public function buscarTodosOsUsuarios(){
-        $sql = "SELECT * FROM usuario";
+        $sql = "SELECT usuario.*, filial.nome nome_filial FROM usuario
+                INNER JOIN filial ON filial.CD_FILIAL = usuario.FK_CD_FILIAL";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -19,7 +20,9 @@ class UsuarioModel {
     }
 
     public function buscarUsuarioPorCd($id){
-        $sql = "SELECT * FROM usuario where cd_usuario = :cd";
+        $sql = "SELECT *, filial.nome nome_filial FROM usuario
+                INNER JOIN filial ON filial.CD_FILIAL = usuario.FK_CD_FILIAL
+                WHERE cd_usuario = :cd";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd' => $id);
         $query->execute($parameters);
@@ -30,8 +33,7 @@ class UsuarioModel {
         $sql = "INSERT INTO usuario (LOGIN, SENHA, NIVEL_DE_ACESSO, ESTADO, FK_CD_FILIAL) values (:nome, :senha, :nivel_de_acesso, :estado, :fk_cd_filial)";
         $query = $this->db->prepare($sql);
         $parameters = array(':nome' => $usuario["nome"], ':senha' => $usuario["senha"], ':nivel_de_acesso' => intval($usuario["nivel_de_acesso"]),':fk_cd_filial'=>intval($usuario["cadUsuarioFilial"]) ,':estado' => intval($usuario["estado"]));
-        $retorno = $query->execute($parameters);    
-        var_dump($retorno);
+        $retorno = $query->execute($parameters);
         return true;
     }
 
@@ -61,9 +63,9 @@ class UsuarioModel {
     }
 
     public function editarUsuario($usuario, $cdUsuario){
-        $sql = "UPDATE usuario SET LOGIN=:login, SENHA=:senha, NIVEL_DE_ACESSO=:nivel_de_acesso, ESTADO=:estado WHERE cd_usuario=:cd";
+        $sql = "UPDATE usuario SET LOGIN=:login, SENHA=:senha, NIVEL_DE_ACESSO=:nivel_de_acesso, ESTADO=:estado, FK_CD_FILIAL=:fk_cd_filial WHERE cd_usuario=:cd";
         $query = $this->db->prepare($sql);
-        $parameters = array(':login' => $usuario["login"],':senha' => $usuario["senha"], ':nivel_de_acesso' => intval($usuario["nivel_de_acesso"]),':estado' => intval($usuario["estado"]), 'cd' => intval($cdUsuario));
+        $parameters = array(':login' => $usuario["login"],':senha' => $usuario["senha"], ':nivel_de_acesso' => intval($usuario["nivel_de_acesso"]),':estado' => intval($usuario["estado"]), ':fk_cd_filial' => intval($usuario["cadUsuarioFilial"]), 'cd' => intval($cdUsuario));
         $retorno = $query->execute($parameters);
         if($retorno){
           return true;

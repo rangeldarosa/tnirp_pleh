@@ -23,7 +23,11 @@ class Login extends Controller {
         if(isset($usuario->login) && isset($usuario->senha) && $usuario->login == $login  && $usuario->senha == $senha) {
             $_SESSION["usuario"] = $usuario;
             $_SESSION["loginEfetuado"] = true;
-            header('location: '.URL);
+            if($_SESSION["usuario"]->nivel_de_acesso == 0) {
+              header('location: '.URL.'pastas');
+            } else {
+              header('location: '.URL);
+            }
         } else {
             Util::retornarMensagemErro("Erro ao Efetuar Login", "Login ou Senha Inválidos", "Usuário não encontrado na base de dados");
             header('location: '.URL);

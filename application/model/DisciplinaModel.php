@@ -16,7 +16,7 @@ class DisciplinaModel
     }
 
     public function buscarDisciplinaPorProfessorCursoAnoFilialInstituicao($cdProfessor,$cdCurso, $cdInstituicao, $cdFilial, $cdAno){
-        $sql = "select disciplina.*, 
+        $sql = "SELECT disciplina.*,
                 instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
                 ano.nome NOME_ANO, curso.NOME NOME_CURSO, professor.NOME NOME_PROFESSOR, disciplina.NOME NOME_DISCIPLINA
                 from disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
@@ -33,7 +33,8 @@ class DisciplinaModel
                 and instituicao.CD_INSTITUICAO = :cd_instituicao
                 and filial.CD_FILIAL = :cd_filial
                 and ano.CD_ANO = :cd_ano
-                and professor.CD_PROFESSOR = :cd_professor";
+                and professor.CD_PROFESSOR = :cd_professor
+                ORDER BY disciplina.nome ASC";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd_curso' => $cdCurso,':cd_instituicao' =>$cdInstituicao, ':cd_filial'=>$cdFilial, ':cd_ano'=>$cdAno, ':cd_professor'=>$cdProfessor );
         $query->execute($parameters);
@@ -41,10 +42,10 @@ class DisciplinaModel
     }
 
     public function buscarDisciplinaPorProfessorCursoAnoFilialInstituicaoAtivos($cdProfessor,$cdInstituicao, $cdFilial, $cdAno, $cdCurso){
-        $sql = "select disciplina.*,
+        $sql = "SELECT disciplina.*,
                 instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
                 ano.nome NOME_ANO, curso.NOME NOME_CURSO, professor.NOME NOME_PROFESSOR, disciplina.NOME NOME_DISCIPLINA
-              from disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
+                from disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
                 where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
                 and filial.CD_FILIAL = aux_ano_filial.FK_CD_FILIAL
                 and ano.CD_ANO = aux_ano_filial.FK_CD_ANO
@@ -59,7 +60,8 @@ class DisciplinaModel
                 and filial.CD_FILIAL = :cd_filial
                 and ano.CD_ANO = :cd_ano
                 and professor.CD_PROFESSOR = :cd_professor
-                and disciplina.estado = 1";
+                and disciplina.estado = 1
+                ORDER BY disciplina.nome ASC";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd_curso' => $cdCurso,':cd_instituicao' =>$cdInstituicao, ':cd_filial'=>$cdFilial, ':cd_ano'=>$cdAno, ':cd_professor'=>$cdProfessor );
         $query->execute($parameters);

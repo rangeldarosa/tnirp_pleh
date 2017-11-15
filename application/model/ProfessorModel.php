@@ -16,7 +16,7 @@ class ProfessorModel
     }
 
     public function buscarProfessorPorCursoAnoFilialInstituicao($cdCurso, $cdInstituicao, $cdFilial, $cdAno){
-        $sql = "select professor.*,
+        $sql = "SELECT professor.*,
                 instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
                 ano.nome NOME_ANO, curso.NOME NOME_CURSO
                 from professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
@@ -30,7 +30,8 @@ class ProfessorModel
                 and curso.CD_CURSO = :cd_curso
                 and instituicao.CD_INSTITUICAO = :cd_instituicao
                 and filial.CD_FILIAL = :cd_filial
-                and ano.CD_ANO = :cd_ano; ";
+                and ano.CD_ANO = :cd_ano;
+                ORDER BY professor.nome ASC";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd_curso' => $cdCurso,':cd_instituicao' =>$cdInstituicao, ':cd_filial'=>$cdFilial, ':cd_ano'=>$cdAno );
         $query->execute($parameters);
@@ -38,7 +39,7 @@ class ProfessorModel
     }
 
     public function buscarProfessorPorCursoAnoFilialInstituicaoAtivos($cdInstituicao, $cdFilial, $cdAno, $cdCurso){
-        $sql = "select professor.*,
+        $sql = "SELECT professor.*,
                 instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
                 ano.nome NOME_ANO, curso.NOME NOME_CURSO
                 from professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
@@ -53,7 +54,8 @@ class ProfessorModel
                 and instituicao.CD_INSTITUICAO = :cd_instituicao
                 and filial.CD_FILIAL = :cd_filial
                 and ano.CD_ANO = :cd_ano
-                and professor.estado = 1 ";
+                and professor.estado = 1
+                ORDER BY professor.nome ASC";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd_curso' => $cdCurso,':cd_instituicao' =>$cdInstituicao, ':cd_filial'=>$cdFilial, ':cd_ano'=>$cdAno );
         $query->execute($parameters);

@@ -21,7 +21,7 @@ class CursoModel{
     }
 
     public function buscarCursoPorAnoFilialInstituicao($cdInstituicao, $cdFilial, $cdAno){
-        $sql = "select curso.*,
+        $sql = "SELECT curso.*,
         instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
         ano.nome NOME_ANO
         from curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
@@ -32,7 +32,8 @@ class CursoModel{
         and filial.Instituicao_CD_INSTITUICAO = :cd_instituicao
         and filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
         and filial.cd_filial = :cd_filial
-        and ano.cd_ano = :cd_ano";
+        and ano.cd_ano = :cd_ano
+        ORDER BY curso.nome ASC";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd_instituicao' =>$cdInstituicao, ':cd_filial'=>$cdFilial, ':cd_ano'=>$cdAno );
         $query->execute($parameters);
@@ -40,7 +41,7 @@ class CursoModel{
     }
 
     public function buscarCursoPorAnoFilialInstituicaoAtivos($cdInstituicao, $cdFilial, $cdAno){
-        $sql = "select curso.*,
+        $sql = "SELECT curso.*,
         instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
         ano.nome NOME_ANO
         from curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
@@ -52,7 +53,8 @@ class CursoModel{
         and filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
         and filial.cd_filial = :cd_filial
         and ano.cd_ano = :cd_ano
-        and curso.ESTADO = 1";
+        and curso.ESTADO = 1
+        ORDER BY curso.nome ASC";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd_instituicao' =>$cdInstituicao, ':cd_filial'=>$cdFilial, ':cd_ano'=>$cdAno );
         $query->execute($parameters);
@@ -60,7 +62,7 @@ class CursoModel{
     }
 
     public function buscarCursoPorAnoFilialInstituicaoAtivo($cdInstituicao, $cdFilial, $cdAno){
-        $sql = "select curso.*,
+        $sql = "SELECT curso.*,
         instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
         ano.nome NOME_ANO
         from curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
@@ -72,7 +74,8 @@ class CursoModel{
         and filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
         and filial.cd_filial = :cd_filial
         and ano.cd_ano = :cd_ano
-        and curso.ESTADO = 1";
+        and curso.ESTADO = 1
+        ORDER BY curso.nome ASC";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd_instituicao' =>$cdInstituicao, ':cd_filial'=>$cdFilial, ':cd_ano'=>$cdAno);
         $query->execute($parameters);

@@ -1,12 +1,17 @@
-
 appConfig = {}
 
 initialize = function () {
+  document.getElementById("loading-area").style.display = 'block';
+  $(window).unload(function() {
+        document.getElementById("loading-area").style.display = 'none';
+  });
+
   $(document).ready(function(){
     appConfig.initDataTable();
     appConfig.initCustomMultiSelect();
     appConfig.initCustomSelect();
   });
+  
 }
 
 appConfig.ajaxDynamicSimpleCombo = function(controller, metodo, areaLoadSelect, limparComboMetodo, id, idSelected) {
@@ -17,8 +22,10 @@ appConfig.ajaxDynamicSimpleCombo = function(controller, metodo, areaLoadSelect, 
   if(idSelected == '' || idSelected == undefined) {
     var urlLoad = url+controller+"/"+metodo+"/"+id+"/"+idSelected;
   }
+  document.getElementById("loading-area").style.display = 'block';
   $(areaLoadSelect).load(urlLoad,function(data, sucess, response){
     appConfig.initCustomSelect();
+    document.getElementById("loading-area").style.display = 'none';
   });
 };
 
@@ -60,8 +67,28 @@ appConfig.ajaxDynamicSimple = function(controller, metodo, areaLoadSelect, limpa
     metodo = limparComboMetodo;
   }
   var urlLoad = url+controller+"/"+metodo+"/"+id;
-  $(areaLoadSelect).load(urlLoad,function(data, sucess, response){});
+  document.getElementById("loading-area").style.display = 'block';
+  $(areaLoadSelect).load(urlLoad,function(data, sucess, response){
+    document.getElementById("loading-area").style.display = 'none';
+  });
 };
+
+appConfig.ajaxDynamicFormPost = function(buttomId, areaLoad, controller, metodo) {
+  $("#"+buttomId).submit(function () {
+    document.getElementById("loading-area").style.display = 'block';
+    var dados = jQuery(this).serialize();
+    $.ajax({
+      url: url + controller+"/"+metodo,
+      data: {
+        dados: dados,
+      },
+      type: "POST",
+      success: function (data) {
+        document.getElementById("loading-area").style.display = 'none';
+      }
+    });
+  });
+}
 
 appConfig.initCustomSelect = function () {
   $(document).ready(function() {
@@ -141,18 +168,4 @@ appConfig.initCustomMultiSelect = function () {
       }
     });
   });
-}
-
-appConfig.ajaxDynamicFormPost = function(selectorForm, type, cache, areaLoad) {
-    console.log(selectorForm);
-    e.preventDefault();
-    $.ajax({
-        type     : type,
-        cache    : cache,
-        url      : $(this).attr('action'),
-        data     : $(this).serialize(),
-        success  : function(data) {
-            $(areaLoad).empty().append(data);
-        }
-    });
 }

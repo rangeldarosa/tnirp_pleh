@@ -67,6 +67,7 @@
     display: inline-block;
     padding: 20px;
     opacity: 0.7;
+    cursor:pointer;
 }
 
 .paginator a:hover {
@@ -86,4 +87,16 @@
 
 .paginator .round {
     border-radius: 50%;
+}
+
+/* INSERÇÃO DA FILA */
+.select-min-interval {
+  max-width: 180px;
+  display: inline;
+}
+.group-interval-repeat {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content:space-around;
 }
