@@ -114,7 +114,7 @@
     <h3 class="panel-title"><strong><?php echo $modelTitle ?></strong></h3>
   </div>
   <div class="panel-body">
-    <div class="row">
+    <!--<div class="row">
       <div class="col lg-12 col-sm-12 col-xs-12 col-md-12">
         <div class="form-busca">
           <form name="buscaFolder" class="form" id="formAjaxPost" onsubmit="appConfig.ajaxDynamicFormPost('#'+this.id, 'POST', false, '.container-pastas')" method="POST" action="<?php echo URL?>pastas/<?php echo $nextMethod; ?>/find/1/null/null/null/null/null/null/null">
@@ -130,7 +130,7 @@
         </div>
       </div>
     </div>
-    <div class="clearfix" style="clear:both;"></div><br>
+    <div class="clearfix" style="clear:both;"></div><br>-->
     <section class="container-pastas">
     <?php
       if(!empty($listas) && is_array($listas)) {
