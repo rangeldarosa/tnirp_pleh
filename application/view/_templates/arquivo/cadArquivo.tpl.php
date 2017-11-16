@@ -28,22 +28,7 @@ if(isset($arquivo)) {
       <label for="cadArquivoNome">Nome do Arquivo</label>
       <input type="text" name="cadArquivoNome" class="form-control input-controll-app" id="cadArquivoNome" placeholder="Nome do Arquivo" required maxlength="255" value="<?php echo isset($arquivo) ? $arquivo->NOME : ''; ?>">
     </div>
-
-    <div class="form-group">
-      <label for="cadArquivoValorPeB">Valor Preto/Branco</label>
-      <input type="text" name="cadArquivoValorPeB" class="form-control input-controll-app price" id="cadArquivoValorPeB" placeholder="Valor P/B" required maxlength="10" value="<?php echo isset($arquivo) ? $arquivo->VALOR_PRETO_E_BRANCO : ''; ?>">
-
-    </div>
-    <div class="form-group">
-      <label for="cadArquivoValorColor">Valor Colorido</label>
-      <input type="text" name="cadArquivoValorColor" class="form-control input-controll-app price" id="cadArquivoValorColor" placeholder="Valor Colorido" required maxlength="10" value="<?php echo isset($arquivo) ? $arquivo->VALOR_COLORIDO : ''; ?>">
-    </div>
-
-    <div class="form-group">
-      <label for="cadArquivoPaginas">Número de Páginas</label>
-      <input type="text" name="cadArquivoPaginas" class="form-control input-controll-app" id="cadArquivoPaginas" placeholder="Número de Páginas" required maxlength="10" value="<?php echo isset($arquivo) ? $arquivo->PAGINAS : ''; ?>">
-    </div>
-
+    
     <div class="form-group">
       <label for="cadArquivoFile"><i class="fa fa-lg fa-file-pdf-o" aria-hidden="true"></i> Arquivo</label>
       <input type="file" name="cadArquivoFile" class="form-control input-file-app" id="cadArquivoFile">
