@@ -44,7 +44,7 @@ class Arquivo extends Controller {
             $disciplina = $_POST['cadArquivoDisciplina'];
             
             if($this->arquivoModel->salvarArquivo($arquivo)) {
-                --,0000$dir = $_SERVER["DOCUMENT_ROOT"]."/tnirp_pleh/documentos/";
+                $dir = $_SERVER["DOCUMENT_ROOT"]."/tnirp_pleh/documentos/";
                 move_uploaded_file($_FILES['cadArquivoFile']['tmp_name'],$dir.$novoNome);
                 $arquivoCadastrado = $this->arquivoModel->buscarUltimoArquivoCadastrado();
                 $this->auxiliarDisciplina->salvarDisciplinaArquivo($arquivoCadastrado[0]->CD_ARQUIVO,$disciplina);
