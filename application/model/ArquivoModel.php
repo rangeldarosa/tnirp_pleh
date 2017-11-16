@@ -161,5 +161,20 @@
             return true;
         }
 
+        public function buscarArquivoPorCodigo($cdArquivo){
+            $sql = "SELECT * FROM arquivo WHERE cd_arquivo = :cd_arquivo";
+            $query = $this->db->prepare($sql);
+            $parameters = array(':cd_arquivo' =>$cdArquivo);
+            $query->execute($parameters);
+            return $query->fetchAll();
+        }
+
+        public function buscarUltimoArquivoCadastrado(){
+            $sql = "SELECT * FROM arquivo order by cd_arquivo desc limit 1";
+            $query = $this->db->prepare($sql);
+            $query->execute();
+            return $query->fetchAll();
+        }
+
     }
 ?>
