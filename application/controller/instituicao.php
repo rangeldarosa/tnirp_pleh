@@ -4,8 +4,10 @@
         function __construct()  {
             parent::__construct();
             require APP . 'model/InstituicaoModel.php';
+            require APP . 'model/FilialModel.php';
             require APP . 'util/Util.php';
             $this->model = new InstituicaoModel($this->db);
+            $this->filialModel = new FilialModel($this->db);
         }
 
 
@@ -15,6 +17,7 @@
             Util::validarNivelGerente();
 
             $instituicoes = $this->model->buscarTodosAsInstituicoes();
+            $listaFilial = $this->filialModel->buscarTodosAsFiliais();
             require APP . 'view/_templates/header.php';
             require APP . 'view/instituicao/index.php';
             require APP . 'view/_templates/footer.php';
@@ -49,7 +52,7 @@
           require APP . 'view/_templates/header.php';
           require APP . 'view/instituicao/index.php';
           require APP . 'view/_templates/footer.php';
-    
+
           if($cdInstituicao && isset($_POST))  {
             $instituicaoEdit = array();
             if(!empty($_POST["cadInstituiçãoNome"])) {
@@ -68,7 +71,7 @@
         public function bloquearInstituicao($cdInstituicao) {
             $this->model->bloquearInstituicao($cdInstituicao);
           }
-      
+
           public function desbloquearInstituicao($cdInstituicao) {
             $this->model->desbloquearInstituicao($cdInstituicao);
           }

@@ -9,11 +9,13 @@
     ?>
     <h3 class="title text-center">Dashboard</h3><br>
   <!-- POR FILIAL -->
-        <?php foreach ($dashBoardItens as $item) {?>
-        <?php foreach ($item['fila_atual'] as $fila) {?>
+        <?php foreach ($dashBoardItens as $item) { ?>
+        <?php foreach ($item['fila_atual'] as $fila) {
+          $fila->valor_pagar = 0;
+          ?>
           <script>
             var showInterval<?php echo $fila->CD_REQUISICAO;?> = function() {
-              alert("<?php
+              alert('<?php
               echo "Aluno: ".$fila->NOME;
               echo "\\nUsuário: ".$fila->nmUsuario;
               echo "\\n\\nIntervalos de Páginas:\\n";
@@ -23,10 +25,21 @@
                 echo $intervalo->tipo_impressao == 'COLORIDO' ? 'Colorido' : 'Preto e branco';
                 echo "\\n";
               }
-              ?>");
+              ?>');
             }
           </script>
-        <?php } ?>
+          <?php
+
+          foreach ($fila->intervalos as $intervalo) {
+            $qtPaginas = ($intervalo->ate_pagina - $intervalo->de_pagina) + 1;
+            if($intervalo->tipo_impressao == 'COLORIDO') {
+              $fila->valor_pagar += ($qtPaginas * $item['TAXA_IMPRESSAO_COLORIDA']);
+            } else {
+              $fila->valor_pagar += ($qtPaginas * $item['TAXA_IMPRESSAO_PRETO_E_BRANCO']);
+            }
+          }
+
+          } ?>
       <div class="row">
         <div class="col-lg-12">
           <h4><strong><?php echo $item['NOME']; ?></strong></h4>
@@ -42,6 +55,7 @@
                       <th>Arquivo <span class="glyphicon glyphicon-sort"></span></th>
                       <th>Status Atual <span class="glyphicon glyphicon-sort"></span></th>
                       <th>Intervalos <span class="glyphicon glyphicon-sort"></span></th>
+                      <th>Valor a Pagar <span class="glyphicon glyphicon-sort"></span></th>
                       <th>Ação <span class="glyphicon glyphicon-sort"></span></th>
                 </thead>
                 <tbody>
@@ -62,6 +76,7 @@
                     <td class="text-center"><a href="<?php echo URL.'documentos/getFile/'.$fila->link?>" target="_blank"><i class="fa fa-file-pdf-o"></i> <?php echo $fila->nmArquivo;?></a></td>
                     <td class="text-center"><strong><?php echo $statusAtual ?></strong></td>
                     <td class="text-center"><strong><span onclick="showInterval<?php echo $fila->CD_REQUISICAO;?>()"><a>Clique para Abrir</a></span></strong></td>
+                    <td class="text-center"><strong><span style="font-weight:bold; color: #F00;"><?php echo Util::formatCashCurrent($fila->valor_pagar); ?></span></td>
                     <td class="text-center">
                     <?php if($fila->STATUSATUAL == 0) { ?>
                       <a href="<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/1'?>"><button><i class="fa fa-print"></i> Iniciar Impressão</button></a>
@@ -96,7 +111,7 @@
                 </div>
               </div>
           </div>
-          <div class="col-lg-6 col-md-3 col-sm-6 col-xs-6">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h3 class="panel-title"><strong>Lucro</strong></h3>

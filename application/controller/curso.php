@@ -5,9 +5,11 @@
             parent::__construct();
             require APP . 'model/CursoModel.php';
             require APP . 'model/AuxiliarAnoCurso.php';
+            require APP . 'model/ProfessorModel.php';
             require APP . 'util/Util.php';
             $this->model = new CursoModel($this->db);
             $this->auxiliarAnoCurso = new AuxiliarAnoCurso($this->db);
+            $this->professorModel = new ProfessorModel($this->db);
         }
 
 
@@ -16,6 +18,7 @@
             Util::validarNivelGerente();
 
             $cursos = $this->model->listarCursos();
+            $listaProfessor = $this->professorModel->buscarTodosProfessores();
 
             require APP . 'view/_templates/header.php';
             require APP . 'view/curso/index.php';

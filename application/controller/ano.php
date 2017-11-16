@@ -6,7 +6,9 @@ class Ano extends Controller {
         parent::__construct();
         require APP . 'util/Util.php';
         require APP . 'model/AnoModel.php';
+        require APP . 'model/CursoModel.php';
         $this->model = new AnoModel($this->db);
+        $this->cursoModel = new CursoModel($this->db);
     }
 
     public function index() {
@@ -14,6 +16,7 @@ class Ano extends Controller {
         Util::validarNivelGerente();
 
         $anos=$this->model->buscarTodosOsAnos();
+        $listaCurso=$this->cursoModel->listarCursos();
 
         require APP . 'view/_templates/header.php';
         require APP . 'view/ano/index.php';
@@ -25,8 +28,6 @@ class Ano extends Controller {
       Util::validarLogin();
       Util::validarNivelGerente();
 
-      var_dump($cdFilial);
-      var_dump($cdInstituicao);
       $identificadores = array();
       $identificadores["cdFilial"] = $cdFilial;
       $identificadores["cdInstituicao"] = $cdInstituicao;
@@ -81,7 +82,7 @@ class Ano extends Controller {
         }
       }
     }
-    
+
     public function limparComboAnoPorFilialEInstituicao() {
       Util::validarLogin();
       Util::validarNivelGerente();

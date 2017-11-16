@@ -80,7 +80,8 @@
                     and disciplina.CD_DISCIPLINA = aux_professor_disciplina.FK_CD_DISCIPLINA
                     and disciplina.CD_DISCIPLINA = aux_disciplina_arquivo.FK_CD_DISCIPLINA
                     and arquivo.CD_ARQUIVO = aux_disciplina_arquivo.FK_CD_ARQUIVO
-                    and curso.CD_CURSO = aux_curso_professor.FK_CD_CURSO";
+                    and curso.CD_CURSO = aux_curso_professor.FK_CD_CURSO
+                    limit 2";
             $query = $this->db->prepare($sql);
             $query->execute(array());
             return $query->fetchAll();
@@ -149,7 +150,7 @@
                 ."(:nome,:paginas,:caminho_para_o_arquivo,:arquivo_privado,:estado,:valor_preto_e_branco,:valor_colorido)";
             $query = $this->db->prepare($sql);
             $parameters = array(
-                ':nome' => $arquivo["nome"], 
+                ':nome' => $arquivo["nome"],
                 ':paginas' => $arquivo["paginas"],
                 ':caminho_para_o_arquivo' => $arquivo["caminho_para_o_arquivo"],
                 ':arquivo_privado' => $arquivo["arquivo_privado"],

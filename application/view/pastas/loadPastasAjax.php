@@ -284,20 +284,20 @@
                   <strong>Intervalo de Páginas: </strong><br><br>
                   <div class="group-interval-repeat" id="group-interval-repeat">
                       <label>De:</label>
-                      <select class="select-controll-app select-min-interval" required name="intervaloPaginasDe[]">
+                      <select class="select-controll-app select-min-interval" name="intervaloPaginasDe[]">
                         <option value=""> Início do Intervalo</option>
                       <?php for($i=1;$i<=$pasta->PAGINAS;$i++) {?>
                         <option value="<?php echo $i ?>"><?php echo $i ?></option>
                       <?php } ?>
                       </select>
                       <label style="margin-left: 5px;margin-right:5px">Até</label>
-                      <select class="select-controll-app select-min-interval" required name="intervaloPaginasaAte[]">
+                      <select class="select-controll-app select-min-interval" name="intervaloPaginasaAte[]">
                         <option value="">Final do Intervalo</option>
                       <?php for($i=1;$i<=$pasta->PAGINAS;$i++) {?>
                         <option value="<?php echo $i ?>"><?php echo $i ?></option>
                       <?php } ?>
                       </select>
-                      <select class="select-controll-app" required name="intervaloPaginasTipo[]">
+                      <select class="select-controll-app" name="intervaloPaginasTipo[]">
                         <option value="">Tipo de Impressão</option>
                         <option value="PRETO_BRANCO">Preto e Branco</option>
                         <option value="COLORIDO">Colorido</option>
