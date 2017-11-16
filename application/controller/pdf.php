@@ -45,4 +45,30 @@ class Pdf extends Controller
 
     }
 
+    public function numeroPaginas($nomeDocumento) {
+
+        $dir = dirname(__FILE__); 
+        $dir = str_replace("application\controller","", $dir);
+        $dir = str_replace("application/controller","", $dir);
+        $dir .= "documentos/";
+
+        $comando = "identify ". $dir . $nomeDocumento .".pdf";
+        $identify = exec($comando , $output);
+        return count($output);
+
+    }
+
+    public function verificarSePaginaEColorida($nomeDocument, $pagina) {
+
+        $dir = dirname(__FILE__); 
+        $dir = str_replace("application\controller","", $dir);
+        $dir = str_replace("application/controller","", $dir);
+        $dir .= "documentos/";
+
+        $comando = "convert ". $dir . $nomeDocumento .".pdf[". $pagina ."] -colorspace HSL -channel G -separate -format %[fx:mean] info:";
+        $convert = exec($comando , $output);
+        return $output[0] > 0;
+
+    }
+
 }
