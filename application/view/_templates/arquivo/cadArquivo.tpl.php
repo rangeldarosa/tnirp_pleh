@@ -22,13 +22,12 @@ if(isset($arquivo)) {
 ?>
 
 <div class="cadArquivoArea">
-  <form action="<?php echo !isset($arquivo) ? URL.'arquivo/salvarArquivo' : '';?>" method="post">
-
+  <form action="<?php echo !isset($arquivo) ? URL.'arquivo/salvarArquivo' : '';?>" method="post" enctype="multipart/form-data" novalidate>
     <div class="form-group">
       <label for="cadArquivoNome">Nome do Arquivo</label>
       <input type="text" name="cadArquivoNome" class="form-control input-controll-app" id="cadArquivoNome" placeholder="Nome do Arquivo" required maxlength="255" value="<?php echo isset($arquivo) ? $arquivo->NOME : ''; ?>">
     </div>
-    
+
     <div class="form-group">
       <label for="cadArquivoPaginas">Número de Páginas</label>
       <input type="text" name="cadArquivoPaginas" class="form-control input-controll-app" id="cadArquivoPaginas" placeholder="Número de Páginas" required maxlength="10" value="<?php echo isset($arquivo) ? $arquivo->PAGINAS : ''; ?>">
@@ -59,7 +58,7 @@ if(isset($arquivo)) {
     <div class="form-group">
       <label for="cadArquivoInstituicao">Instituição</label>
       <select id="cadArquivoInstituicao" onchange="appConfig.ajaxDynamicSimpleCombo('filial', 'buscarFilialPorInsituicaoCombo', '#loadComboFilial', 'limparComboFilialPorInstituicao', this.value)" class="select-controll-app" name="cadArquivoInstituicao" required>
-          <<option value="">Selecione uma Instituição</option>
+          <option value="">Selecione uma Instituição</option>
           <?php
             if (is_array($listarInstituicoesCombo)) {
               foreach ($listarInstituicoesCombo as $key) {
