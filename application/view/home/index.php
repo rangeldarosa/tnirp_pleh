@@ -10,6 +10,23 @@
     <h3 class="title text-center">Dashboard</h3><br>
   <!-- POR FILIAL -->
         <?php foreach ($dashBoardItens as $item) {?>
+        <?php foreach ($item['fila_atual'] as $fila) {?>
+          <script>
+            var showInterval<?php echo $fila->CD_REQUISICAO;?> = function() {
+              alert("<?php
+              echo "Aluno: ".$fila->NOME;
+              echo "\\nUsuário: ".$fila->nmUsuario;
+              echo "\\n\\nIntervalos de Páginas:\\n";
+              foreach ($fila->intervalos as $intervalo) {
+                echo "[".$intervalo->de_pagina." - ";
+                echo $intervalo->ate_pagina."] - ";
+                echo $intervalo->tipo_impressao == 'COLORIDO' ? 'Colorido' : 'Preto e branco';
+                echo "\\n";
+              }
+              ?>");
+            }
+          </script>
+        <?php } ?>
       <div class="row">
         <div class="col-lg-12">
           <h4><strong><?php echo $item['NOME']; ?></strong></h4>
@@ -24,6 +41,7 @@
                       <th>Usuário <span class="glyphicon glyphicon-sort"></span></th>
                       <th>Arquivo <span class="glyphicon glyphicon-sort"></span></th>
                       <th>Status Atual <span class="glyphicon glyphicon-sort"></span></th>
+                      <th>Intervalos <span class="glyphicon glyphicon-sort"></span></th>
                       <th>Ação <span class="glyphicon glyphicon-sort"></span></th>
                 </thead>
                 <tbody>
@@ -43,6 +61,7 @@
                     <td class="text-left"><?php echo $fila->nmUsuario;?></td>
                     <td class="text-center"><a href="<?php echo URL.'documentos/getFile/'.$fila->link?>" target="_blank"><i class="fa fa-file-pdf-o"></i> <?php echo $fila->nmArquivo;?></a></td>
                     <td class="text-center"><strong><?php echo $statusAtual ?></strong></td>
+                    <td class="text-center"><strong><span onclick="showInterval<?php echo $fila->CD_REQUISICAO;?>()"><a>Clique para Abrir</a></span></strong></td>
                     <td class="text-center">
                     <?php if($fila->STATUSATUAL == 0) { ?>
                       <a href="<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/1'?>"><button><i class="fa fa-print"></i> Iniciar Impressão</button></a>

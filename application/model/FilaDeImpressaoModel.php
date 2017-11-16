@@ -24,27 +24,34 @@ class FilaDeImpressaoModel {
     }
 
     public function buscarTodasAsRequisicoesPendentes(){
-        $sql = "SELECT REQUISICAO.*, usuario.login nmUsuario, arquivo.nome nmArquivo, arquivo.CAMINHO_PARA_O_ARQUIVO link, filial.nome nmFilial FROM REQUISICAO_INTERVALOS
-                JOIN REQUISICAO ON REQUISICAO.CD_REQUISICAO = REQUISICAO_INTERVALOS.ID_REQUISICAO
+        $sql = "SELECT REQUISICAO.*, usuario.login nmUsuario, arquivo.nome nmArquivo, arquivo.CAMINHO_PARA_O_ARQUIVO link, filial.nome nmFilial FROM REQUISICAO
                 JOIN usuario ON usuario.CD_USUARIO = requisicao.FK_CD_USUARIO
                 JOIN arquivo ON arquivo.CD_ARQUIVO = REQUISICAO.FK_CD_ARQUIVO
                 JOIN filial ON filial.CD_FILIAL = requisicao.FK_USUARIO_CD_FILIAL
-                AND REQUISICAO.STATUSATUAL < 3 AND REQUISICAO.STATUSATUAL >= 0";
+                AND (REQUISICAO.STATUSATUAL >= 0 AND REQUISICAO.STATUSATUAL < 3)";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
     }
 
     public function buscarTodasAsRequisicoesPendentesPorFilial($cdFilial){
-        $sql = "SELECT REQUISICAO.*, usuario.login nmUsuario, arquivo.nome nmArquivo, arquivo.CAMINHO_PARA_O_ARQUIVO link, filial.nome nmFilial FROM REQUISICAO_INTERVALOS
-                JOIN REQUISICAO ON REQUISICAO.CD_REQUISICAO = REQUISICAO_INTERVALOS.ID_REQUISICAO
+        $sql = "SELECT REQUISICAO.*, usuario.login nmUsuario, arquivo.nome nmArquivo, arquivo.CAMINHO_PARA_O_ARQUIVO link, filial.nome nmFilial FROM REQUISICAO
                 JOIN usuario ON usuario.CD_USUARIO = requisicao.FK_CD_USUARIO
                 JOIN arquivo ON arquivo.CD_ARQUIVO = REQUISICAO.FK_CD_ARQUIVO
                 JOIN filial ON filial.CD_FILIAL = requisicao.FK_USUARIO_CD_FILIAL
                 AND (REQUISICAO.STATUSATUAL >= 0 AND REQUISICAO.STATUSATUAL < 3)
-                WHERE ID_FILIAL = :cdFilial";
+                WHERE CD_FILIAL = :cdFilial";
         $query = $this->db->prepare($sql);
         $parameters = array(':cdFilial' => $cdFilial);
+        $query->execute($parameters);
+        return $query->fetchAll();
+    }
+
+    public function buscarIntervaloPorRequisicao($cdRequisicao){
+        $sql = "SELECT REQUISICAO_INTERVALOS.* FROM REQUISICAO_INTERVALOS
+                WHERE ID_REQUISICAO = :cdRequisicao";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':cdRequisicao' => $cdRequisicao);
         $query->execute($parameters);
         return $query->fetchAll();
     }
