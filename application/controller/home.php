@@ -20,6 +20,9 @@ class Home extends Controller {
           $dashBoardItens = $this->HomeModel->buscarDashBoardItensAdmin();
           for ($i=0; $i <count($dashBoardItens) ; $i++) {
             $dashBoardItens[$i]['fila_atual'] = $this->filaImpressaoModel->buscarTodasAsRequisicoesPendentesPorFilial($dashBoardItens[$i]['CD_FILIAL']);
+            for($j=0; $j < count($dashBoardItens[$i]['fila_atual']); $j++) {
+              $dashBoardItens[$i]['fila_atual'][$j]->intervalos = $this->filaImpressaoModel->buscarIntervaloPorRequisicao($dashBoardItens[$i]['fila_atual'][$j]->CD_REQUISICAO);
+            }
           }
         } else {
           $filaImpressaoItens = $this->filaImpressaoModel->buscarTodasAsRequisicoesPendentesPorFilial($_SESSION['usuario']->fk_cd_filial);
