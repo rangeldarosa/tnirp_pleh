@@ -176,5 +176,30 @@
             return $query->fetchAll();
         }
 
+        public function bloquearArquivo($cdArquivo){
+            $sql = "UPDATE arquivo SET ESTADO = 0 WHERE CD_ARQUIVO = :cd";
+            $query = $this->db->prepare($sql);
+            $parameters = array(':cd' => intval($cdArquivo));
+            $retorno = $query->execute($parameters);
+            if($retorno){
+                Util::retornarMensagemSucesso("Sucesso!", null, "Arquivo bloqueado com sucesso");
+            }else{
+                Util::retornarMensagemErro("Erro ao bloquear Arquivo", "ERROR NO UPDATE", "Algo errado no update do arquivo");
+            }
+            header('location: ' . URL . 'arquivo/');
+        }
+        public function desbloquearArquivo($cdArquivo){
+            $sql = "UPDATE arquivo SET ESTADO = 1 WHERE CD_ARQUIVO = :cd";
+            $query = $this->db->prepare($sql);
+            $parameters = array(':cd' => intval($cdArquivo));
+            $retorno = $query->execute($parameters);
+            if($retorno){
+                Util::retornarMensagemSucesso("Sucesso!", null, "Arquivo desbloqueado com sucesso");
+            }else{
+                Util::retornarMensagemErro("Erro ao desbloquear Arquivo", "ERROR NO UPDATE", "Algo errado no update do arquivo");
+            }
+            header('location: ' . URL . 'arquivo/');
+        }
+
     }
 ?>

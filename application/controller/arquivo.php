@@ -54,4 +54,12 @@ class Arquivo extends Controller {
         }
     }
 
+    public function bloquearArquivo($cdArquivo) {
+        $this->arquivoModel->bloquearArquivo($cdArquivo);
+    }
+  
+    public function desbloquearArquivo($cdArquivo) {
+        $this->arquivoModel->desbloquearArquivo($cdArquivo);
+    }
+
 }
