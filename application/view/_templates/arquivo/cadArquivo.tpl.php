@@ -22,7 +22,7 @@ if(isset($arquivo)) {
 ?>
 
 <div class="cadArquivoArea">
-  <form action="<?php echo !isset($arquivo) ? URL.'arquivo/salvarArquivo' : '';?>" method="post">
+  <form action="<?php echo !isset($arquivo) ? URL.'arquivo/salvarArquivo' : '';?>" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
       <label for="cadArquivoNome">Nome do Arquivo</label>

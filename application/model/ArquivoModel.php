@@ -137,6 +137,22 @@
         //     return $query->fetchAll();
         // }
 
-    }
+        public function salvarArquivo($arquivo){
+            $sql = "INSERT INTO arquivo(nome,paginas,caminho_para_o_arquivo,arquivo_privado,estado,valor_preto_e_branco,valor_colorido) VALUES "
+                ."(:nome,:paginas,:caminho_para_o_arquivo,:arquivo_privado,:estado,:valor_preto_e_branco,:valor_colorido)";
+            $query = $this->db->prepare($sql);
+            $parameters = array(
+                ':nome' => $arquivo["nome"], 
+                ':paginas' => $arquivo["paginas"],
+                ':caminho_para_o_arquivo' => $arquivo["caminho_para_o_arquivo"],
+                ':arquivo_privado' => $arquivo["arquivo_privado"],
+                ':estado' => $arquivo["estado"],
+                ':valor_preto_e_branco' => $arquivo["valor_preto_e_branco"],
+                ':valor_colorido' => $arquivo["valor_colorido"]
+            );
+            $retorno = $query->execute($parameters);
+            return true;
+        }
 
+    }
 ?>
