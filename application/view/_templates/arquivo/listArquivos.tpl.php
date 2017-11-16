@@ -9,8 +9,6 @@
             <th>Professor <span class="glyphicon glyphicon-sort"></span></th>
             <th>Ano <span class="glyphicon glyphicon-sort"></span></th>
             <th>Filial <span class="glyphicon glyphicon-sort"></span></th>
-            <th class="text-center">Valor preto e branco <span class="glyphicon glyphicon-sort"></span></th>
-            <th class="text-center">Valor colorido <span class="glyphicon glyphicon-sort"></span></th>
             <th class="text-center">Páginas <span class="glyphicon glyphicon-sort"></span></th>
             <th class="text-center" width="100">Arquivo privado <span class="glyphicon glyphicon-sort"></span></th>
             <th class="text-center" width="70">Privado <span class="glyphicon glyphicon-sort"></span></th>
@@ -29,8 +27,6 @@
             <td><?php echo $arquivo->NOME_PROFESSOR;?></td>
             <td><?php echo $arquivo->NOME_ANO;?></td>
             <td><?php echo $arquivo->NOME_FILIAL;?></td>
-            <td class="text-center"><?php echo $arquivo->VALOR_PRETO_E_BRANCO;?></td>
-            <td class="text-center"><?php echo $arquivo->VALOR_COLORIDO;?></td>
             <td class="text-center"><?php echo $arquivo->PAGINAS;?></td>
             <td class="text-center"><?php echo $arquivo->ARQUIVO_PRIVADO == '1' ? 'Sim' : 'Não';?></td>
             <td class="text-center"><?php echo $arquivo->ESTADO == '1' ? 'Sim' : 'Não';?></td>

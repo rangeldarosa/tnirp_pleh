@@ -269,4 +269,17 @@ class Pastas extends Controller {
         require APP . 'view/pastas/loadPastasAjax.php';
     }
 
+    public function loadImageFile($page, $cdArquivo) {
+      $locationFile = $this->arquivoModel->buscarCaminhoArquivo(intval($cdArquivo));
+      $base64 = Util::recuperarPaginaDoPDFEmBase64($locationFile->CAMINHO, intval($page-1));
+      require APP . 'view/pastas/loadImageAjax.php';
+    }
+
+    public function adicionarAFila() {
+      echo 'test';
+      die(var_dump($_POST));
+
+
+    }
+
 }

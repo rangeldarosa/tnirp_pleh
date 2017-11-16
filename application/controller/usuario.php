@@ -38,6 +38,8 @@
             }
         }
 
+        //-- FALTA EDITAR USUARIO AQUI
+
         public function listarUsuarios()
         {
             $instituicoes = $this->model->buscarTodosAsInstituicoes();

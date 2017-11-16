@@ -63,7 +63,8 @@ class FilialModel
             FROM filial f
             INNER JOIN cidade cid ON f.Cidade_CD_CIDADE = cid.CD_CIDADE
             INNER JOIN instituicao inst ON f.Instituicao_CD_INSTITUICAO = inst.CD_INSTITUICAO
-            WHERE f.Instituicao_CD_INSTITUICAO = :cd AND f.ESTADO=1";
+            WHERE f.Instituicao_CD_INSTITUICAO = :cd AND f.ESTADO=1
+            ORDER BY f.nome ASC";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd' => $id);
         $query->execute($parameters);

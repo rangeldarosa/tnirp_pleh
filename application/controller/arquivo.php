@@ -40,8 +40,7 @@ class Arquivo extends Controller {
             
             if($this->arquivoModel->salvarArquivo($arquivo)) {
                 $dir = $_SERVER["DOCUMENT_ROOT"]."/tnirp_pleh/documentos/";
-                echo $dir.$novoNome;
-                echo move_uploaded_file($_FILES['cadArquivoFile']['tmp_name'],$dir.$novoNome);
+                move_uploaded_file($_FILES['cadArquivoFile']['tmp_name'],$dir.$novoNome);
                 Util::retornarMensagemSucesso("Sucesso!", null, "Arquivo, inserido com sucesso");
                 header('location: ' . URL . 'arquivo/');
             }
@@ -77,8 +76,10 @@ class Arquivo extends Controller {
                 $arquivoEdit["valor_colorido"] = $_POST['cadArquivoValorColor'];
         
                 if($this->model->alterarArquivo($arquivoEdit, $cdArquivo)) {
-        
+                    $dir = $_SERVER["DOCUMENT_ROOT"]."/tnirp_pleh/documentos/";
                     
+                    //Buscar nome aquivo
+                    unlink($dir.$arquivoSalv->nome);
         
                     Util::retornarMensagemSucesso("Sucesso!", null, "Arquivo, Alterado com sucesso");
                     header('location: ' . URL . 'arquivo/');

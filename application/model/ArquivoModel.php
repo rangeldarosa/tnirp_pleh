@@ -11,7 +11,7 @@
         }
 
         public function buscarArquivosPorDisciplinaProfessorCursoAnoFilialInstituicao($cdDisciplina,$cdProfessor,$cdCurso, $cdInstituicao, $cdFilial, $cdAno){
-            $sql = "select * from arquivo,aux_disciplina_arquivo,disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
+            $sql = "SELECT * from arquivo,aux_disciplina_arquivo,disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
                     where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
                     and filial.CD_FILIAL = aux_ano_filial.FK_CD_FILIAL
                     and ano.CD_ANO = aux_ano_filial.FK_CD_ANO
@@ -28,7 +28,8 @@
                     and filial.CD_FILIAL = :cd_filial
                     and ano.CD_ANO = :cd_ano
                     and professor.CD_PROFESSOR = :cd_professor
-                    and disciplina.CD_DISCIPLINA =:cd_disciplina";
+                    and disciplina.CD_DISCIPLINA =:cd_disciplina
+                    ORDER BY arquivo.nome ASC";
             $query = $this->db->prepare($sql);
             $parameters = array(':cd_curso' => $cdCurso,':cd_instituicao' =>$cdInstituicao, ':cd_filial'=>$cdFilial, ':cd_ano'=>$cdAno, ':cd_professor'=>$cdProfessor, ':cd_disciplina'=>$cdDisciplina );
             $query->execute($parameters);
@@ -36,7 +37,7 @@
         }
 
         public function buscarArquivosPorDisciplinaProfessorCursoAnoFilialInstituicaoAtivos($cdDisciplina,$cdProfessor,$cdInstituicao, $cdFilial, $cdAno ,$cdCurso){
-            $sql = "select arquivo.NOME NMARQUIVO, arquivo.*, instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
+            $sql = "SELECT arquivo.NOME NMARQUIVO, arquivo.*, instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
                     ano.nome NOME_ANO, curso.NOME NOME_CURSO, professor.NOME NOME_PROFESSOR, disciplina.NOME NOME_DISCIPLINA
                     from arquivo,aux_disciplina_arquivo,disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
                     where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
@@ -56,14 +57,13 @@
                     and ano.CD_ANO = :cd_ano
                     and professor.CD_PROFESSOR = :cd_professor
                     and disciplina.CD_DISCIPLINA =:cd_disciplina
-                    and arquivo.estado = 1";
+                    and arquivo.estado = 1
+                    ORDER BY arquivo.nome ASC";
             $query = $this->db->prepare($sql);
             $parameters = array(':cd_curso' => $cdCurso,':cd_instituicao' =>$cdInstituicao, ':cd_filial'=>$cdFilial, ':cd_ano'=>$cdAno, ':cd_professor'=>$cdProfessor, ':cd_disciplina'=>$cdDisciplina );
             $query->execute($parameters);
             return $query->fetchAll();
         }
-
-
 
         public function buscarTodosOsArquivos(){
             $sql = "SELECT arquivo.NOME NMARQUIVO, arquivo.*, instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
@@ -84,6 +84,13 @@
             $query = $this->db->prepare($sql);
             $query->execute(array());
             return $query->fetchAll();
+        }
+
+        public function buscarCaminhoArquivo($cdArquivo){
+            $sql = "SELECT arquivo.CAMINHO_PARA_O_ARQUIVO CAMINHO FROM ARQUIVO WHERE CD_ARQUIVO = :cdArquivo";
+            $query = $this->db->prepare($sql);
+            $query->execute(array(':cdArquivo' => $cdArquivo));
+            return $query->fetch();
         }
 
 

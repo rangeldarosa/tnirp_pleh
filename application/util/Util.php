@@ -5,9 +5,7 @@
               if(isset($_SESSION["loginEfetuado"]) && $_SESSION["loginEfetuado"] == true) {
                   return true;
               }
-
               header('location: ' . URL . 'login' );
-
           }
 
           public static function retornarMensagemSucesso($titulo, $causa, $mensagem){
@@ -73,16 +71,15 @@
             return VALOR_PREFIX_MOEDA.' '.Util::formatNumber($value, VALOR_CASAS_DECIMAIS, VALOR_PREFIX_CENTAVOS, VALOR_PREFIX_MILHAR);
           }
 
-          public static function recuperarPaginaDoPDFEmBase64($nomeDocumento, $pagina) {
-
+          public static function recuperarPaginaDoPDFEmBase64($documento, $pagina) {;
             $dir = dirname(__FILE__);
             $dir = str_replace("application\util","", $dir);
             $dir = str_replace("application/util","", $dir);
+            $documento = $dir.$documento;
             $dir .= "documentos/";
 
             // exec("convert -alpha off input.pdf -resize 500x700! -background white -flatten -quality 90 output.jpg");
-
-            $comando = "convert -alpha off -density 288 ". $dir . $nomeDocumento .".pdf[". $pagina ."] -resize 1000x1000 -background white -flatten -quality 90 ". $dir ."imagem_convertida.jpg";
+            $comando = "convert -alpha off -density 288 ". $documento ."[". $pagina ."] -resize 1000x1000 -background white -flatten -quality 90 ". $dir ."imagem_convertida.jpg";
             exec($comando);
 
             $comando = "composite -dissolve 90% -gravity center ". $dir ."copyright.png ". $dir ."imagem_convertida.jpg ". $dir ."imagem_convertida.jpg";
