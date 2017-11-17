@@ -26,6 +26,9 @@ class Home extends Controller {
           }
         } else {
           $filaImpressaoItens = $this->filaImpressaoModel->buscarTodasAsRequisicoesPendentesPorFilial($_SESSION['usuario']->fk_cd_filial);
+          for($j=0; $j < count($filaImpressaoItens); $j++) {
+            $filaImpressaoItens[$j]->intervalos = $this->filaImpressaoModel->buscarIntervaloPorRequisicao($filaImpressaoItens[$j]->CD_REQUISICAO);
+          }
         }
         require APP . 'view/_templates/header.php';
         require APP . 'view/home/index.php';

@@ -28,10 +28,10 @@ if(isset($arquivo)) {
       <label for="cadArquivoNome">Nome do Arquivo</label>
       <input type="text" name="cadArquivoNome" class="form-control input-controll-app" id="cadArquivoNome" placeholder="Nome do Arquivo" required maxlength="255" value="<?php echo isset($arquivo) ? $arquivo->NOME : ''; ?>">
     </div>
-    
+
     <div class="form-group">
       <label for="cadArquivoFile"><i class="fa fa-lg fa-file-pdf-o" aria-hidden="true"></i> Arquivo</label>
-      <input type="file" name="cadArquivoFile" class="form-control input-file-app" id="cadArquivoFile">
+      <input type="file" name="cadArquivoFile" accept="application/pdf" class="form-control input-file-app" id="cadArquivoFile">
     </div>
 
     <div class="form-group">

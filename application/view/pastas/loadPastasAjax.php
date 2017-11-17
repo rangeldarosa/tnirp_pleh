@@ -287,19 +287,19 @@
                       <select class="select-controll-app select-min-interval" name="intervaloPaginasDe[]">
                         <option value=""> Início do Intervalo</option>
                       <?php for($i=1;$i<=$pasta->PAGINAS;$i++) {?>
-                        <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                        <option value="<?php echo $i ?>" <?php if($i == 1) echo 'selected'; ?>><?php echo $i ?></option>
                       <?php } ?>
                       </select>
                       <label style="margin-left: 5px;margin-right:5px">Até</label>
                       <select class="select-controll-app select-min-interval" name="intervaloPaginasaAte[]">
                         <option value="">Final do Intervalo</option>
                       <?php for($i=1;$i<=$pasta->PAGINAS;$i++) {?>
-                        <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                        <option value="<?php echo $i ?>" <?php if($i == $pasta->PAGINAS) echo 'selected'; ?>><?php echo $i ?></option>
                       <?php } ?>
                       </select>
                       <select class="select-controll-app" name="intervaloPaginasTipo[]">
                         <option value="">Tipo de Impressão</option>
-                        <option value="PRETO_BRANCO">Preto e Branco</option>
+                        <option value="PRETO_BRANCO" selected>Preto e Branco</option>
                         <option value="COLORIDO">Colorido</option>
                       </select>
                   </div><br>
