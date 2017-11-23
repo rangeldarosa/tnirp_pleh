@@ -66,7 +66,7 @@
         }
 
         public function buscarTodosOsArquivos(){
-            $sql = "select distinct arquivo.CD_ARQUIVO,arquivo.nome,(select distinct nome from curso where cd_curso = curso.CD_CURSO limit 1) nome_curso,
+            $sql = "SELECT distinct arquivo.CD_ARQUIVO, arquivo.nome,(select distinct nome from curso where cd_curso = curso.CD_CURSO limit 1) nome_curso,
                 professor.NOME as nome_professor, ano.NOME, (select nome from filial where cd_filial = filial.CD_FILIAL limit 1 ) as filial_nome, arquivo.PAGINAS, arquivo.ARQUIVO_PRIVADO 
                 from instituicao, filial, aux_ano_filial, ano, aux_ano_curso, curso, aux_curso_professor, professor, aux_professor_disciplina, disciplina, aux_disciplina_arquivo,arquivo
                 where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO  
@@ -79,7 +79,8 @@
                 and professor.CD_PROFESSOR = aux_professor_disciplina.FK_CD_PROFESSOR
                 and disciplina.CD_DISCIPLINA = aux_professor_disciplina.FK_CD_DISCIPLINA
                 and disciplina.CD_DISCIPLINA = aux_disciplina_arquivo.FK_CD_DISCIPLINA
-                and arquivo.CD_ARQUIVO = aux_disciplina_arquivo.FK_CD_ARQUIVO;";
+                and arquivo.CD_ARQUIVO = aux_disciplina_arquivo.FK_CD_ARQUIVO
+                ORDER BY arquivo.nome ASC;";
             $query = $this->db->prepare($sql);
             $query->execute(array());
             return $query->fetchAll();
