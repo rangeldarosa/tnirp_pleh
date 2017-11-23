@@ -66,8 +66,8 @@
         }
 
         public function buscarTodosOsArquivos(){
-            $sql = "SELECT distinct arquivo.CD_ARQUIVO, arquivo.nome,(select distinct nome from curso where cd_curso = curso.CD_CURSO limit 1) nome_curso,
-                professor.NOME as nome_professor, ano.NOME, (select nome from filial where cd_filial = filial.CD_FILIAL limit 1 ) as filial_nome, arquivo.PAGINAS, arquivo.ARQUIVO_PRIVADO 
+            $sql = "SELECT distinct arquivo.CD_ARQUIVO, arquivo.nome as NOME,(select distinct nome from curso where cd_curso = curso.CD_CURSO limit 1) as NOME_CURSO,
+                disciplina.nome as NOME_DISCIPLINA, professor.NOME as NOME_PROFESSOR, ano.NOME as NOME_ANO, (select nome from filial where cd_filial = filial.CD_FILIAL limit 1 ) as NOME_FILIAL, arquivo.PAGINAS, arquivo.ARQUIVO_PRIVADO as ARQUIVO_PRIVADO, arquivo.estado as ESTADO 
                 from instituicao, filial, aux_ano_filial, ano, aux_ano_curso, curso, aux_curso_professor, professor, aux_professor_disciplina, disciplina, aux_disciplina_arquivo,arquivo
                 where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO  
                 and filial.CD_FILIAL = aux_ano_filial.FK_CD_FILIAL
