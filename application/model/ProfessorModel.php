@@ -96,12 +96,25 @@ class ProfessorModel
     }
 
     public function salvarProfessor($professor){
-
-        $sql = "INSERT INTO professor (NOME, ESTADO, PRIVADO) values (:nome, :estado, :privado)";
-        $query = $this->db->prepare($sql);
-        $parameters = array(':nome' => $professor["nome"], ':estado' => intval($professor["estado"]), ':privado' =>  intval($professor["privado"]));
-        $retorno = $query->execute($parameters);
+        
+                $sql = "INSERT INTO professor (NOME, ESTADO, PRIVADO) values (:nome, :estado, :privado)";
+                $query = $this->db->prepare($sql);
+                $this->db->beginTransaction();
+                $parameters = array(':nome' => $professor["nome"], ':estado' => intval($professor["estado"]), ':privado' =>  intval($professor["privado"]));
+                $retorno = $query->execute($parameters);
+                $idRequisicao = $this->db->lastInsertId(); 
+        $this->salvarProfessorDisciplina($professor, $idRequisicao);
+        $this->db->commit();
         return true;
+    }
+
+    public function salvarProfessorDisciplina($professor,$idRequisicao){
+        foreach ($professor["disciplinas"] as $key => $value) {
+            $sql = "INSERT INTO aux_professor_disciplina(fk_cd_professor,fk_cd_disciplina) VALUES(:cd_professor,:cd_disciplina);";
+            $query = $this->db->prepare($sql);
+            $parameters = array(':cd_professor' => $idRequisicao, ':cd_disciplina' => $value);
+            $retorno = $query->execute($parameters);
+        }
     }
 
     public function editarProfessor($professor, $cdProfessor){
@@ -110,10 +123,19 @@ class ProfessorModel
         $parameters = array(':nome' => $professor["nome"], ':estado' => intval($professor["estado"]), ':privado' =>  intval($professor["privado"]), 'cd' => intval($cdProfessor));
         $retorno = $query->execute($parameters);
         if($retorno){
+            $this->excluirDisciplinaProfessor($cdProfessor);
+            $this->salvarProfessorDisciplina($professor,$cdProfessor);
           return true;
         }else{
           return false;
         }
+    }
+
+    public function excluirDisciplinaProfessor($idProfessor){
+        $sql = "DELETE FROM  aux_professor_disciplina WHERE fk_cd_professor = :cd";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':cd' => $idProfessor);
+        $retorno = $query->execute($parameters);
     }
 
     public function buscarProfessorPorCd($id){
