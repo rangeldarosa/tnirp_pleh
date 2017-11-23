@@ -100,3 +100,12 @@
   align-content: center;
   justify-content:space-around;
 }
+
+.excluir-intervalo {
+  font-size: 22px;
+  /* display: block; */
+}
+
+.group-interval-repeat *{
+  margin-right: 3px;
+}
