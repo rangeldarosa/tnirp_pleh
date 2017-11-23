@@ -27,12 +27,12 @@ class Disciplina extends Controller {
     }
     public function salvarDisciplina()
     {
-
         $disciplina = array();
-        if(isset($_POST["cadDisciplinaNome"]) && isset($_POST["cadDisciplinaStatus"]) && isset($_POST["cadDisciplinaPrivado"])) {
-          $professor["nome"] = $_POST["cadDisciplinaNome"];
-          $professor["estado"] = $_POST["cadDisciplinaStatus"];
-          $professor["privado"] = $_POST["cadDisciplinaPrivado"];
+        if(isset($_POST["cadDisciplinaNome"]) && isset($_POST["cadDisciplinaStatus"]) && isset($_POST["cadDisciplinaPrivada"])) {
+          $disciplina["nome"] = $_POST["cadDisciplinaNome"];
+          $disciplina["estado"] = $_POST["cadDisciplinaStatus"];
+          $disciplina["privado"] = $_POST["cadDisciplinaPrivada"];
+
           if($this->model->salvarDisciplina($disciplina)) {
             Util::retornarMensagemSucesso("Sucesso!", null, "Disciplina, inserida com sucesso");
             header('location: ' . URL . 'disciplina/');
@@ -67,13 +67,16 @@ class Disciplina extends Controller {
       require APP . 'view/_templates/header.php';
       require APP . 'view/disciplina/index.php';
       require APP . 'view/_templates/footer.php';
-
+      
       if($cdDisciplina && isset($_POST))  {
         $disciplinaEdit = array();
-        if(!empty($_POST["cadDisciplinaNome"]) && !empty($_POST["cadDisciplinaStatus"]) && !empty( $_POST["cadDisciplinaPrivado"])) {
+
+        if(!empty($_POST["cadDisciplinaNome"]) && $_POST["cadDisciplinaStatus"] != "" && $_POST["cadDisciplinaPrivada"] != "") {
+
           $disciplinaEdit["nome"] = $_POST["cadDisciplinaNome"];
           $disciplinaEdit["estado"] = $_POST["cadDisciplinaStatus"];
-          $disciplinaEdit["privado"] = $_POST["cadDisciplinaPrivado"];
+          $disciplinaEdit["privado"] = $_POST["cadDisciplinaPrivada"];
+
           if($this->model->editarDisciplina($disciplinaEdit, $cdDisciplina)) {
             Util::retornarMensagemSucesso("Sucesso!", null, "Disciplina, Alterada com sucesso");
             header('location: ' . URL . 'disciplina/');

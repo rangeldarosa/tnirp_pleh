@@ -65,7 +65,12 @@ class UsuarioModel {
     public function editarUsuario($usuario, $cdUsuario){
         $sql = "UPDATE usuario SET LOGIN=:login, SENHA=:senha, NIVEL_DE_ACESSO=:nivel_de_acesso, ESTADO=:estado, FK_CD_FILIAL=:fk_cd_filial WHERE cd_usuario=:cd";
         $query = $this->db->prepare($sql);
-        $parameters = array(':login' => $usuario["login"],':senha' => $usuario["senha"], ':nivel_de_acesso' => intval($usuario["nivel_de_acesso"]),':estado' => intval($usuario["estado"]), ':fk_cd_filial' => intval($usuario["cadUsuarioFilial"]), 'cd' => intval($cdUsuario));
+        $parameters = array(':login' => $usuario["login"],
+          ':senha' => $usuario["senha"],
+          ':nivel_de_acesso' => intval($usuario["nivel_de_acesso"]),
+          ':estado' => intval($usuario["estado"]),
+          ':fk_cd_filial' => intval($usuario["cadUsuarioFilial"]),
+          'cd' => intval($cdUsuario));
         $retorno = $query->execute($parameters);
         if($retorno){
           return true;

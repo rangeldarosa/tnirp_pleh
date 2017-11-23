@@ -124,7 +124,7 @@ class DisciplinaModel
         }
         header('location: ' . URL . 'disciplina/');
     }
-    public function desbloquearProfessor($cdDisciplina){
+    public function desbloquearDisciplina($cdDisciplina){
         $sql = "UPDATE disciplina SET ESTADO = 1 WHERE cd_disciplina = :cd";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd' => intval($cdDisciplina));

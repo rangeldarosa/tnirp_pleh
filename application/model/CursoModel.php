@@ -114,20 +114,30 @@ class CursoModel{
         return $query->fetchAll();
     }
 
-    public function desativarCurso($curso){
-        $sql = "UPDATE curso SET ESTADO = 0 WHERE CD_CURSO = :cd_curso";
+    public function bloquearCurso($cdCurso){
+        $sql = "UPDATE curso SET ESTADO = 0 WHERE cd_curso = :cd";
         $query = $this->db->prepare($sql);
-        $parameters = array(':cd_curso' => $curso["cd_curso"]);
+        $parameters = array(':cd' => intval($cdCurso));
         $retorno = $query->execute($parameters);
-        return true;
+        if($retorno){
+            Util::retornarMensagemSucesso("Sucesso!", null, "Curso bloqueado com sucesso");
+        }else{
+            Util::retornarMensagemErro("Erro ao bloquear curso", "ERROR NO UPDATE", "Algo errado no update da curso");
+        }
+        header('location: ' . URL . 'curso/');
     }
 
-    public function ativarCurso($curso){
-        $sql = "UPDATE curso SET ESTADO = 1 WHERE CD_CURSO = :cd_curso";
+    public function desbloquearCurso($cdCurso){
+        $sql = "UPDATE curso SET ESTADO = 1 WHERE cd_curso = :cd";
         $query = $this->db->prepare($sql);
-        $parameters = array(':cd_curso' => $curso["cd_curso"]);
+        $parameters = array(':cd' => intval($cdCurso));
         $retorno = $query->execute($parameters);
-        return true;
+        if($retorno){
+            Util::retornarMensagemSucesso("Sucesso!", null, "Curso desbloqueado com sucesso");
+        }else{
+            Util::retornarMensagemErro("Erro ao desbloquear Curso", "ERROR NO UPDATE", "Algo errado no update da curso");
+        }
+        header('location: ' . URL . 'curso/');
     }
 
     public function alterarCurso($curso){

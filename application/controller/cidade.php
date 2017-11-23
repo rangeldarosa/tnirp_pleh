@@ -40,5 +40,28 @@
             require APP . 'view/cidade/index.php';
             require APP . 'view/_templates/footer.php';
         }
+
+        public function editarCidade($cdCidade){
+          $cidades = $this->model->buscarTodasAsCidades();
+          $cidade = $this->model->buscarCidadePor($cdCidade);
+
+          require APP . 'view/_templates/header.php';
+          require APP . 'view/cidade/index.php';
+          require APP . 'view/_templates/footer.php';
+
+          if($cdCidade && isset($_POST))  {
+              if(!empty($_POST["cadCidadeNome"]) && !empty($_POST["cadCidadeEstado"])) {
+                $cidadeEdit = array();
+                $cidadeEdit["codigo"] = $cdCidade;
+                $cidadeEdit["nome"] = $_POST["cadCidadeNome"];
+                $cidadeEdit["estado"] = $_POST["cadCidadeEstado"];
+
+                if($this->model->editarCidade($cidadeEdit)) {
+                  Util::retornarMensagemSucesso("Sucesso", null, "Cidade, inserida com sucesso");
+                  header('location: ' . URL . 'cidade/');
+                }
+              }
+          }
+        }
     }
 ?>
