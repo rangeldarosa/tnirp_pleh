@@ -13,6 +13,7 @@ class Pastas extends Controller {
         require APP . 'model/ProfessorModel.php';
         require APP . 'model/DisciplinaModel.php';
         require APP . 'model/ArquivoModel.php';
+        require APP . 'model/FilaDeImpressaoModel.php';
         $this->instituicaoModel = new InstituicaoModel($this->db);
         $this->filialModel = new FilialModel($this->db);
         $this->anoModel = new AnoModel($this->db);
@@ -20,6 +21,7 @@ class Pastas extends Controller {
         $this->professorModel = new ProfessorModel($this->db);
         $this->disciplinaModel = new DisciplinaModel($this->db);
         $this->arquivoModel = new ArquivoModel($this->db);
+        $this->filaDeImpressaoModel = new FilaDeImpressaoModel($this->db);
     }
 
     public function index() {
@@ -276,8 +278,23 @@ class Pastas extends Controller {
     }
 
     public function adicionarAFila() {
-      echo 'test';
-      die(var_dump($_POST));
+      // die("<pre>".var_export($_POST, true)."</pre>");
+
+      $requisicao = Array();
+      $requisicao["cdUsuario"] = $_SESSION["usuario"]->cd_usuario;
+      $requisicao["cdFilial"] = $_SESSION['usuario']->fk_cd_filial;
+      $requisicao["cdArquivo"] = $_POST["CD_ARQUIVO"];
+      $requisicao["nomeUsuario"] = $_POST["nomeAlunoFila"];
+
+      $requisicao["intervalos"] = Array();
+      $requisicao["intervalos"]["intervaloPaginasDe"] = $_POST["intervaloPaginasDe"];
+      $requisicao["intervalos"]["intervaloPaginasaAte"] = $_POST["intervaloPaginasaAte"];
+      $requisicao["intervalos"]["intervaloPaginasTipo"] = $_POST["intervaloPaginasTipo"];
+
+      $this->filaDeImpressaoModel->salvarRequisicao($requisicao);
+
+      // $nomeArquivo = $_POST["NMARQUIVO"];
+
 
 
     }
