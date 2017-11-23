@@ -57,13 +57,37 @@ class FilaDeImpressaoModel {
     }
 
     public function salvarRequisicao($requisicao){
-        $sql = "INSERT INTO requisicao (FK_CD_USUARIO, FK_USUARIO_CD_FILIAL, FK_CD_ARQUIVO, DATA, TIPO) values (:cdUsuario, :cdFilial, :cdArquivo, :data, :tipo)";
+        $sql = "INSERT INTO requisicao (FK_CD_USUARIO, FK_USUARIO_CD_FILIAL, FK_CD_ARQUIVO, DATA, tipo, STATUSATUAL, NOME) values (:cdUsuario, :cdFilial, :cdArquivo, now(), 'IMPRESSAO', 0, :nomeUsuario)";
         $query = $this->db->prepare($sql);
-        $parameters = array(':FK_CD_USUARIO' => $requisicao["cdUsuario"], ':FK_USUARIO_CD_FILIAL' => $requisicao["cdfilial"], ':FK_CD_ARQUIVO' => $requisicao["cdArquivo"],
-        ':data' => $requisicao["data"], ':tipo' => $requisicao["tipo"]);
+        $this->db->beginTransaction();
+        $parameters = array(':cdUsuario' => $requisicao["cdUsuario"], ':cdFilial' => $requisicao["cdFilial"], ':cdArquivo' => $requisicao["cdArquivo"], ':nomeUsuario' => $requisicao["nomeUsuario"]);
         $retorno = $query->execute($parameters);
-        var_dump($retorno);
+        $idRequisicao = $this->db->lastInsertId(); 
+        $this->salvarIntervalo($requisicao["intervalos"], $idRequisicao, $requisicao["cdFilial"], $requisicao["cdUsuario"]);
+        // var_dump($retorno);
+        $this->db->commit(); 
+        echo "Fila cadastrada com sucesso";
         return true;
     }
+
+    private function salvarIntervalo($intervalos, $idRequisicao, $idFilial, $idUsuario) {
+        // echo $idRequisicao ." => ". $idFilial ." => ". $idUsuario ." <br/><br/>";
+        // die("<pre>".var_export($intervalos, true)."</pre>");
+        foreach($intervalos["intervaloPaginasDe"] as $key => $intervaloPaginaDe) {
+            $sqlIntervalo = "INSERT INTO requisicao_intervalos 
+                                        (id_requisicao, id_filial, id_usuario, de_pagina, ate_pagina, tipo_impressao)
+                                 VALUES (:id_requisicao, :id_filial, :id_usuario, :de_pagina, :ate_pagina, :tipo_impressao)";
+            $query = $this->db->prepare($sqlIntervalo);
+            $parameters = array(':id_requisicao' => $idRequisicao, ':id_filial' => $idFilial, ':id_usuario' => $idUsuario,
+            ':de_pagina' => $intervaloPaginaDe, ':ate_pagina' => $intervalos["intervaloPaginasaAte"][$key], ':tipo_impressao' => $intervalos["intervaloPaginasTipo"][$key]);
+            $query->execute($parameters);
+        }
+
+        // var_dump($retorno);
+        return true;
+        
+    }
+
+
 }
 ?>
