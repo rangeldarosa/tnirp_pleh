@@ -64,20 +64,17 @@ class FilaDeImpressaoModel {
         $retorno = $query->execute($parameters);
         $idRequisicao = $this->db->lastInsertId(); 
         $this->salvarIntervalo($requisicao["intervalos"], $idRequisicao, $requisicao["cdFilial"], $requisicao["cdUsuario"]);
-        // var_dump($retorno);
         $this->db->commit();
 
-        Util::retornarMensagemSucesso("Arquivo adicionado na fila para impressão.", null, "Por favor, aguarde até que um atendente processe sua requisição.");  
+        Util::retornarMensagemSucesso("Arquivo adicionado na fila para impressão.", null, "Por favor, aguarde até que um atendente processe sua requisição.");
         header("location: ". URL ."pastas");
 
         return true;
     }
 
     private function salvarIntervalo($intervalos, $idRequisicao, $idFilial, $idUsuario) {
-        // echo $idRequisicao ." => ". $idFilial ." => ". $idUsuario ." <br/><br/>";
-        // die("<pre>".var_export($intervalos, true)."</pre>");
         foreach($intervalos["intervaloPaginasDe"] as $key => $intervaloPaginaDe) {
-            $sqlIntervalo = "INSERT INTO requisicao_intervalos 
+            $sqlIntervalo = "INSERT INTO requisicao_intervalos
                                         (id_requisicao, id_filial, id_usuario, de_pagina, ate_pagina, tipo_impressao)
                                  VALUES (:id_requisicao, :id_filial, :id_usuario, :de_pagina, :ate_pagina, :tipo_impressao)";
             $query = $this->db->prepare($sqlIntervalo);
@@ -85,10 +82,8 @@ class FilaDeImpressaoModel {
             ':de_pagina' => $intervaloPaginaDe, ':ate_pagina' => $intervalos["intervaloPaginasaAte"][$key], ':tipo_impressao' => $intervalos["intervaloPaginasTipo"][$key]);
             $query->execute($parameters);
         }
-
-        // var_dump($retorno);
         return true;
-        
+
     }
 
 

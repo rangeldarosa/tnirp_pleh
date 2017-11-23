@@ -33,19 +33,14 @@ class Ano extends Controller {
       $identificadores["cdInstituicao"] = $cdInstituicao;
 
       $listaAnoFilial = $this->model->buscarAnoPorFilialEInstituicaoCombo($identificadores);
-
-      //http://localhost/tnirp_pleh/ano/buscarAnoPorFilial/1/1
-      //require APP . 'view/_templates/arquivo/ajax/carregaComboFilialByInstituicao.php';
     }
-
-
 
     public function salvarAno(){
         $ano = array();
         if(isset($_POST["cadAnoNome"]) && isset($_POST["cadAnoStatus"])) {
             $ano["nome"] = $_POST["cadAnoNome"];
             $ano["estado"] = $_POST["cadAnoStatus"];
-            if($this->model->salvarAno($ano)) {
+            if($this->model->salvarAno($ano) > 0) {
                 Util::retornarMensagemSucesso("Sucesso!", null, "Ano, inserido com sucesso");
                 header('location: ' . URL . 'ano/');
             }
