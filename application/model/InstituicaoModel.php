@@ -57,7 +57,7 @@ class InstituicaoModel
                 WHERE instituicao.ESTADO=1 AND
                 (SELECT count(1) FROM filial f
                       INNER JOIN cidade cid ON f.Cidade_CD_CIDADE = cid.CD_CIDADE
-                      WHERE f.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO) > 0
+                      WHERE f.estado=1 AND f.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO ) > 0
                 ORDER BY instituicao.NOME_INSTITUICAO ASC";
         $query = $this->db->prepare($sql);
         $query->execute();
