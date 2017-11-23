@@ -39,7 +39,7 @@ class ProfessorModel
     }
 
     public function buscarProfessorPorCursoAnoFilialInstituicaoAtivos($cdInstituicao, $cdFilial, $cdAno, $cdCurso){
-        if(intval($_SESSION["usuario"]->Instituicao_CD_INSTITUICAO)==$cdInstituicao){
+        if(intval($_SESSION["usuario"]->Instituicao_CD_INSTITUICAO)==$cdInstituicao || intval($_SESSION["usuario"]->nivel_de_acesso)==3 ){
             $sql = "SELECT professor.*,
             instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
             ano.nome NOME_ANO, curso.NOME NOME_CURSO

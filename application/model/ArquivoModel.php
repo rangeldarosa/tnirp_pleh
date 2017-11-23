@@ -37,7 +37,7 @@
         }
 
         public function buscarArquivosPorDisciplinaProfessorCursoAnoFilialInstituicaoAtivos($cdDisciplina,$cdProfessor,$cdInstituicao, $cdFilial, $cdAno ,$cdCurso){
-            if(intval($_SESSION["usuario"]->Instituicao_CD_INSTITUICAO)==$cdInstituicao){
+            if(intval($_SESSION["usuario"]->Instituicao_CD_INSTITUICAO)==$cdInstituicao || intval($_SESSION["usuario"]->nivel_de_acesso)==3 ){
                 $sql = "SELECT arquivo.NOME NMARQUIVO, arquivo.*, instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
                         ano.nome NOME_ANO, curso.NOME NOME_CURSO, professor.NOME NOME_PROFESSOR, disciplina.NOME NOME_DISCIPLINA
                         from arquivo,aux_disciplina_arquivo,disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
