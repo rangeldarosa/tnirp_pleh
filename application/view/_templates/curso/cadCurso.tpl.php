@@ -22,7 +22,7 @@
         if(!empty($listaProfessor) && is_array($listaProfessor) && isset($listaProfessor)) {
           foreach($listaProfessor as $value) {
         ?>
-          <option value="<?php echo $value->CD_CPROFESSOR?>" <?php echo $value->ESTADO == 0 ? 'disabled' : '' ?>><?php echo $value->NOME?> </option>
+          <option value="<?php echo $value->CD_PROFESSOR?>" <?php echo $value->ESTADO == 0 ? 'disabled' : '' ?>><?php echo $value->NOME?> </option>
         <?php
           }
         }

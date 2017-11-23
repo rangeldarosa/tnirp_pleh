@@ -60,7 +60,7 @@
               $instituicaoEdit["estado"] = 1;
               if($this->model->editarInstituicao($instituicaoEdit, $cdInstituicao)) {
                 Util::retornarMensagemSucesso("Sucesso!", null, "Instituição, Alterado com sucesso");
-                header('location: ' . URL . 'professor/');
+                header('location: ' . URL . 'instituicao/');
               } else {
                 Util::retornarMensagemErro("Erro ao alterar instituição!", "ERRO NO UPDATE", "Aconteceu algo errado ao atualizar o instituição");
               }

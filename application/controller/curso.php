@@ -66,6 +66,14 @@
             }
         }
 
+        public function bloquearCurso($cdCurso) {
+          $this->model->bloquearCurso($cdCurso);
+        }
+
+        public function desbloquearCurso($cdCurso) {
+          $this->model->desbloquearCurso($cdCurso);
+        }
+
         public function editarCurso($cdCurso){
 
             $cursos = $this->model->listarCursosAtivos();

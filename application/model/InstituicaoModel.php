@@ -19,7 +19,7 @@ class InstituicaoModel
             $parameters = array(':nome' => $instituicao["nome"]);
             $retorno = $query->execute($parameters);
             if($retorno){
-                Util::retornarMensagemSucesso("Sucesso!", null, "Instituição bloqueado com sucesso");
+                Util::retornarMensagemSucesso("Sucesso!", null, "Instituição cadastrada com sucesso");
             }else{
                 Util::retornarMensagemErro("Erro ao bloquear instituição", "ERROR NO UPDATE", "Algo errado no update do instituição");
             }

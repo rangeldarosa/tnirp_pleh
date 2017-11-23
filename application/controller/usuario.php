@@ -38,7 +38,33 @@
             }
         }
 
-        //-- FALTA EDITAR USUARIO AQUI
+        public function editarUsuario($idUsuario){
+
+          $filiais = $this->filialModel->buscarTodosAsFiliais();
+          $usuarios = $this->model->buscarTodososUsuarios();
+          $usuario = $this->model->buscarUsuarioPorCd($idUsuario);
+
+          require APP . 'view/_templates/header.php';
+          require APP . 'view/usuario/index.php';
+          require APP . 'view/_templates/footer.php';
+
+          if($idUsuario && isset($_POST))  {
+            if(isset($_POST["cadUsuarioLogin"]) && isset($_POST["cadUsuarioSenha"]) && isset($_POST["cadUsuarioNivelAcesso"]) && isset($_POST['cadUsuarioFilial'])) {
+              $usuario = array();
+              $usuario["login"] = $_POST["cadUsuarioLogin"];
+              $usuario["senha"] = $_POST["cadUsuarioSenha"];
+              $usuario["nivel_de_acesso"] = $_POST["cadUsuarioNivelAcesso"];
+              $usuario["cadUsuarioFilial"] = $_POST["cadUsuarioFilial"];
+              $usuario["estado"] = 1;
+              if($this->model->editarUsuario($usuario,$idUsuario)) {
+                Util::retornarMensagemSucesso("Sucesso", null, "Usuario, inserida com sucesso");
+                header('location: ' . URL . 'usuario/');
+              }
+            }
+          }
+
+
+        }
 
         public function listarUsuarios()
         {

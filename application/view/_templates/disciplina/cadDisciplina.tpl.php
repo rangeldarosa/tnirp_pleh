@@ -1,5 +1,5 @@
 <div class="cadDisciplinaArea">
-  <form action="<?php echo !isset($disciplina) ? URL.'disciplina/salvarDiscplina' : '';?>" method="post">
+  <form action="<?php echo !isset($disciplina) ? URL.'disciplina/salvarDisciplina' : '';?>" method="post">
 
     <div class="form-group">
       <label for="cadDisciplinaNome">Nome da Disciplina</label>

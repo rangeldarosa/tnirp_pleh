@@ -65,8 +65,11 @@ class FilaDeImpressaoModel {
         $idRequisicao = $this->db->lastInsertId(); 
         $this->salvarIntervalo($requisicao["intervalos"], $idRequisicao, $requisicao["cdFilial"], $requisicao["cdUsuario"]);
         // var_dump($retorno);
-        $this->db->commit(); 
-        echo "Fila cadastrada com sucesso";
+        $this->db->commit();
+
+        Util::retornarMensagemSucesso("Arquivo adicionado na fila para impressão.", null, "Por favor, aguarde até que um atendente processe sua requisição.");  
+        header("location: ". URL ."pastas");
+
         return true;
     }
 
