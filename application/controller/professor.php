@@ -41,7 +41,7 @@ class Professor extends Controller {
           $professor["disciplinas"] = $_POST["cadProfessorDisciplina"];
 
           if($this->model->salvarProfessor($professor)) {
-            Util::retornarMensagemSucesso("Sucesso!", null, "Professor, inserido com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Professor cadastrado com sucesso");
             header('location: ' . URL . 'professor/');
           }
         }
@@ -89,7 +89,7 @@ class Professor extends Controller {
           $professorEdit["privado"] = $_POST["cadProfessoresPrivado"];
           $professorEdit["disciplinas"] = $_POST["cadProfessorDisciplina"];
           if($this->model->editarProfessor($professorEdit, $cdProfessor)) {
-            Util::retornarMensagemSucesso("Sucesso!", null, "Professor, Alterado com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Professor alterado com sucesso");
             header('location: ' . URL . 'professor/');
           } else {
             Util::retornarMensagemErro("Erro ao alterar professor!", "ERRO NO UPDATE", "Aconteceu algo errado ao atualizar o professor");

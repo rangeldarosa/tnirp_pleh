@@ -34,7 +34,7 @@ class Disciplina extends Controller {
           $disciplina["privado"] = $_POST["cadDisciplinaPrivada"];
 
           if($this->model->salvarDisciplina($disciplina)) {
-            Util::retornarMensagemSucesso("Sucesso!", null, "Disciplina, inserida com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Disciplina cadastrada com sucesso");
             header('location: ' . URL . 'disciplina/');
           }
         }
@@ -67,7 +67,7 @@ class Disciplina extends Controller {
       require APP . 'view/_templates/header.php';
       require APP . 'view/disciplina/index.php';
       require APP . 'view/_templates/footer.php';
-      
+
       if($cdDisciplina && isset($_POST))  {
         $disciplinaEdit = array();
 
@@ -78,7 +78,7 @@ class Disciplina extends Controller {
           $disciplinaEdit["privado"] = $_POST["cadDisciplinaPrivada"];
 
           if($this->model->editarDisciplina($disciplinaEdit, $cdDisciplina)) {
-            Util::retornarMensagemSucesso("Sucesso!", null, "Disciplina, Alterada com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Disciplina alterada com sucesso");
             header('location: ' . URL . 'disciplina/');
           } else {
             Util::retornarMensagemErro("Erro ao alterar disciplina!", "ERRO NO UPDATE", "Aconteceu algo errado ao atualizar a disciplina");

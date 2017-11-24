@@ -61,7 +61,7 @@
                         $this->auxiliarAnoCurso->salvarAuxiliarAnoCurso($curso);
                     }
                 }
-                Util::retornarMensagemSucesso("Sucesso", null, "Curso, inserida com sucesso");
+                Util::retornarMensagemSucesso("Sucesso", null, "Curso cadastrado com sucesso");
                 header('location: ' . URL . 'curso/');
             }
         }
@@ -100,7 +100,7 @@
                             $this->auxiliarAnoCurso->salvarAuxiliarAnoCurso($cursoEdit);
                         }
 
-                        Util::retornarMensagemSucesso("Sucesso!", null, "Curso, Alterado com sucesso");
+                        Util::retornarMensagemSucesso("Sucesso!", null, "Curso alterado com sucesso");
                         header('location: ' . URL . 'curso/');
                     } else {
                         Util::retornarMensagemErro("Erro ao alterar professor!", "ERRO NO UPDATE", "Aconteceu algo errado ao atualizar o professor");

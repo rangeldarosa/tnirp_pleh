@@ -46,7 +46,7 @@ class Ano extends Controller {
             $ano["nome"] = $_POST["cadAnoNome"];
             $ano["estado"] = $_POST["cadAnoStatus"];
             if($this->model->salvarAno($ano)) {
-                Util::retornarMensagemSucesso("Sucesso!", null, "Ano, inserido com sucesso");
+                Util::retornarMensagemSucesso("Sucesso!", null, "Ano cadastrado com sucesso");
                 header('location: ' . URL . 'ano/');
             }
         }
@@ -74,7 +74,7 @@ class Ano extends Controller {
           $anoEdit["nome"] = $_POST["cadProfessoresNome"];
           $anoEdit["estado"] = $_POST["cadProfessoresStatus"];
           if($this->model->editarAno($anoEdit, $cdAno)) {
-            Util::retornarMensagemSucesso("Sucesso!", null, "Ano, Alterado com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Ano alterado com sucesso");
             header('location: ' . URL . 'ano/');
           } else {
             Util::retornarMensagemErro("Erro ao alterar ano!", "ERRO NO UPDATE", "Aconteceu algo errado ao atualizar o ano");

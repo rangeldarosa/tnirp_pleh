@@ -39,8 +39,7 @@
 
     <div class="text-center">
       <a href="<?php echo URL;?>curso"><input type="button" class="btn btn-default btn-default-app"  value="Casdastro de Curso" ></a>
-      <input type="submit" class="btn btn-default btn-default-app" name="enviarDados" value="Enviar Dados">
-      <input type="reset" class="btn btn-default btn-default-app" name="resetarDados" value="Resetar Dados">
+      <input type="submit" class="btn btn-default btn-default-app btn-success" name="enviarDados" value="Enviar Dados">
       <a href="<?php echo URL;?>filial"><input type="button" class="btn btn-default btn-default-app"  value="Casdastro de Filial" ></a>
     </div>
 
