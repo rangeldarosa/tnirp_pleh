@@ -5,6 +5,7 @@
             parent::__construct();
             require APP . 'model/FilialModel.php';
             require APP . 'model/CidadeModel.php';
+            require APP . 'model/AnoModel.php';
             require APP . 'model/InstituicaoModel.php';
             require APP . 'model/AuxiliarFilialAnoModel.php';
             require APP . 'util/Util.php';
@@ -13,6 +14,7 @@
             $this->cidadeModel = new CidadeModel($this->db);
             $this->instituicaoModel = new InstituicaoModel($this->db);
             $this->modelAuxFilialAno = new AuxiliarFilialAnoModel($this->db);
+            $this->anoModel = new AnoModel($this->db);
         }
 
 
@@ -24,6 +26,7 @@
             $filiais = $this->model->buscarTodosAsFiliais();
             $cidades = $this->cidadeModel->buscarTodasAsCidades();
             $instituicoes = $this->instituicaoModel->buscarTodosAsInstituicoes();
+            $listaAnos = $this->anoModel->buscarTodosOsAnos();
 
             require APP . 'view/_templates/header.php';
             require APP . 'view/filial/index.php';
@@ -91,6 +94,8 @@
           require APP . 'view/filial/index.php';
           require APP . 'view/_templates/footer.php';
 
+
+          
           if($cdFilial && isset($_POST)) {
             $filialEdit = array();
             if(isset($_POST["cadFilialNome"]) && isset($_POST["cadFilialTaxaImpressaoColorida"])
@@ -102,7 +107,12 @@
                 $filialEdit["cidade"] =   $_POST["cadFilialCidade"];
                 $filialEdit["instituicao"] = $_POST["cadFilialInstituicao"];
                 $filialEdit["status"] = $_POST["cadFilialStatus"];
+                $filialEdit["anos"] = $_POST["cadFilialAno"];
               if($this->model->editarFilial($filialEdit, $cdFilial)) {
+                $this->modelAuxFilialAno->deletarFilialAno($cdFilial);
+                    if($filialEdit["anos"]){
+                        $this->modelAuxFilialAno->salvarAuxFilialAno($cdFilial,$filialEdit);
+                    }
                 Util::retornarMensagemSucesso("Sucesso", null, "Filial alterada com sucesso");
                 header('location: ' . URL . 'filial/');
               } else {

@@ -1,5 +1,5 @@
 <div class="cadFilialArea">
-  <form action="<?php echo !isset($filial) ? URL.'filial/salvarFilial' : '';?>" method="post">
+  <form action="<?php echo !isset($filial) ? URL.'filial/salvarAno' : URL.'filial/editarFilial/'.$filial->CD_FILIAL;?>" method="post">  
 
     <div class="form-group">
       <label for="cadFilialNome">Nome da Filial</label>
@@ -51,15 +51,15 @@
       <label for="cadFiliaisStatus">Anos</label>
       <select class="multi-select-app" multiple="multiple" name="cadFilialAno[]" required>
         <?php
-        if(!empty($listaAno) && is_array($listaAno) && isset($listaAno)) {
-          foreach($listaAno as $value) {
+        if(!empty($listaAnos) && is_array($listaAnos) && isset($listaAnos)) {
+          foreach($listaAnos as $value) {
         ?>
           <option value="<?php echo $value->CD_ANO ?>" <?php echo $value->ESTADO == 0 ? 'disabled' : '' ?>><?php echo $value->NOME?> </option>
         <?php
           }
         }
-        if(!empty($listaAnoRelacionado) && is_array($listaAnoRelacionado) && isset($listaAnoRelacionado)) {
-          foreach($listaAnoRelacionado as $valueRel) {
+        if(!empty($listaAnosRelacionados) && is_array($listaAnosRelacionados) && isset($listaAnosRelacionados)) {
+          foreach($listaAnosRelacionados as $valueRel) {
             ?>
               <option value="<?php echo $valueRel->CD_ANO ?>" <?php echo $valueRel->ESTADO == 0 ? 'disabled' : '' ?> selected><?php echo $valueRel->NOME?> </option>
             <?php
