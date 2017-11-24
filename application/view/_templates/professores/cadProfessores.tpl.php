@@ -1,5 +1,5 @@
 <div class="cadProfessoresArea">
-  <form action="<?php echo !isset($professor) ? URL.'professor/salvarProfessor' : '';?>" method="post">
+  <form action="<?php echo !isset($professor) ? URL.'professor/salvarProfessor' : URL.'professor/editarProfessor/'.$professor->CD_PROFESSOR;?>" method="post">
 
     <div class="form-group">
       <label for="cadProfessoresNome">Nome da Professor</label>
