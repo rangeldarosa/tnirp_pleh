@@ -16,7 +16,7 @@
                 $sql = "INSERT INTO aux_ano_curso(FK_CD_CURSO,FK_CD_ANO) VALUES (:curso,:ano)";
                 $query = $this->db->prepare($sql);
                 $parameters = array(':curso' => $curso["codigo"], ':ano' => $ano["codigo"]);
-                $retorno .= $query->execute($parameters);
+                $retorno = $query->execute($parameters);
             }
             return true;
         }

@@ -6,10 +6,12 @@
             require APP . 'model/CursoModel.php';
             require APP . 'model/AuxiliarAnoCurso.php';
             require APP . 'model/ProfessorModel.php';
+            require APP . 'model/AuxiliarCursoProfessor.php';
             require APP . 'util/Util.php';
             $this->model = new CursoModel($this->db);
             $this->auxiliarAnoCurso = new AuxiliarAnoCurso($this->db);
             $this->professorModel = new ProfessorModel($this->db);
+            $this->auxiliarCursoProfessor = new AuxiliarCursoProfessor($this->db);
         }
 
 
@@ -76,8 +78,13 @@
 
         public function editarCurso($cdCurso){
 
-            $cursos = $this->model->listarCursosAtivos();
+            $cursos = $this->model->listarCursos();
             $curso = $this->model->buscarCursoPorCodigo($cdCurso);
+
+            
+            $listaProfessor = $this->auxiliarCursoProfessor->listarProfessoresNaoRelacionados($cdCurso);
+            $listaProfessorRelacionado = $this->auxiliarCursoProfessor->listarProfessoresRelacionados($cdCurso);
+
 
             require APP . 'view/_templates/header.php';
             require APP . 'view/curso/index.php';
@@ -91,13 +98,14 @@
                     $cursoEdit["codigo"] = $cdCurso;
                     $cursoEdit["nome"] = $_POST["cadCursoNome"];
                     $cursoEdit["estado"] = $_POST["cadCursoStatus"];
-                    $cursoEdit["anos"] = isset($_POST["cadAnos"]) ? $_POST["cadAnos"] : "";
+                    $cursoEdit["professores"] = isset($_POST["cadCursoProfessor"]) ? $_POST["cadCursoProfessor"] : "";
 
                     if($this->model->alterarCurso($cursoEdit, $cdCurso)) {
 
-                        $this->auxiliarAnoCurso->deletarCursoAno($cdCurso);
-                        if($cursoEdit["anos"]){
-                            $this->auxiliarAnoCurso->salvarAuxiliarAnoCurso($cursoEdit);
+                       
+                        $this->auxiliarCursoProfessor->deletarCursoProfessor($cdCurso);
+                        if($cursoEdit["professores"]){
+                           $this->auxiliarCursoProfessor->salvarAuxiliarCursoProfessor($cursoEdit);
                         }
 
                         Util::retornarMensagemSucesso("Sucesso!", null, "Curso alterado com sucesso");
