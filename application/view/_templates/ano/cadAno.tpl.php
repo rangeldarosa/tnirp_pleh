@@ -1,5 +1,5 @@
 <div class="cadAnoArea">
-  <form action="<?php echo !isset($ano) ? URL.'ano/salvarAno' : '';?>" method="post">
+  <form action="<?php echo !isset($ano) ? URL.'ano/salvarAno' : URL.'ano/editarAno/'.$ano->CD_ANO;?>" method="post">
 
     <div class="form-group">
       <label for="cadAnoNome">Ano</label>
