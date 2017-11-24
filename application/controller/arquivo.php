@@ -25,21 +25,21 @@ class Arquivo extends Controller {
     }
 
     public function salvarArquivo(){
-       
-        if(isset($_POST["cadArquivoNome"]) && isset($_POST["cadArquivoValorPeB"]) && 
-            isset($_POST["cadArquivoValorColor"]) && isset($_POST['cadArquivoPaginas']) && 
-            isset($_FILES['cadArquivoFile'])) {
+      
+        if(isset($_POST["cadArquivoNome"]) && 
+            isset($_FILES['cadArquivoFile']) && 
+            isset($_POST['cadArquivoArqPrivado']) && 
+            isset($_POST['cadArquivoEstado']) &&
+            isset($_POST['cadArquivoDisciplina'])) {
 
             $nomeOriginal = $_FILES['cadArquivoFile']['name'];
             $novoNome = sha1($_FILES['cadArquivoFile']['name']+rand()).".pdf";
 
             $arquivo["nome"] = $_POST["cadArquivoNome"];
-            $arquivo["paginas"] = $_POST['cadArquivoPaginas'];
+            $arquivo["paginas"] = 12; //$_POST['cadArquivoPaginas'];
             $arquivo["caminho_para_o_arquivo"] = $novoNome;
             $arquivo["arquivo_privado"] = $_POST['cadArquivoArqPrivado'];
             $arquivo["estado"] = $_POST['cadArquivoEstado'];
-            $arquivo["valor_preto_e_branco"] = $_POST['cadArquivoValorPeB'];
-            $arquivo["valor_colorido"] = $_POST['cadArquivoValorColor'];
 
             $disciplina = $_POST['cadArquivoDisciplina'];
             
