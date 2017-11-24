@@ -144,7 +144,7 @@ class DisciplinaModel
         $parameters = array(':cd' => intval($cdDisciplina));
         $retorno = $query->execute($parameters);
         if($retorno){
-            Util::retornarMensagemSucesso("Sucesso!", null, "Disciplina bloqueado com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Disciplina bloqueada com sucesso");
         }else{
             Util::retornarMensagemErro("Erro ao bloquear Disciplina", "ERROR NO UPDATE", "Algo errado no update da disciplina");
         }
@@ -156,7 +156,7 @@ class DisciplinaModel
         $parameters = array(':cd' => intval($cdDisciplina));
         $retorno = $query->execute($parameters);
         if($retorno){
-            Util::retornarMensagemSucesso("Sucesso!", null, "Disciplina desbloqueado com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Disciplina desbloqueada com sucesso");
         }else{
             Util::retornarMensagemErro("Erro ao desbloquear Disciplina", "ERROR NO UPDATE", "Algo errado no update da disciplina");
         }

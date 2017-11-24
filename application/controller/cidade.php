@@ -27,7 +27,7 @@
               $cidade["nome"] = $_POST["cadCidadeNome"];
               $cidade["estado"] = $_POST["cadCidadeEstado"];
               if($this->model->salvarCidade($cidade)) {
-                Util::retornarMensagemSucesso("Sucesso", null, "Cidade, inserida com sucesso");
+                Util::retornarMensagemSucesso("Sucesso", null, "Cidade cadastrada com sucesso");
                 header('location: ' . URL . 'cidade/');
               }
             }
@@ -57,7 +57,7 @@
                 $cidadeEdit["estado"] = $_POST["cadCidadeEstado"];
 
                 if($this->model->editarCidade($cidadeEdit)) {
-                  Util::retornarMensagemSucesso("Sucesso", null, "Cidade, inserida com sucesso");
+                  Util::retornarMensagemSucesso("Sucesso", null, "Cidade alterada com sucesso");
                   header('location: ' . URL . 'cidade/');
                 }
               }

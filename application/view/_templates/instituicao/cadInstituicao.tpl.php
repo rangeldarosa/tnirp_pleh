@@ -7,8 +7,7 @@
     </div>
 
     <div class="text-center">
-      <input type="submit" class="btn btn-default btn-default-app" name="enviarDados" value="Enviar Dados">
-      <input type="reset" class="btn btn-default btn-default-app" name="resetarDados" value="Resetar Dados">
+      <input type="submit" class="btn btn-default btn-default-app btn-success" name="enviarDados" value="Enviar Dados">
       <a href="<?php echo URL;?>disciplina"><input type="button" class="btn btn-default btn-default-app fa fa-arrow-left"  value="Casdastro de Disciplinas" ></a>
     </div>
 

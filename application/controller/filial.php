@@ -61,7 +61,7 @@
                 $filial["instituicao"] = $_POST["cadFilialInstituicao"];
                 $filial["status"] = $_POST["cadFilialEstado"];
                 if($this->model->salvarFilial($filial)) {
-                    Util::retornarMensagemSucesso("Sucesso", null, "Filial, inserida com sucesso");
+                    Util::retornarMensagemSucesso("Sucesso", null, "Filial cadastrada com sucesso");
                     header('location: ' . URL . 'filial/');
 
                 }
@@ -103,7 +103,7 @@
                 $filialEdit["instituicao"] = $_POST["cadFilialInstituicao"];
                 $filialEdit["status"] = $_POST["cadFilialStatus"];
               if($this->model->editarFilial($filialEdit, $cdFilial)) {
-                Util::retornarMensagemSucesso("Sucesso", null, "Filial, Alterada com sucesso");
+                Util::retornarMensagemSucesso("Sucesso", null, "Filial alterada com sucesso");
                 header('location: ' . URL . 'filial/');
               } else {
                 Util::retornarMensagemErro("Erro ao Editar Filial", "ERRO NO UPDATE", "Algo de Errado ao Atualizar Filial");

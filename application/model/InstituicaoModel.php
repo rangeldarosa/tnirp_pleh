@@ -83,7 +83,7 @@ class InstituicaoModel
         $parameters = array(':cd' => intval($cdInstituicao));
         $retorno = $query->execute($parameters);
         if($retorno){
-            Util::retornarMensagemSucesso("Sucesso!", null, "Instituição bloqueado com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Instituição bloqueada com sucesso");
         }else{
             Util::retornarMensagemErro("Erro ao bloquear instituição", "ERROR NO UPDATE", "Algo errado no update do instituição");
         }
@@ -95,7 +95,7 @@ class InstituicaoModel
         $parameters = array(':cd' => intval($cdInstituicao));
         $retorno = $query->execute($parameters);
         if($retorno){
-            Util::retornarMensagemSucesso("Sucesso!", null, "Instituição desbloqueado com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Instituição desbloqueada com sucesso");
         }else{
             Util::retornarMensagemErro("Erro ao desbloquear instituição", "ERROR NO UPDATE", "Algo errado no update do instituição");
         }
