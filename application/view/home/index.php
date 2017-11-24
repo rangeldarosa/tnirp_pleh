@@ -1,3 +1,29 @@
+<script>
+ function changeStatus(status, url) {
+   if (url == "" || url == undefined || status == "" || status == undefined) {
+     alert('ACESSO NEGADO, PROCURE O ADMINISTRADOR DO SISTEMA');
+     return;
+   }
+   if(status == 'INICIAR') {
+     if(confirm('Deseja Iniciar a Impressão?')) {
+       window.location.href = url;
+     }
+   } else if(status == 'CANCELAR') {
+     if(confirm('Deseja Cancelar a Impressão?')) {
+       window.location.href = url;
+     }
+   } else if(status == 'VOLTAR') {
+     if(confirm('Deseja voltar um Status da Impressão?')) {
+       window.location.href = url;
+     }
+   } else if(status == 'FINALIZAR') {
+     if(confirm('Deseja finalizar a Impressão?')) {
+       window.location.href = url;
+     }
+   }
+ }
+</script>
+
 <div class="container-fluid">
     <br>
     <?php
@@ -79,17 +105,17 @@
                     <td class="text-center"><strong><span style="font-weight:bold; color: #F00;"><?php echo Util::formatCashCurrent($fila->valor_pagar); ?></span></td>
                     <td class="text-center">
                     <?php if($fila->STATUSATUAL == 0) { ?>
-                      <a href="<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/1'?>"><button><i class="fa fa-print"></i> Iniciar Impressão</button></a>
+                      <a onclick="changeStatus('INICIAR', '<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/1'?>')"><button><i class="fa fa-print"></i> Iniciar Impressão</button></a>
                     <?php }
                     if($fila->STATUSATUAL == 1) { ?>
-                      <a href="<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/2'?>"><button><i class="glyphicon glyphicon-ok"></i> Finalizar Impressão</button></a>
+                      <a onclick="changeStatus('FINALIZAR', '<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/2'?>')"><button><i class="glyphicon glyphicon-ok"></i> Finalizar Impressão</button></a>
                     <?php
                     }
                     ?>
                     <?php if($fila->STATUSATUAL > 0) { ?>
-                    <a href="<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/'.($fila->STATUSATUAL-1);?>"><button><i class="fa fa-arrow-left"></i> Voltar Status</button></a>
+                    <a onclick="changeStatus('VOLTAR', '<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/'.($fila->STATUSATUAL-1) ?>')"><button><i class="fa fa-arrow-left"></i> Voltar Status</button></a>
                   <?php } ?>
-                    <a href="<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/-1'?>"><button><i class="fa fa-times"></i> Cancelar Impressão</button></a>
+                    <a onclick="changeStatus('CANCELAR', '<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/-1'?>')"><button><i class="fa fa-times"></i> Cancelar Impressão</button></a>
                     </td>
                 </tr>
                 <?php
@@ -194,20 +220,20 @@
               <td class="text-center"><strong><?php echo $statusAtual ?></strong></td>
               <td class="text-center"><strong><span onclick="showInterval<?php echo $fila->CD_REQUISICAO;?>()"><a>Clique para Abrir</a></span></strong></td>
               <td class="text-center"><strong><span style="font-weight:bold; color: #F00;"><?php echo Util::formatCashCurrent($fila->valor_pagar); ?></span></td>
-              <td class="text-center">
-              <?php if($fila->STATUSATUAL == 0) { ?>
-                <a href="<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/1'?>"><button><i class="fa fa-print"></i> Iniciar Impressão</button></a>
-              <?php }
-              if($fila->STATUSATUAL == 1) { ?>
-                <a href="<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/2'?>"><button><i class="glyphicon glyphicon-ok"></i> Finalizar Impressão</button></a>
-              <?php
-              }
-              ?>
-              <?php if($fila->STATUSATUAL > 0) { ?>
-              <a href="<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/'.($fila->STATUSATUAL-1);?>"><button><i class="fa fa-arrow-left"></i> Voltar Status</button></a>
-            <?php } ?>
-              <a href="<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/-1'?>"><button><i class="fa fa-times"></i> Cancelar Impressão</button></a>
-              </td>
+                <td class="text-center">
+                  <?php if($fila->STATUSATUAL == 0) { ?>
+                    <a onclick="changeStatus('INICIAR', '<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/1'?>')"><button><i class="fa fa-print"></i> Iniciar Impressão</button></a>
+                  <?php }
+                  if($fila->STATUSATUAL == 1) { ?>
+                    <a onclick="changeStatus('FINALIZAR', '<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/2'?>')"><button><i class="glyphicon glyphicon-ok"></i> Finalizar Impressão</button></a>
+                  <?php
+                  }
+                  ?>
+                  <?php if($fila->STATUSATUAL > 0) { ?>
+                  <a onclick="changeStatus('VOLTAR', '<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/'.($fila->STATUSATUAL-1) ?>')"><button><i class="fa fa-arrow-left"></i> Voltar Status</button></a>
+                <?php } ?>
+                  <a onclick="changeStatus('CANCELAR', '<?php echo URL.'home/changeStatus/'.$fila->CD_REQUISICAO.'/-1'?>')"><button><i class="fa fa-times"></i> Cancelar Impressão</button></a>
+                </td>
           </tr>
           <?php
             }

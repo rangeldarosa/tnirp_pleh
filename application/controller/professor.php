@@ -32,12 +32,14 @@ class Professor extends Controller {
 
     public function salvarProfessor()
     {
-
         $professor = array();
-        if(isset($_POST["cadProfessoresNome"]) && isset($_POST["cadProfessoresStatus"]) && isset($_POST["cadProfessoresPrivado"])) {
+        if(isset($_POST["cadProfessoresNome"]) && isset($_POST["cadProfessoresStatus"]) && isset($_POST["cadProfessoresPrivado"]) && isset($_POST['cadProfessorDisciplina'])) {
+          
           $professor["nome"] = $_POST["cadProfessoresNome"];
           $professor["estado"] = $_POST["cadProfessoresStatus"];
           $professor["privado"] = $_POST["cadProfessoresPrivado"];
+          $professor["disciplinas"] = $_POST["cadProfessorDisciplina"];
+
           if($this->model->salvarProfessor($professor)) {
             Util::retornarMensagemSucesso("Sucesso!", null, "Professor cadastrado com sucesso");
             header('location: ' . URL . 'professor/');
@@ -65,7 +67,8 @@ class Professor extends Controller {
 
 
     public function editarProfessor($cdProfessor)
-    {
+    {     
+      
       $professores = $this->model->buscarTodosProfessores();
       $professor = $this->model->buscarProfessorPorCd($cdProfessor);
 
@@ -75,13 +78,16 @@ class Professor extends Controller {
       require APP . 'view/_templates/header.php';
       require APP . 'view/professor/index.php';
       require APP . 'view/_templates/footer.php';
+      
+      
 
       if($cdProfessor && isset($_POST))  {
         $professorEdit = array();
-        if(!empty($_POST["cadProfessoresNome"]) && !empty($_POST["cadProfessoresStatus"]) && !empty( $_POST["cadProfessoresPrivado"])) {
+        if(isset($_POST["cadProfessoresNome"]) !="" && $_POST["cadProfessoresStatus"] != "" && $_POST["cadProfessoresPrivado"] != "" && is_array($_POST['cadProfessorDisciplina'])) {
           $professorEdit["nome"] = $_POST["cadProfessoresNome"];
           $professorEdit["estado"] = $_POST["cadProfessoresStatus"];
           $professorEdit["privado"] = $_POST["cadProfessoresPrivado"];
+          $professorEdit["disciplinas"] = $_POST["cadProfessorDisciplina"];
           if($this->model->editarProfessor($professorEdit, $cdProfessor)) {
             Util::retornarMensagemSucesso("Sucesso!", null, "Professor alterado com sucesso");
             header('location: ' . URL . 'professor/');

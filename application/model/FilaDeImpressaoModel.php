@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 class FilaDeImpressaoModel {
 
@@ -28,7 +28,7 @@ class FilaDeImpressaoModel {
                 JOIN usuario ON usuario.CD_USUARIO = requisicao.FK_CD_USUARIO
                 JOIN arquivo ON arquivo.CD_ARQUIVO = REQUISICAO.FK_CD_ARQUIVO
                 JOIN filial ON filial.CD_FILIAL = requisicao.FK_USUARIO_CD_FILIAL
-                AND (REQUISICAO.STATUSATUAL >= 0 AND REQUISICAO.STATUSATUAL < 3)";
+                AND (REQUISICAO.STATUSATUAL >= 0 AND REQUISICAO.STATUSATUAL < 2)";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -39,7 +39,7 @@ class FilaDeImpressaoModel {
                 JOIN usuario ON usuario.CD_USUARIO = requisicao.FK_CD_USUARIO
                 JOIN arquivo ON arquivo.CD_ARQUIVO = REQUISICAO.FK_CD_ARQUIVO
                 JOIN filial ON filial.CD_FILIAL = requisicao.FK_USUARIO_CD_FILIAL
-                AND (REQUISICAO.STATUSATUAL >= 0 AND REQUISICAO.STATUSATUAL < 3)
+                AND (REQUISICAO.STATUSATUAL >= 0 AND REQUISICAO.STATUSATUAL < 2)
                 WHERE CD_FILIAL = :cdFilial";
         $query = $this->db->prepare($sql);
         $parameters = array(':cdFilial' => $cdFilial);
