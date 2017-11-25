@@ -268,6 +268,18 @@ class Pastas extends Controller {
           // INSERT FILA DE IMPRESSÃO
         }
 
+        if ($idArquivo != null && $idArquivo != "null") {
+          $locationFile = $this->arquivoModel->buscarCaminhoArquivo(intval($idArquivo));
+          $nomeDocumento = $locationFile->CAMINHO;
+          $intervaloPaginas = Util::sugerirIntervalosDocumento($nomeDocumento);
+          if (!$intervaloPaginas) {
+            $intervaloPaginas = Array();
+            $intervaloPaginas["intervaloPaginasaDe"] = array(1);
+            $intervaloPaginas["intervaloPaginasaAte"] = Array($listas[0]->PAGINAS);
+            $intervaloPaginas["intervaloPaginasTipo"] = Array('PRETO_BRANCO');
+          }
+        }
+
         require APP . 'view/pastas/loadPastasAjax.php';
     }
 

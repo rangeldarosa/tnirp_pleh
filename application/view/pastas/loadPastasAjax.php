@@ -287,26 +287,39 @@
                 </div>
                   <hr>
                   <strong>Intervalo de Páginas: </strong><br><br>
+                  <?php 
+                    foreach($intervaloPaginas["intervaloPaginasaDe"] as $key => $intervaloDe) {
+                      $intervaloAte = $intervaloPaginas["intervaloPaginasaAte"][$key];
+                      $intervaloTipo = $intervaloPaginas["intervaloPaginasTipo"][$key];
+                  ?>
                   <div class="group-interval-repeat" id="group-interval-repeat" style="margin-top:10px">
                       <label>De:</label>
                       <select class="select-controll-app select-min-interval" name="intervaloPaginasDe[]" onChange="calcularPrecos()">
                         <option value=""> Início do Intervalo</option>
                       <?php for($i=1;$i<=$pasta->PAGINAS;$i++) {?>
-                        <option value="<?php echo $i ?>" <?php if($i == 1) echo 'selected'; ?>><?php echo $i ?></option>
+                        <option value="<?php echo $i ?>" <?php if($i == $intervaloDe) echo 'selected'; ?>><?php echo $i ?></option>
                       <?php } ?>
                       </select>
                       <label style="margin-left: 5px;margin-right:5px">Até</label>
                       <select class="select-controll-app select-min-interval" name="intervaloPaginasaAte[]" onChange="calcularPrecos()">
                         <option value="">Final do Intervalo</option>
                       <?php for($i=1;$i<=$pasta->PAGINAS;$i++) {?>
-                        <option value="<?php echo $i ?>" <?php if($i == $pasta->PAGINAS) echo 'selected'; ?>><?php echo $i ?></option>
+                        <option value="<?php echo $i ?>" <?php if($i == $intervaloAte) echo 'selected'; ?>><?php echo $i ?></option>
                       <?php } ?>
                       </select>
                       <select class="select-controll-app" name="intervaloPaginasTipo[]" onChange="calcularPrecos()">
-                        <option value="PRETO_BRANCO" selected>Preto e Branco</option>
-                        <option value="COLORIDO">Colorido</option>
+                        <option value="PRETO_BRANCO" <?php if($intervaloTipo === 'PRETO_BRANCO') echo 'selected'; ?>>Preto e Branco</option>
+                        <option value="COLORIDO" <?php if($intervaloTipo === 'COLORIDO') echo 'selected'; ?>>Colorido</option>
                       </select>
-                  </div><br>
+                      <?php if ($key > 0) { ?>
+                        <a class="excluir-intervalo" onClick="removerIntervalo(this)"><i class="fa fa-close"></i></a>
+                      <?php  } ?>
+
+                  </div>
+                  <?php 
+                    }
+                  ?>
+                  <br>
                   <div class="text-center" style="margin: 0 auto;">
                     <button type="button" style="width: 100%" name="buttom-repeat-interval" onclick="cloneInterval('group-interval-repeat');calcularPrecos()" class="btn btn-default"><i class="fa fa-plus-circle" aria-hidden="true"></i> Mais Intervalos</button>
                     <!-- <button type="button" style="width: 49.3%" name="buttom-repeat-interval" onclick="calcularPrecos()" class="btn btn-default"><i class="fa fa-calculator" aria-hidden="true"></i> Calcular Preço</button> -->

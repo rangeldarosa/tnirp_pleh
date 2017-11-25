@@ -71,28 +71,112 @@
             return VALOR_PREFIX_MOEDA.' '.Util::formatNumber($value, VALOR_CASAS_DECIMAIS, VALOR_PREFIX_CENTAVOS, VALOR_PREFIX_MILHAR);
           }
 
-          public static function recuperarPaginaDoPDFEmBase64($documento, $pagina) {;
+          public static function recuperarPaginaDoPDFEmBase64($documento, $pagina) {
             $dir = dirname(__FILE__);
             $dir = str_replace("application\util","", $dir);
             $dir = str_replace("application/util","", $dir);
             $documento = $dir.$documento;
             $dir .= "documentos/";
 
+            $nomeArquivo = $_SESSION["usuario"]->cd_usuario . "img.jpg";
+
             // exec("convert -alpha off input.pdf -resize 500x700! -background white -flatten -quality 90 output.jpg");
-            $comando = "convert -alpha off -density 288 ". $documento ."[". $pagina ."] -resize 1000x1000 -background white -flatten -quality 90 ". $dir ."imagem_convertida.jpg";
+            $comando = "convert -alpha off -density 288 ". $documento ."[". $pagina ."] -resize 1000x1000 -background white -flatten -quality 90 ". $dir . $nomeArquivo;
             exec($comando);
 
-            $comando = "composite -dissolve 90% -gravity center ". $dir ."copyright.png ". $dir ."imagem_convertida.jpg ". $dir ."imagem_convertida.jpg";
+            $comando = "composite -dissolve 90% -gravity center ". $dir ."copyright.png ". $dir . $nomeArquivo ." ". $dir . $nomeArquivo;
             exec($comando);
 
 
-            $path = $dir ."imagem_convertida.jpg";
+            $path = $dir . $nomeArquivo;
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data = file_get_contents($path);
             $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
             return $base64;
 
           }
+
+          public static function sugerirIntervalosDocumento($nomeArquivo) {
+
+            // $arquivoModel = new ArquivoModel();
+            // $locationFile = $arquivoModel->buscarCaminhoArquivo(intval($cdArquivo));
+            // $nomeDocumento = $locationFile->CAMINHO;
+            $numPaginas = Util::numeroPaginas($nomeArquivo);
+            if ($numPaginas === 0) {
+                return null;
+            }
+            $intervaloColorido = null;
+    
+            $intervalos = Array();
+            $intervalos["intervaloPaginasaDe"] = Array();
+            $intervalos["intervaloPaginasaAte"] = Array();
+            $intervalos["intervaloPaginasTipo"] = Array();
+            for ($i=0; $i < $numPaginas; $i++) {
+                
+                $colorida = Util::verificarSePaginaEColorida($nomeArquivo, $i);
+                if ($intervaloColorido === null || boolval($colorida) !== boolval($intervaloColorido)) {
+                    if ($intervaloColorido != null && $i > 0) {
+                        $intervalos["intervaloPaginasaAte"][] = $i;
+                    }
+                    $intervalos["intervaloPaginasaDe"][] = $i + 1;
+                    if ($colorida) {
+                        $intervalos["intervaloPaginasTipo"][] = "COLORIDO";
+                        $intervaloColorido = true;
+                    } else {
+                        $intervalos["intervaloPaginasTipo"][] = "PRETO_BRANCO";
+                        $intervaloColorido = false;
+                    }
+                }
+    
+            }
+    
+            $intervalos["intervaloPaginasaAte"][] = $i;
+            return $intervalos;
+    
+        }
+    
+        public static function numeroPaginas($nomeDocumento) {
+    
+            $dir = dirname(__FILE__); 
+            // $dir = str_replace("application\controller","", $dir);
+            // $dir = str_replace("application/controller","", $dir);
+            // $dir .= "/documentos/";
+
+            // $dir = dirname(__FILE__);
+            $dir = str_replace("application\util","", $dir);
+            $dir = str_replace("application/util","", $dir);
+            $dir .= "documentos/";
+            $documento = $dir.$nomeDocumento;
+    
+            $comando = "identify ". $documento;
+            $identify = exec($comando , $output);
+            return count($output);
+    
+        }
+    
+        public static function verificarSePaginaEColorida($nomeDocumento, $pagina) {
+    
+            // $dir = dirname(__FILE__); 
+            // $dir = str_replace("application\controller","", $dir);
+            // $dir = str_replace("application/controller","", $dir);
+            // $dir .= "/documentos/";
+
+            $dir = dirname(__FILE__); 
+            $dir = str_replace("application\controller","", $dir);
+            $dir = str_replace("application/controller","", $dir);
+            // $dir .= "/documentos/";
+
+            // $dir = dirname(__FILE__);
+            $dir = str_replace("application\util","", $dir);
+            $dir = str_replace("application/util","", $dir);
+            $dir .= "documentos/";
+            $documento = $dir.$nomeDocumento;
+    
+            $comando = "convert ". $documento ."[". $pagina ."] -colorspace HSL -channel G -separate -format %[fx:mean] info:";
+            $convert = exec($comando , $output);
+            return floatval($output[0]) > 0;
+    
+        }
 
   }
 ?>

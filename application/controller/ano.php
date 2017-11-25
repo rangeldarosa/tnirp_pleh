@@ -7,8 +7,10 @@ class Ano extends Controller {
         require APP . 'util/Util.php';
         require APP . 'model/AnoModel.php';
         require APP . 'model/CursoModel.php';
+        require APP . 'model/AuxiliarAnoCurso.php';
         $this->model = new AnoModel($this->db);
         $this->cursoModel = new CursoModel($this->db);
+        $this->auxiliarAnoCurso = new AuxiliarAnoCurso($this->db);
     }
 
     public function index() {
@@ -40,8 +42,8 @@ class Ano extends Controller {
         if(isset($_POST["cadAnoNome"]) && isset($_POST["cadAnoStatus"])) {
             $ano["nome"] = $_POST["cadAnoNome"];
             $ano["estado"] = $_POST["cadAnoStatus"];
-            if($this->model->salvarAno($ano) > 0) {
-                Util::retornarMensagemSucesso("Sucesso!", null, "Ano, inserido com sucesso");
+            if($this->model->salvarAno($ano)) {
+                Util::retornarMensagemSucesso("Sucesso!", null, "Ano cadastrado com sucesso");
                 header('location: ' . URL . 'ano/');
             }
         }
@@ -59,6 +61,9 @@ class Ano extends Controller {
       $anos = $this->model->buscarTodosOsAnos();
       $ano = $this->model->buscarAnoPorCd($cdAno);
 
+      $listaCurso = $this->auxiliarAnoCurso->listarCursosNaoRelacionados($cdAno);
+      $listaCursoRelacionado = $this->auxiliarAnoCurso->listarCursosRelacionados($cdAno);
+
       require APP . 'view/_templates/header.php';
       require APP . 'view/ano/index.php';
       require APP . 'view/_templates/footer.php';
@@ -66,10 +71,18 @@ class Ano extends Controller {
       if($cdAno && isset($_POST))  {
         $anoEdit = array();
         if(!empty($_POST["cadAnoNome"]) && !empty($_POST["cadAnoStatus"])) {
-          $anoEdit["nome"] = $_POST["cadProfessoresNome"];
-          $anoEdit["estado"] = $_POST["cadProfessoresStatus"];
+          $anoEdit["nome"] = $_POST["cadAnoNome"];
+          $anoEdit["estado"] = $_POST["cadAnoStatus"];
+          $anoEdit["cursos"] = isset($_POST["cadAnoCurso"]) ? $_POST["cadAnoCurso"] : "";
+
           if($this->model->editarAno($anoEdit, $cdAno)) {
-            Util::retornarMensagemSucesso("Sucesso!", null, "Ano, Alterado com sucesso");
+            $this->auxiliarAnoCurso->deletarAnoCurso($cdAno);
+            if($anoEdit["cursos"]){
+                $this->auxiliarAnoCurso->salvarAuxiliarAnoCurso($cdAno,$anoEdit);
+            }
+
+          
+            Util::retornarMensagemSucesso("Sucesso!", null, "Ano alterado com sucesso");
             header('location: ' . URL . 'ano/');
           } else {
             Util::retornarMensagemErro("Erro ao alterar ano!", "ERRO NO UPDATE", "Aconteceu algo errado ao atualizar o ano");

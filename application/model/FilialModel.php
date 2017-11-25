@@ -79,7 +79,7 @@ class FilialModel
         $retorno = $query->execute($parameters);
         var_dump($retorno);
         if($retorno){
-            Util::retornarMensagemSucesso("Sucesso", null, "Filial, Bloqueada com sucesso");
+            Util::retornarMensagemSucesso("Sucesso", null, "Filial bloqueada com sucesso");
         }else{
             Util::retornarMensagemErro("Erro ao bloquear filial", "ERROR NO UPDATE", "Algo errado no update da filial");
         }
@@ -94,7 +94,7 @@ class FilialModel
         $retorno = $query->execute($parameters);
         var_dump($retorno);
         if($retorno){
-            Util::retornarMensagemSucesso("Sucesso", null, "Filial, Desbloqueada com sucesso");
+            Util::retornarMensagemSucesso("Sucesso", null, "Filial desbloqueada com sucesso");
         }else{
             Util::retornarMensagemErro("Erro ao desbloquear filial", "ERROR NO UPDATE", "Algo errado no update da filial");
         }

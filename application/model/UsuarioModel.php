@@ -43,7 +43,7 @@ class UsuarioModel {
         $parameters = array(':cd' => intval($cdUsuario));
         $retorno = $query->execute($parameters);
         if($retorno){
-            Util::retornarMensagemSucesso("Sucesso!", null, "Usuario bloqueado com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Usuário bloqueado com sucesso");
         }else{
             Util::retornarMensagemErro("Erro ao bloquear Usuario", "ERROR NO UPDATE", "Algo errado no update do Usuario");
         }
@@ -55,7 +55,7 @@ class UsuarioModel {
         $parameters = array(':cd' => intval($cdUsuario));
         $retorno = $query->execute($parameters);
         if($retorno){
-            Util::retornarMensagemSucesso("Sucesso!", null, "Usuario desbloqueado com sucesso");
+            Util::retornarMensagemSucesso("Sucesso!", null, "Usuário desbloqueado com sucesso");
         }else{
             Util::retornarMensagemErro("Erro ao desbloquear Usuario", "ERROR NO UPDATE", "Algo errado no update do Usuario");
         }

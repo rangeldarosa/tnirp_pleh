@@ -10,13 +10,14 @@
             }
         }
     
-        public function salvarAuxiliarAnoCurso($curso){
+        public function salvarAuxiliarAnoCurso($cdAno,$ano){
+            
             $retorno = "";
-            foreach($curso['anos'] as $ano){
+            foreach($ano['cursos'] as $curso){
                 $sql = "INSERT INTO aux_ano_curso(FK_CD_CURSO,FK_CD_ANO) VALUES (:curso,:ano)";
                 $query = $this->db->prepare($sql);
-                $parameters = array(':curso' => $curso["codigo"], ':ano' => $ano["codigo"]);
-                $retorno .= $query->execute($parameters);
+                $parameters = array(':curso' => $curso["codigo"], ':ano' => $cdAno);
+                $retorno = $query->execute($parameters);
             }
             return true;
         }
@@ -32,17 +33,25 @@
             return $query->fetchAll();
         }
         
-        public function listarAnosPorNaoRelacionados($codigoCurso){
-            $sql = "SELECT * from ano where cd_ano not in (select fk_cd_ano from aux_ano_curso where FK_CD_CURSO = :codigo)";
+        public function listarCursosRelacionados($cdAno){
+            $sql = "SELECT * from curso where cd_curso in (select fk_cd_curso from aux_ano_curso where FK_CD_ANO = :codigo)";
             $query = $this->db->prepare($sql);
-            $parameters = array(':codigo' => codigoCurso);
-            $query->execute();
+            $parameters = array(':codigo' => $cdAno);
+            $query->execute($parameters);
             return $query->fetchAll();
         }
-        public function deletarCursoAno($idCurso){
-            $sql = "DELETE FROM aux_ano_curso WHERE FK_CD_CURSO = :codigo ";
+        public function listarCursosNaoRelacionados($cdAno){
+            $sql = "SELECT * from curso where cd_curso not in (select fk_cd_curso from aux_ano_curso where FK_CD_ANO = :codigo)";
             $query = $this->db->prepare($sql);
-            $parameters = array(':codigo' => $idCurso);
+            $parameters = array(':codigo' => $cdAno);
+            $query->execute($parameters);
+            return $query->fetchAll();
+        }
+
+        public function deletarAnoCurso($idAno){
+            $sql = "DELETE FROM aux_ano_curso WHERE FK_CD_ANO = :codigo ";
+            $query = $this->db->prepare($sql);
+            $parameters = array(':codigo' => $idAno);
             $retorno = $query->execute($parameters);
             return true;
         } 

@@ -32,7 +32,7 @@
               $usuario["cadUsuarioFilial"] = $_POST["cadUsuarioFilial"];
               $usuario["estado"] = 1;
               if($this->model->salvarUsuario($usuario)) {
-                Util::retornarMensagemSucesso("Sucesso", null, "Usuario, inserida com sucesso");
+                Util::retornarMensagemSucesso("Sucesso", null, "Usuário cadastrado com sucesso");
                 header('location: ' . URL . 'usuario/');
               }
             }
@@ -57,7 +57,7 @@
               $usuario["cadUsuarioFilial"] = $_POST["cadUsuarioFilial"];
               $usuario["estado"] = 1;
               if($this->model->editarUsuario($usuario,$idUsuario)) {
-                Util::retornarMensagemSucesso("Sucesso", null, "Usuario, inserida com sucesso");
+                Util::retornarMensagemSucesso("Sucesso", null, "Usuário alterado com sucesso");
                 header('location: ' . URL . 'usuario/');
               }
             }
