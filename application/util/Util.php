@@ -76,7 +76,7 @@
             $dir = str_replace("application\util","", $dir);
             $dir = str_replace("application/util","", $dir);
             $dir .= "documentos/";
-			$documento = $dir.$documento;
+			      $documento = $dir.$documento;
 
             $nomeArquivo = $_SESSION["usuario"]->cd_usuario . "img.jpg";
             $comando = "convert -alpha off -density 288 ". $documento ."[". $pagina ."] -resize 1000x1000 -background white -flatten -quality 90 ". $dir . $nomeArquivo;
@@ -88,7 +88,7 @@
 
             $path = $dir . $nomeArquivo;
             $type = pathinfo($path, PATHINFO_EXTENSION);
-            $data = file_get_contents($path);
+            @$data = file_get_contents($path);
             $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
             return $base64;
 
