@@ -142,6 +142,41 @@
             return $query->fetchAll();
         }
 
+        public function findFileForPrint($idDisciplina, $idProfessor, $idInstituicao, $idFilial, $idAno, $idCurso, $cdArquivo){
+          $sql = "SELECT arquivo.NOME NMARQUIVO, arquivo.*, arquivo.CAMINHO_PARA_O_ARQUIVO, instituicao.NOME_INSTITUICAO, filial.NOME NOME_FILIAL,
+                  ano.nome NOME_ANO, curso.NOME NOME_CURSO, professor.NOME NOME_PROFESSOR, disciplina.NOME NOME_DISCIPLINA
+                  from arquivo,aux_disciplina_arquivo,disciplina,aux_professor_disciplina,professor, aux_curso_professor, curso, aux_ano_curso, ano, aux_ano_filial, filial, instituicao
+                  where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
+                  and filial.CD_FILIAL = aux_ano_filial.FK_CD_FILIAL
+                  and ano.CD_ANO = aux_ano_filial.FK_CD_ANO
+                  and ano.CD_ANO = aux_ano_curso.FK_CD_ANO
+                  and curso.CD_CURSO = aux_ano_curso.FK_CD_CURSO
+                  and curso.CD_CURSO = aux_curso_professor.FK_CD_CURSO
+                  and professor.CD_PROFESSOR = aux_curso_professor.FK_CD_PROFESSOR
+                  and professor.CD_PROFESSOR = aux_professor_disciplina.FK_CD_PROFESSOR
+                  and disciplina.CD_DISCIPLINA = aux_professor_disciplina.FK_CD_DISCIPLINA
+                  and disciplina.CD_DISCIPLINA = aux_disciplina_arquivo.FK_CD_DISCIPLINA
+                  and arquivo.CD_ARQUIVO = aux_disciplina_arquivo.FK_CD_ARQUIVO
+                  and curso.CD_CURSO = :cd_curso
+                  and instituicao.CD_INSTITUICAO = :cd_instituicao
+                  and filial.CD_FILIAL = :cd_filial
+                  and ano.CD_ANO = :cd_ano
+                  and professor.CD_PROFESSOR = :cd_professor
+                  and disciplina.CD_DISCIPLINA = :cd_disciplina
+                  and arquivo.cd_arquivo = :cd_arquivo
+                  ORDER BY arquivo.nome ASC";
+      $query = $this->db->prepare($sql);
+      $parameters = array(':cd_curso' => $idCurso,
+                          ':cd_instituicao' => $idInstituicao,
+                          ':cd_filial' => $idFilial,
+                          ':cd_ano' => $idAno,
+                          ':cd_professor' => $idProfessor,
+                          ':cd_disciplina' => $idDisciplina,
+                          ':cd_arquivo' => $cdArquivo);
+      $query->execute($parameters);
+      return $query->fetchAll();
+        }
+
         public function buscarUltimoArquivoCadastrado(){
             $sql = "SELECT * FROM arquivo order by cd_arquivo desc limit 1";
             $query = $this->db->prepare($sql);

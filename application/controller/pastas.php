@@ -229,7 +229,7 @@ class Pastas extends Controller {
           $base64 = Util::recuperarPaginaDoPDFEmBase64('arquivo', 6);
           $styleTypeName = 'font-size: 12px;font-weight:bold;';
           $styleTypeSubName = 'font-size: 10px;color:#777;';
-          $listas = $this->arquivoModel->buscarArquivosPorDisciplinaProfessorCursoAnoFilialInstituicaoAtivos((int)$idDisciplina, (int)$idProfessor, (int) $idInstituicao, (int) $idFilial, (int) $idAno, (int) $idCurso);
+          $listas = $this->arquivoModel->findFileForPrint((int)$idDisciplina, (int)$idProfessor, (int) $idInstituicao, (int) $idFilial, (int) $idAno, (int) $idCurso, (int) $idArquivo);
           if(isset($listas) && is_array($listas) && !empty($listas)) {
             $navTopAtual[0]['nome'] = $listas[0]->NOME_INSTITUICAO;
             $navTopAtual[0]['link'] = "appConfig.ajaxDynamicSimple('pastas', 'buscaPastasByPages', '#loadPastas', 'limparPastasByPages', 'filial/1/".$idInstituicao."/".$idFilial."/".$idAno."/".$idCurso."/".$idProfessor."/".$idDisciplina."/".$idArquivo."')";
