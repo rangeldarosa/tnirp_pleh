@@ -10,8 +10,10 @@ initialize = function () {
     appConfig.initDataTable();
     appConfig.initCustomMultiSelect();
     appConfig.initCustomSelect();
+    appConfig.bloquearInspecionar();
+    appConfig.bloquearPrint();
   });
-  
+
 }
 
 appConfig.ajaxDynamicSimpleCombo = function(controller, metodo, areaLoadSelect, limparComboMetodo, id, idSelected) {
@@ -168,4 +170,20 @@ appConfig.initCustomMultiSelect = function () {
       }
     });
   });
+}
+
+appConfig.bloquearInspecionar = function () {
+
+}
+
+appConfig.bloquearPrint = function () {
+  function limpeza(){
+    window.clipboardData.setData('text','')
+  }
+  function limpeza2(){
+    if(clipboardData){
+      clipboardData.clearData();
+    }
+  }
+  setInterval("limpeza2();", 1000);
 }

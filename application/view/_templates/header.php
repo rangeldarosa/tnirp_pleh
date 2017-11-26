@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" oncontextmenu="return false">
 <head>
     <meta charset="utf-8">
     <title>HD Print</title>
@@ -28,6 +28,34 @@
 	<link href="<?php echo URL; ?>css/404.css" rel="stylesheet">
   <link href="<?php echo URL; ?>css/style.css" rel="stylesheet">
   <link href="<?php echo URL; ?>css/pastas.css" rel="stylesheet">
+
+  <script>
+    //--DESABILITA PRINT
+    function printsreen(){
+
+    }
+    setInterval("printsreen();", 100);
+
+    //-- DESABILITA CTRL C
+    window.onkeydown = function(){
+        var cntr = window.event.ctrlKey, tecla = window.event.keyCode;
+
+        if(cntr == true && tecla == 65){ //cntrol A
+            //alert("apertou control a");
+            event.keyCode = 0;
+            return false;
+        }
+        else if(cntr == true && tecla == 67){ //cntrol C
+            event.keyCode = 0;
+            return false;
+        }
+        else if(cntr == true && tecla == 86){ //cntrol V
+            event.keyCode = 0;
+            return false;
+        }
+    }
+
+  </script>
 </head>
 <body>
   <div class="loading-area" id="loading-area" style="display:none;">
