@@ -17,19 +17,19 @@ class Documentos extends Controller {
     }
 
     public function getFile($file) {
-      Util::validarLogin();
-      Util::validarNivelGerente();
-      $dirAtual = dirname(__FILE__);
-      $dirAtual = str_replace("application\controller","", $dirAtual);
-      $dirAtual = str_replace("application/controller","", $dirAtual);
-      $folderInical = 'documentos';
-      $fileLink = $dirAtual.$folderInical."\\".$file;
-      header('Content-type: application/pdf');
-      header('Content-Disposition: inline; filename="' . $file . '"');
-      header('Content-Transfer-Encoding: binary');
-      header('Content-Length: ' . filesize($fileLink));
-      header('Accept-Ranges: bytes');
-      @readfile($fileLink);
+      //Util::validarLogin();
+      //Util::validarNivelGerente();
+      //$dirAtual = dirname(__FILE__);
+      //$dirAtual = str_replace("application\controller","", $dirAtual);
+      //$dirAtual = str_replace("application/controller","", $dirAtual);
+      //$folderInical = 'documentos';
+      //$fileLink = $dirAtual.$folderInical."\\".$file;
+      //header('Content-type: application/pdf');
+      //header('Content-Disposition: inline; filename="' . $file . '"');
+      //header('Content-Transfer-Encoding: binary');
+      //header('Content-Length: ' . filesize($fileLink));
+      //header('Accept-Ranges: bytes');
+      //@readfile($fileLink);
     }
 
 }

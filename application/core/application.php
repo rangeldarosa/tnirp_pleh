@@ -21,12 +21,30 @@ class Application {
         session_start();
         // check for controller: no controller given ? then load start-page
         if (!$this->url_controller) {
-
             require APP . 'controller/home.php';
             $page = new Home();
             $page->index();
-
-        } elseif (file_exists(APP . 'controller/' . $this->url_controller . '.php')) {
+        }
+		elseif($this->url_controller == 'documentos') {
+			if (isset($_SESSION['usuario']) && $_SESSION['usuario']->nivel_de_acesso > 0) {
+				$dirAtual = dirname(__FILE__);
+				$dirAtual = str_replace("application\core","", $dirAtual);
+				$dirAtual = str_replace("application/core","", $dirAtual);
+				$folderInical = 'documentos';
+				$fileLink = $dirAtual.$folderInical."/".$this->url_params[0];
+				header('Content-type: application/pdf');
+				header('Content-Disposition: inline; filename="' . $this->url_params[0] . '"');
+				header('Content-Transfer-Encoding: binary');
+				header('Content-Length: ' . filesize($fileLink));
+				header('Accept-Ranges: bytes');
+				@readfile($fileLink);
+			} else {
+				require APP . 'controller/home.php';
+				$page = new Home();
+				$page->index();
+			}
+		}
+		elseif (file_exists(APP . 'controller/' . $this->url_controller . '.php')) {
             // here we did check for controller: does such a controller exist ?
 
             // if so, then load this file and create this controller

@@ -44,11 +44,14 @@ class Arquivo extends Controller {
             $disciplina = $_POST['cadArquivoDisciplina'];
 
             if($this->arquivoModel->salvarArquivo($arquivo)) {
-                $dir = $_SERVER["DOCUMENT_ROOT"]."/tnirp_pleh/documentos/";
+                $dir = dirname(__FILE__);
+                $dir = str_replace("application\controller","", $dir);
+                $dir = str_replace("application/controller","", $dir);;
+                $dir = $dir.'documentos/';
                 move_uploaded_file($_FILES['cadArquivoFile']['tmp_name'],$dir.$novoNome);
+                $qtPaginas = Util::numeroPaginas($novoNome);
                 $arquivoCadastrado = $this->arquivoModel->buscarUltimoArquivoCadastrado();
                 $this->auxiliarDisciplina->salvarDisciplinaArquivo($arquivoCadastrado[0]->CD_ARQUIVO,$disciplina);
-                $qtPaginas = Util::numeroPaginas($novoNome);
                 $this->arquivoModel->atualizarPaginaArquivo($arquivoCadastrado[0]->CD_ARQUIVO, $qtPaginas);
                 Util::retornarMensagemSucesso("Sucesso!", null, "Arquivo, inserido com sucesso");
                 header('location: ' . URL . 'arquivo/');
