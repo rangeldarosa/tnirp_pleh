@@ -116,7 +116,7 @@
 
 <div class="panel panel-default" id="loadPastas">
   <div class="panel-heading">
-    <h3 class="panel-title"><strong><?php echo $modelTitle ?></strong></h3>
+    <h3 class="panel-title"><strong><?php echo (!empty($listas) && is_array($listas)) ? $modelTitle : 'Atenção'?></strong></h3>
   </div>
   <div class="panel-body">
     <!--<div class="row">
@@ -210,14 +210,14 @@
         ?>
         <div class="error404Area">
           <div class="container-fluid">
-              <div class="alert alert-danger">
+              <div class="alert alert-info">
                 <div class="titleError">
-                  <span class="glyphicon glyphicon-remove-sign"></span>
-                  <strong>404 - Nenhum Arquivo Aqui</strong>
+                  <span class="glyphicon glyphicon-info-sign"></span><strong> Nenhum Arquivo Encontrado</strong>
                 </div>
                 <div class="message">
-                  <strong>Oooopss! Algo Errado Aconteceu</strong><br>
-                  Experimente alguma ação abaixo<br>
+                  <strong>Oooopss! Não conseguimos encontrar nenhum arquivo para esse item!<br>
+                    Talvez o item que você procura não tenha sido cadastrado ainda, por favor informe o problema para um funcionário para que ele verifique para você,<br>
+                    Tente alguma ação abaixo:<br>
                   <a onclick="<?php echo isset($backMode) ? $backMode : '' ?>"><button class="btn btn-success btn-lg btn-default"><span class="glyphicon glyphicon glyphicon-arrow-left"></span> Voltar</button></a>
                   <a href="<?php echo URL?>pastas"><button class="btn btn-warning btn-lg btn-default"><span class="glyphicon glyphicon-home"></span> Ir para o Início</button></a>
 
@@ -287,7 +287,7 @@
                 </div>
                   <hr>
                   <strong>Intervalo de Páginas: </strong><br><br>
-                  <?php 
+                  <?php
                     foreach($intervaloPaginas["intervaloPaginasaDe"] as $key => $intervaloDe) {
                       $intervaloAte = $intervaloPaginas["intervaloPaginasaAte"][$key];
                       $intervaloTipo = $intervaloPaginas["intervaloPaginasTipo"][$key];
@@ -316,7 +316,7 @@
                       <?php  } ?>
 
                   </div>
-                  <?php 
+                  <?php
                     }
                   ?>
                   <br>

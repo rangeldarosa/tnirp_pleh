@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h2 class="text-center">Listagem de Filial</h2><br>
+  <h2 class="text-center">Controle de Filial</h2><br>
   <?php
   include APP . 'view/_templates/alerts/alerts.tpl.php';
   ?>

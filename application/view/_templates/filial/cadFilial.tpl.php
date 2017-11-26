@@ -1,5 +1,5 @@
 <div class="cadFilialArea">
-  <form action="<?php echo !isset($filial) ? URL.'filial/salvarAno' : URL.'filial/editarFilial/'.$filial->CD_FILIAL;?>" method="post">  
+  <form action="<?php echo !isset($filial) ? URL.'filial/salvarAno' : URL.'filial/editarFilial/'.$filial->CD_FILIAL;?>" method="post">
 
     <div class="form-group">
       <label for="cadFilialNome">Nome da Filial</label>
@@ -70,9 +70,9 @@
     </div>
 
     <div class="text-center">
-      <a href="<?php echo URL;?>ano"><input type="button" class="btn btn-default btn-default-app"  value="Casdastro de Ano" ></a>
+      <a href="<?php echo URL;?>ano"><button type="button" class="btn btn-default btn-default-app"><i class="fa fa-arrow-left"></i> Casdastro de Ano</button></a>
       <input type="submit" class="btn btn-default btn-default-app btn-success" name="enviarDados" value="Enviar Dados">
-      <a href="<?php echo URL;?>arquivo"><input type="button" class="btn btn-default btn-default-app"  value="Casdastro de Arquivo" ></a>
+      <a href="<?php echo URL;?>arquivo"><button type="button" class="btn btn-default btn-default-app">Casdastro de Arquivo <i class="fa fa-arrow-right"></i></button></a>
     </div>
 
   </form>

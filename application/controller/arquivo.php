@@ -25,10 +25,10 @@ class Arquivo extends Controller {
     }
 
     public function salvarArquivo(){
-      
-        if(isset($_POST["cadArquivoNome"]) && 
-            isset($_FILES['cadArquivoFile']) && 
-            isset($_POST['cadArquivoArqPrivado']) && 
+
+        if(isset($_POST["cadArquivoNome"]) &&
+            isset($_FILES['cadArquivoFile']) &&
+            isset($_POST['cadArquivoArqPrivado']) &&
             isset($_POST['cadArquivoEstado']) &&
             isset($_POST['cadArquivoDisciplina'])) {
 
@@ -36,18 +36,20 @@ class Arquivo extends Controller {
             $novoNome = sha1($_FILES['cadArquivoFile']['name']+rand()).".pdf";
 
             $arquivo["nome"] = $_POST["cadArquivoNome"];
-            $arquivo["paginas"] = 12; //$_POST['cadArquivoPaginas'];
+            $arquivo["paginas"] = 1; //$_POST['cadArquivoPaginas'];
             $arquivo["caminho_para_o_arquivo"] = $novoNome;
             $arquivo["arquivo_privado"] = $_POST['cadArquivoArqPrivado'];
             $arquivo["estado"] = $_POST['cadArquivoEstado'];
 
             $disciplina = $_POST['cadArquivoDisciplina'];
-            
+
             if($this->arquivoModel->salvarArquivo($arquivo)) {
                 $dir = $_SERVER["DOCUMENT_ROOT"]."/tnirp_pleh/documentos/";
                 move_uploaded_file($_FILES['cadArquivoFile']['tmp_name'],$dir.$novoNome);
                 $arquivoCadastrado = $this->arquivoModel->buscarUltimoArquivoCadastrado();
                 $this->auxiliarDisciplina->salvarDisciplinaArquivo($arquivoCadastrado[0]->CD_ARQUIVO,$disciplina);
+                $qtPaginas = Util::numeroPaginas($novoNome);
+                $this->arquivoModel->atualizarPaginaArquivo($arquivoCadastrado[0]->CD_ARQUIVO, $qtPaginas);
                 Util::retornarMensagemSucesso("Sucesso!", null, "Arquivo, inserido com sucesso");
                 header('location: ' . URL . 'arquivo/');
             }
@@ -57,7 +59,7 @@ class Arquivo extends Controller {
     public function bloquearArquivo($cdArquivo) {
         $this->arquivoModel->bloquearArquivo($cdArquivo);
     }
-  
+
     public function desbloquearArquivo($cdArquivo) {
         $this->arquivoModel->desbloquearArquivo($cdArquivo);
     }

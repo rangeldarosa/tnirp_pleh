@@ -8,7 +8,7 @@
 
     <div class="text-center">
       <input type="submit" class="btn btn-default btn-default-app btn-success" name="enviarDados" value="Enviar Dados">
-      <a href="<?php echo URL;?>disciplina"><input type="button" class="btn btn-default btn-default-app fa fa-arrow-left"  value="Casdastro de Disciplinas" ></a>
+      <a href="<?php echo URL;?>disciplina"><button type="button" class="btn btn-default btn-default-app">Casdastro de Disciplinas <i class="fa fa-arrow-right"></i></button></a>
     </div>
 
   </form>

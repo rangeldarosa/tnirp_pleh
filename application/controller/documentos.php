@@ -16,14 +16,14 @@ class Documentos extends Controller {
       Util::validarNivelGerente();
     }
 
-    public function getFile($folderInical, $ano, $curso, $disciplina, $professor, $file) {
+    public function getFile($file) {
       Util::validarLogin();
       Util::validarNivelGerente();
       $dirAtual = dirname(__FILE__);
       $dirAtual = str_replace("application\controller","", $dirAtual);
       $dirAtual = str_replace("application/controller","", $dirAtual);
-
-      $fileLink = $dirAtual.$folderInical."\\".$ano."\\".$curso."\\".$disciplina."\\".$professor."\\".$file;
+      $folderInical = 'documentos';
+      $fileLink = $dirAtual.$folderInical."\\".$file;
       header('Content-type: application/pdf');
       header('Content-Disposition: inline; filename="' . $file . '"');
       header('Content-Transfer-Encoding: binary');

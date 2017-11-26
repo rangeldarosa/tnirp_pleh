@@ -38,9 +38,9 @@
     </div>
 
     <div class="text-center">
-      <a href="<?php echo URL;?>curso"><input type="button" class="btn btn-default btn-default-app"  value="Casdastro de Curso" ></a>
+      <a href="<?php echo URL;?>curso"><button type="button" class="btn btn-default btn-default-app"><i class="fa fa-arrow-left"></i> Casdastro de Curso</button></a>
       <input type="submit" class="btn btn-default btn-default-app btn-success" name="enviarDados" value="Enviar Dados">
-      <a href="<?php echo URL;?>filial"><input type="button" class="btn btn-default btn-default-app"  value="Casdastro de Filial" ></a>
+      <a href="<?php echo URL;?>filial"><button type="button" class="btn btn-default btn-default-app"> Casdastro de Filial <i class="fa fa-arrow-right"></i></button></a>
     </div>
 
   </form>

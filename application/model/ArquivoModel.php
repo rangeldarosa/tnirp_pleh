@@ -92,10 +92,10 @@
         }
 
         public function buscarTodosOsArquivos(){
-            $sql = "SELECT distinct arquivo.CD_ARQUIVO, arquivo.nome as NOME,(select distinct nome from curso where cd_curso = curso.CD_CURSO limit 1) as NOME_CURSO,
-                disciplina.nome as NOME_DISCIPLINA, professor.NOME as NOME_PROFESSOR, ano.NOME as NOME_ANO, (select nome from filial where cd_filial = filial.CD_FILIAL limit 1 ) as NOME_FILIAL, arquivo.PAGINAS, arquivo.ARQUIVO_PRIVADO as ARQUIVO_PRIVADO, arquivo.estado as ESTADO 
+            $sql = "SELECT distinct arquivo.CD_ARQUIVO, arquivo.CAMINHO_PARA_O_ARQUIVO, arquivo.nome as NOME,(select distinct nome from curso where cd_curso = curso.CD_CURSO limit 1) as NOME_CURSO,
+                disciplina.nome as NOME_DISCIPLINA, professor.NOME as NOME_PROFESSOR, ano.NOME as NOME_ANO, (select nome from filial where cd_filial = filial.CD_FILIAL limit 1 ) as NOME_FILIAL, arquivo.PAGINAS, arquivo.ARQUIVO_PRIVADO as ARQUIVO_PRIVADO, arquivo.estado as ESTADO
                 from instituicao, filial, aux_ano_filial, ano, aux_ano_curso, curso, aux_curso_professor, professor, aux_professor_disciplina, disciplina, aux_disciplina_arquivo,arquivo
-                where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO  
+                where filial.Instituicao_CD_INSTITUICAO = instituicao.CD_INSTITUICAO
                 and filial.CD_FILIAL = aux_ano_filial.FK_CD_FILIAL
                 and ano.CD_ANO = aux_ano_filial.FK_CD_ANO
                 and ano.CD_ANO = aux_ano_curso.FK_CD_ANO
@@ -118,57 +118,6 @@
             $query->execute(array(':cdArquivo' => $cdArquivo));
             return $query->fetch();
         }
-
-
-        // public function buscarTodosOsArquivos(){
-        //     $sql = "SELECT ARQUIVO.* FROM ARQUIVO";
-        //     $query = $this->db->prepare($sql);
-        //     $query->execute(array());
-        //     $arquivos = $query->fetchAll();
-        //
-        //     // DISCIPLINAS DO ARQUIVO
-        //     for ($i=0; $i<count($arquivos); $i++) {
-        //       $arquivos[$i]->DISCIPLINAS = $this->buscarNomeDisciplinaByArquivo($arquivos[$i]->CD_ARQUIVO);
-        //       for($j=0; $j<count($arquivos[$i]->DISCIPLINAS); $j++) {
-        //         $arquivos[$i]->DISCIPLINAS[$j]->PROFESSORES = $this->buscarNomeProfessorByDisciplina($arquivos[$i]->DISCIPLINAS[$j]->CD_DISCIPLINA);
-        //         for($k=0; $k<count($arquivos[$i]->DISCIPLINAS[$j]); $k++) {
-        //           $arquivos[$i]->DISCIPLINAS[$j]->PROFESSORES[$k]->CURSOS = $this->buscarCursoPorProfessorDisciplinaArquivo($arquivos[$i]->DISCIPLINAS[$j]->CD_DISCIPLINA, $arquivos[$i]->CD_ARQUIVO, $arquivos[$i]->DISCIPLINAS[$j]->PROFESSORES[$k]->CD_PROFESSOR);
-        //         }
-        //       }
-        //     }
-        //     return $arquivos;
-        // }
-        //
-        // public function buscarNomeDisciplinaByArquivo($cdArquivo){
-        //     $sql = "SELECT DISCIPLINA.NOME, DISCIPLINA.CD_DISCIPLINA FROM DISCIPLINA
-        //       INNER JOIN aux_disciplina_arquivo ON DISCIPLINA.CD_DISCIPLINA = aux_disciplina_arquivo.FK_CD_DISCIPLINA
-        //       WHERE aux_disciplina_arquivo.FK_CD_ARQUIVO = :cdArquivo";
-        //     $query = $this->db->prepare($sql);
-        //     $query->execute(array(':cdArquivo' => $cdArquivo));
-        //     return $query->fetchAll();
-        // }
-        //
-        // public function buscarNomeProfessorByDisciplina($cdDisciplina){
-        //     $sql = "SELECT PROFESSOR.NOME, PROFESSOR.CD_PROFESSOR FROM PROFESSOR
-        //             INNER JOIN aux_professor_disciplina ON PROFESSOR.CD_PROFESSOR = aux_professor_disciplina.FK_CD_PROFESSOR
-        //             WHERE aux_professor_disciplina.FK_CD_DISCIPLINA = :cdDisciplina";
-        //     $query = $this->db->prepare($sql);
-        //     $query->execute(array(':cdDisciplina' => $cdDisciplina));
-        //     return $query->fetchAll();
-        // }
-        //
-        // public function buscarCursoPorProfessorDisciplinaArquivo($cdDisciplina, $cdArquivo, $cdProfessor){
-        //     $sql = "SELECT CURSO.NOME FROM CURSO
-        //             INNER JOIN aux_curso_professor ON aux_curso_professor.FK_CD_CURSO = CURSO.CD_CURSO
-        //             INNER JOIN disciplina ON disciplina.CD_DISCIPLINA = :cdDisciplina
-        //             INNER JOIN aux_disciplina_arquivo ON disciplina.CD_DISCIPLINA = aux_disciplina_arquivo.FK_CD_DISCIPLINA
-        //             AND aux_disciplina_arquivo.FK_CD_ARQUIVO = :cdArquivo
-        //             WHERE aux_curso_professor.FK_CD_PROFESSOR = :cdProfessor;
-        //             ";
-        //     $query = $this->db->prepare($sql);
-        //     $query->execute(array(':cdDisciplina' => $cdDisciplina, ':cdArquivo' => $cdArquivo, ':cdProfessor' => $cdProfessor));
-        //     return $query->fetchAll();
-        // }
 
         public function salvarArquivo($arquivo){
             $sql = "INSERT INTO arquivo(nome,paginas,caminho_para_o_arquivo,arquivo_privado,estado) VALUES "
@@ -223,6 +172,12 @@
                 Util::retornarMensagemErro("Erro ao desbloquear Arquivo", "ERROR NO UPDATE", "Algo errado no update do arquivo");
             }
             header('location: ' . URL . 'arquivo/');
+        }
+
+        public function atualizarPaginaArquivo($cdArquivo, $qtPaginas) {
+          $sql = "UPDATE arquivo SET PAGINAS = :qtPaginas WHERE CD_ARQUIVO = :cd";
+          $query = $this->db->prepare($sql);
+          return $retorno = $query->execute(array(':cd' => intval($cdArquivo), ':qtPaginas' => intval($qtPaginas)));
         }
 
     }

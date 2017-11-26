@@ -3,7 +3,7 @@
     <table class="table table-striped table-bordered table-vcenter table-list">
       <thead>
             <th class="text-center" width="70">Cod <span class="glyphicon glyphicon-sort"></span></th>
-            <th>Nome <span class="glyphicon glyphicon-sort"></span></th>
+            <th>Arquivo <span class="glyphicon glyphicon-sort"></span></th>
             <th>Curso <span class="glyphicon glyphicon-sort"></span></th>
             <th>Disciplina <span class="glyphicon glyphicon-sort"></span></th>
             <th>Professor <span class="glyphicon glyphicon-sort"></span></th>
@@ -11,17 +11,16 @@
             <th>Filial <span class="glyphicon glyphicon-sort"></span></th>
             <th class="text-center">Páginas <span class="glyphicon glyphicon-sort"></span></th>
             <th class="text-center" width="100">Arquivo privado <span class="glyphicon glyphicon-sort"></span></th>
-            <th class="text-center" width="70">Privado <span class="glyphicon glyphicon-sort"></span></th>
+            <th class="text-center" width="70">Ativo <span class="glyphicon glyphicon-sort"></span></th>
             <!-- <th><span class="glyphicon glyphicon-pencil"></span></th> -->
             <th><span class="glyphicon glyphicon-remove"></span></th>
       </thead>
       <tbody>
         <?php
-        foreach($arquivos as $arquivo) {
-        ?>
-        <tr>
+        foreach($arquivos as $arquivo) { ?>
+        <tr class="<?php echo $arquivo->ESTADO == 0 ? 'danger' : ''?>">
             <td class="text-center"><?php echo $arquivo->CD_ARQUIVO;?></td>
-            <td><?php echo $arquivo->NOME;?></td>
+            <td class="text-center"><a href="<?php echo URL.'documentos/getFile/'.$arquivo->CAMINHO_PARA_O_ARQUIVO?>" target="_blank"><i class="fa fa-file-pdf-o"></i> <?php echo $arquivo->NOME;?></a></td>
             <td><?php echo $arquivo->NOME_CURSO;?></td>
             <td><?php echo $arquivo->NOME_DISCIPLINA;?></td>
             <td><?php echo $arquivo->NOME_PROFESSOR;?></td>
