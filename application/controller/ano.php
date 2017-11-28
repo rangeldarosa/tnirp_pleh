@@ -42,7 +42,12 @@ class Ano extends Controller {
         if(isset($_POST["cadAnoNome"]) && isset($_POST["cadAnoStatus"])) {
             $ano["nome"] = $_POST["cadAnoNome"];
             $ano["estado"] = $_POST["cadAnoStatus"];
+            $ano["cursos"] = isset($_POST["cadAnoCurso"]) ? $_POST["cadAnoCurso"] : null;
             if($this->model->salvarAno($ano)) {
+                if($ano["cursos"]){
+                    $lastAnoInserted = $this->model->listarUltimoAnoSalvo();
+                    $this->auxiliarAnoCurso->salvarAuxiliarAnoCurso($lastAnoInserted[0]->CD_ANO, $ano);
+                }
                 Util::retornarMensagemSucesso("Sucesso!", null, "Ano cadastrado com sucesso");
                 header('location: ' . URL . 'ano/');
             }
@@ -81,7 +86,7 @@ class Ano extends Controller {
                 $this->auxiliarAnoCurso->salvarAuxiliarAnoCurso($cdAno,$anoEdit);
             }
 
-          
+
             Util::retornarMensagemSucesso("Sucesso!", null, "Ano alterado com sucesso");
             header('location: ' . URL . 'ano/');
           } else {

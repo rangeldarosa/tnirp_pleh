@@ -1,10 +1,8 @@
 <?php
 
-class FilialModel
-{
+class FilialModel {
 
-    function __construct($db)
-    {
+    function __construct($db) {
         require_once APP . 'util/Util.php';
         try {
             $this->db = $db;
@@ -12,8 +10,8 @@ class FilialModel
             exit('Database connection could not be established.');
         }
     }
-    public function buscarTodosAsFiliais()
-    {
+
+    public function buscarTodosAsFiliais() {
         $sql = "SELECT f.*, inst.NOME_INSTITUICAO, cid.NOME_CIDADE, cid.ESTADO nmestado FROM filial f
               INNER JOIN cidade cid ON f.Cidade_CD_CIDADE = cid.CD_CIDADE
               INNER JOIN instituicao inst ON inst.CD_INSTITUICAO = f.Instituicao_CD_INSTITUICAO";
@@ -23,8 +21,7 @@ class FilialModel
         return $query->fetchAll();
     }
 
-    public function salvarFilial($filial)
-    {
+    public function salvarFilial($filial) {
         $sql = "INSERT INTO filial (NOME, TAXA_IMPRESSAO_COLORIDA,  TAXA_IMPRESSAO_PRETO_E_BRANCO, FILA, ESTADO, Instituicao_CD_INSTITUICAO, Cidade_CD_CIDADE)
         values (:nome, :taxa_impressao_colorida, :taxa_impressao_preto_e_branco, :fila, :estado, :cd_instituicao, :cd_cidade)";
         $query = $this->db->prepare($sql);
@@ -35,8 +32,7 @@ class FilialModel
         return true;
     }
 
-    public function buscarFilialPorCd($id)
-    {
+    public function buscarFilialPorCd($id) {
       $sql = "SELECT f.*, inst.NOME_INSTITUICAO, cid.NOME_CIDADE, cid.ESTADO nmestado FROM filial f
             INNER JOIN cidade cid ON f.Cidade_CD_CIDADE = cid.CD_CIDADE
             INNER JOIN instituicao inst ON inst.CD_INSTITUICAO = f.Instituicao_CD_INSTITUICAO
@@ -71,8 +67,7 @@ class FilialModel
         return $query->fetchAll();
     }
 
-    public function bloquearFilial($cdFilial)
-    {
+    public function bloquearFilial($cdFilial) {
         $sql = "UPDATE filial SET ESTADO = 0 WHERE CD_FILIAL = :cd";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd' => intval($cdFilial));
@@ -86,8 +81,7 @@ class FilialModel
         header('location: ' . URL . 'filial/');
     }
 
-    public function desbloquearFilial($cdFilial)
-    {
+    public function desbloquearFilial($cdFilial) {
         $sql = "UPDATE filial SET ESTADO = 1 WHERE CD_FILIAL = :cd";
         $query = $this->db->prepare($sql);
         $parameters = array(':cd' => intval($cdFilial));
@@ -101,8 +95,7 @@ class FilialModel
         header('location: ' . URL . 'filial/');
     }
 
-    public function editarFilial($filial, $cdFilial)
-    {
+    public function editarFilial($filial, $cdFilial) {
         $sql = "UPDATE FILIAL SET NOME=:nome, TAXA_IMPRESSAO_COLORIDA = :taxa_impressao_colorida,  TAXA_IMPRESSAO_PRETO_E_BRANCO = :taxa_impressao_preto_e_branco,
         ESTADO = :estado, Instituicao_CD_INSTITUICAO = :cd_instituicao, Cidade_CD_CIDADE = :cd_cidade
         WHERE CD_FILIAL=:cd";
@@ -122,6 +115,14 @@ class FilialModel
         }else{
           return false;
         }
+    }
+
+    public function listarUltimaFilialSalva(){
+        $sql = "SELECT * FROM filial ORDER BY CD_FILIAL DESC LIMIT 1";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
     }
 }
 ?>

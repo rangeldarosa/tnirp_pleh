@@ -18,8 +18,7 @@
         }
 
 
-        public function index()
-        {
+        public function index() {
             Util::validarLogin();
             Util::validarNivelGerente();
 
@@ -33,8 +32,7 @@
             require APP . 'view/_templates/footer.php';
         }
 
-        public function listarFiliais()
-        {
+        public function listarFiliais() {
             $filiais = $this->model->buscarTodosAsFiliais();
             $cidades = $this->cidadeModel->buscarTodasAsCidades();
             $instituicoes = $this->instituicaoModel->buscarTodosAsInstituicoes();
@@ -44,11 +42,11 @@
             require APP . 'view/_templates/footer.php';
         }
 
-        public function listarCidades(){
+        public function listarCidades() {
             $cidades = $this->cidadeModel->buscarTodasAsCidades();
         }
 
-        public function listarInstituicoes(){
+        public function listarInstituicoes() {
             $instituicoes = $this->instituicaoModel->buscarTodosAsInstituicoes();
         }
 
@@ -56,29 +54,32 @@
             $filial = array();
             if(isset($_POST["cadFilialNome"]) && isset($_POST["cadFilialTaxaImpressaoColorida"])
             && isset($_POST["cadFilialTaxaImpressaoPretoEBranco"]) && isset($_POST["cadFilialCidade"])
-            && isset($_POST["cadFilialInstituicao"]) && isset($_POST["cadFilialEstado"])) {
+            && isset($_POST["cadFilialInstituicao"]) && isset($_POST["cadFilialStatus"])) {
                 $filial["nome"] = $_POST["cadFilialNome"];
                 $filial["impc"] = $_POST["cadFilialTaxaImpressaoColorida"];
                 $filial["imppb"] = $_POST["cadFilialTaxaImpressaoPretoEBranco"];
                 $filial["cidade"] =   $_POST["cadFilialCidade"];
                 $filial["instituicao"] = $_POST["cadFilialInstituicao"];
-                $filial["status"] = $_POST["cadFilialEstado"];
+                $filial["status"] = $_POST["cadFilialStatus"];
+                $filial["anos"] = $_POST["cadFilialAno"];
                 if($this->model->salvarFilial($filial)) {
-                    Util::retornarMensagemSucesso("Sucesso", null, "Filial cadastrada com sucesso");
-                    header('location: ' . URL . 'filial/');
-
-                }
-            } else{
-                Util::retornarMensagemErro("Erro ao Cadastrar Filial", "Campos Vazio", "Preencha todos os campos");
+                    if($filial["anos"]){
+                        $lastFilialInserted = $this->model->listarUltimaFilialSalva();
+                        $this->modelAuxFilialAno->salvarAuxFilialAno($lastFilialInserted[0]->CD_FILIAL, $filial);
+                    }
+                Util::retornarMensagemSucesso("Sucesso", null, "Filial cadastrada com sucesso");
                 header('location: ' . URL . 'filial/');
+              } else {
+                Util::retornarMensagemErro("Erro ao Editar Filial", "ERRO NO UPDATE", "Algo de Errado ao cadastrar a Filial");
+              }
             }
         }
 
-        public function desbloquearFilial($cdFilial){
+        public function desbloquearFilial($cdFilial) {
             $this->model->desbloquearFilial($cdFilial);
         }
 
-        public function bloquearFilial($cdFilial){
+        public function bloquearFilial($cdFilial) {
             $this->model->bloquearFilial($cdFilial);
         }
 
@@ -94,8 +95,6 @@
           require APP . 'view/filial/index.php';
           require APP . 'view/_templates/footer.php';
 
-
-          
           if($cdFilial && isset($_POST)) {
             $filialEdit = array();
             if(isset($_POST["cadFilialNome"]) && isset($_POST["cadFilialTaxaImpressaoColorida"])

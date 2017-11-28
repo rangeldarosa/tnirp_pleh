@@ -1,5 +1,5 @@
 <div class="cadFilialArea">
-  <form action="<?php echo !isset($filial) ? URL.'filial/salvarAno' : URL.'filial/editarFilial/'.$filial->CD_FILIAL;?>" method="post">
+  <form action="<?php echo !isset($filial) ? URL.'filial/salvarFilial' : URL.'filial/editarFilial/'.$filial->CD_FILIAL;?>" method="post">
 
     <div class="form-group">
       <label for="cadFilialNome">Nome da Filial</label>

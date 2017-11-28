@@ -101,4 +101,13 @@ class AnoModel {
           return false;
         }
     }
+
+    public function listarUltimoAnoSalvo(){
+        $sql = "SELECT * FROM ano ORDER BY CD_ANO DESC LIMIT 1";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
+
 }
