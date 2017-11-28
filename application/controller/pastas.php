@@ -111,7 +111,7 @@ class Pastas extends Controller {
           $nextType = 'curso';
           $styleTypeName = 'font-size: 12px;font-weight:bold;';
           $styleTypeSubName = 'font-size: 10px;color:#777;';
-          $listas = $this->anoModel->buscarAnoPorFilialEInstituicaoComboAtivo((int)$idInstituicao, (int) $idFilial);
+          $listas = $this->anoModel->buscarAnoPorFilialEInstituicaoComboAtivo((int) $idFilial, (int)$idInstituicao);
           if(isset($listas) && is_array($listas) && !empty($listas)) {
             $navTopAtual[0]['nome'] = $listas[0]->NOME_INSTITUICAO;
             $navTopAtual[0]['link'] =  "appConfig.ajaxDynamicSimple('pastas', 'buscaPastasByPages', '#loadPastas', 'limparPastasByPages', 'filial/1/".$idInstituicao."/".$idFilial."/".$idAno."/".$idCurso."/".$idProfessor."/".$idDisciplina."/".$idArquivo."')";

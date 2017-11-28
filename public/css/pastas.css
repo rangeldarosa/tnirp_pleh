@@ -13,6 +13,10 @@
   border-radius: 5px;
 }*/
 
+.pastas-container {
+	margin-bottom: 15px;
+}
+
 .container-pastas .pastas-container div.pastas-container-item {
   padding:15px;
   border: 1px solid #AAA;
